@@ -1,0 +1,9 @@
+curdir="/Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO"
+lo=3
+execMode=0
+IDCGDXOutput="_miro_gdxout_.gdx"
+idir1="/Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO"
+IDCGDXInput="_miro_gdxin_.gdx"
+LstTitleLeftAligned=1
+trace="_sys_trace_gerrymander.trc"
+traceopt=3

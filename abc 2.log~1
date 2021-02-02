@@ -1,0 +1,39 @@
+--- Job abc.gms Start 02/02/21 03:08:22 32.2.0 rc62c018 DEX-DEG x86 64bit/Mac OS X
+--- Applying:
+    /Library/Frameworks/GAMS.framework/Versions/32/Resources/gmsprmun.txt
+--- GAMS Parameters defined
+    Input /Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO/abc.gms
+    PageSize 0
+    ScrDir /Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO/225a/
+    SysDir /Library/Frameworks/GAMS.framework/Versions/32/Resources/
+    LogOption 3
+    ErrMsg 1
+    ErrorLog 99
+    IDE 1
+    LstTitleLeftAligned 1
+GAMS 32.2.0   Copyright (C) 1987-2020 GAMS Development. All rights reserved
+Licensee: Introduction to Optimization (CS/ISyE/ECE 524) S200826/0001AB-GEN
+          University of Wisconsin-Madison, Computer Sciences Dept.   DCE850
+          /Users/walter/Library/Application Support/GAMS/gamslice.txt
+          Evaluation license: Not for commercial or production use
+--- Starting compilation
+--- abc.gms(15) 3 Mb
+--- GDXin=/Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO/adjaceny_AZ.gdx
+--- abc.gms(24) 3 Mb
+--- GDXin=/Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO/county_vote_AZ.gdx
+--- abc.gms(31) 3 Mb 1 Error
+*** Error 135 in /Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO/abc.gms
+    Incompatible operands for relational operator
+--- abc.gms(158) 3 Mb 2 Errors
+*** Error 257 in /Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO/abc.gms
+    Solve statement not checked because of previous errors
+--- abc.gms(161) 3 Mb 3 Errors
+*** Error 141 in /Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO/abc.gms
+    Symbol declared but no values have been assigned. Check for missing
+       data definition, assignment, data loading or implicit assignment
+       via a solve statement.
+       A wild shot: You may have spurious commas in the explanatory
+       text of a declaration. Check symbol reference list.
+--- abc.gms(164) 3 Mb 3 Errors
+*** Status: Compilation error(s)
+--- Job abc.gms Stop 02/02/21 03:08:22 elapsed 0:00:00.041

@@ -1,0 +1,2026 @@
+GAMS 32.2.0  rc62c018 Released Aug 26, 2020 DEX-DEG x86 64bit/Mac OS X - 02/03/21 00:10:49 Page 1
+gerrymandering model
+C o m p i l a t i o n
+
+
+   2   
+   3   
+   4  set P  parties  / republicans, democrats/;
+   5   
+   6   
+   7   
+   8   
+GDXIN   /Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO/_miro_gdxin_.gdx
+--- LOAD  DISTRICT_NUM = 4:district_num
+  10  scalar DISTRICT_NUM 'district number'/3/;
+  11   
+--- LOAD  forRepub = 5:forrepub
+  12  scalar forRepub /1/;
+  13   
+  14  set nodes 'fips code';
+  15   
+  16   
+--- LOAD  nodes = 1:nodes
+  19  alias(nodes,i,j);
+  20   
+  21  table foo(nodes,nodes);
+  22  alias(nodes,i,j);
+--- LOAD  foo = 2:foo
+  24   
+  25  parameter num(nodes,P);
+--- LOAD  num = 3:num
+  28   
+  30  set district/d1*d10/;
+  31  set sDistrict(district);
+  32  set arcs(nodes,nodes);
+  33  arcs(i,j)$(foo(i,j) = 1) = yes;
+  34   
+  35  sDistrict(district)$(ord(district)<=DISTRICT_NUM) = yes;
+  36  alias(sDistrict,d);
+  37  Scalar
+  38      Upper
+  39      Lower
+  40  ;
+  41  scalar totalPeople;
+  42  totalPeople = sum((I,P), num(I,P)) ;
+  43  Lower = 0.2 * totalPeople / card(d) ;
+  44  Upper = 3 * totalPeople / card(d) ;
+  45   
+  46   
+  47  scalar node_num;
+  48  node_num = card(nodes);
+  49   
+  50   
+  51   
+  52  display node_num;
+  53   
+  54  free variable
+  55      obj;
+  56  nonnegative variable
+  57      x(district,i,j) flow from i to j in district d
+  58      pop(district)
+  59  ;
+  60   
+  61  binary variable
+  62      assign(i,district) if i is assigned to d
+  63      root(district,i) 1 if i s the root in d
+  64      assign_1_root_0(i,district) if i is assigned to d and is not a root return 1
+  65      z(district) 1 if republican win in district d
+  66  ;
+  67  equation
+  68  *------------------------------connectiviy constraint------------------------------
+  69      objective
+  70      each_assign_one(i) each county is assigned to one district
+  71      one_root_constr(district)
+  72      root_constr(i,district)
+  73      flow_district_constr_1(district,i,j)
+  74      flow_district_constr_2(district,i,j)
+  75      min_node_district(district)
+  76  *    max_node_district(d)
+  77      assign_1_root_0_constr_1(i,district)
+  78      assign_1_root_0_constr_2(i,district)
+  79      root_balance_1(district,i)
+  80      root_balance_2(district,i)
+  81      non_root_balance_1(district,i)
+  82      non_root_balance_2(district,i)
+  83  *------------------------------vote calculation constraint------------------------------
+  84  *    ppl_constr_up(d) Number of PPL should be in the interval for every district
+  85  *    ppl_constr_lo(d) Number of PPL should be in the interval for every district
+  86      total_population(district)
+  87      decide_win_rep(district) See if in District J republicans are the winner
+  88      decide_win_rep2(district) See if in District J republicans are the winner
+  89  ;
+  90   
+      ------------------------------connectiviy constraint------------------------------
+  94  each_assign_one(i)..
+  95      sum(d, assign(i,d)) =e= 1;
+  96   
+  97  one_root_constr(d)..
+  98      sum(i, root(d,i)) =e= 1;
+  99   
+ 100  root_constr(i,d)..
+ 101      root(d,i) =l= assign(i,d);
+ 102   
+ 103  flow_district_constr_1(d,i,j)$(arcs(i,j) or arcs(j,i))..
+ 104      x(d,i,j) =l= (node_num)*(assign(i,d));
+ 105   
+ 106  flow_district_constr_2(d,i,j)$(arcs(i,j) or arcs(j,i))..
+ 107      x(d,i,j) =l= (node_num)*(assign(j,d));
+ 108   
+ 109  min_node_district(d)..
+ 110      sum(i,assign(i,d)) =g= 2;
+ 111   
+ 112  *max_node_district(d)..
+ 113  *    sum(i,assign(i,d)) =l= 4;
+ 114   
+ 115   
+ 116  assign_1_root_0_constr_1(i,d)..
+ 117      assign(i,d) + (1-root(d,i)) - assign_1_root_0(i,d) =l= 1;
+ 118   
+ 119  assign_1_root_0_constr_2(i,d)..
+ 120      assign(i,d) + (1-root(d,i)) - 2*assign_1_root_0(i,d) =g= 0;
+ 121   
+ 122  root_balance_1(d,i)..
+ 123      sum(j$(arcs(i,j) or arcs(j,i)), x(d,i,j)) - sum(j$(arcs(i,j) or arcs(j,i)), x(d,j,i)) - (sum(j,assign(j,d))-1) +
+ 124      root(d,i)*(node_num) =l= (node_num);
+ 125   
+ 126  root_balance_2(d,i)..
+ 127      sum(j$(arcs(i,j) or arcs(j,i)), x(d,i,j) ) - sum(j$(arcs(i,j) or arcs(j,i)), x(d,j,i)) - (sum(j,assign(j,d))-1) +
+ 128      root(d,i)*(-node_num) =g= (-node_num);
+ 129   
+ 130  non_root_balance_1(d,i)..
+ 131      sum(j$(arcs(i,j) or arcs(j,i)), x(d,i,j) ) - sum(j$(arcs(i,j) or arcs(j,i)), x(d,j,i)) - (-1) +
+ 132      (assign_1_root_0(i,d))*(node_num) =l= node_num;
+ 133   
+ 134  non_root_balance_2(d,i)..
+ 135      sum(j$(arcs(i,j) or arcs(j,i)), x(d,i,j) ) - sum(j$(arcs(i,j) or arcs(j,i)), x(d,j,i)) - (-1)=g= 0;
+ 136   
+      ------------------------------vote calculattion constraint------------------------------
+ 140   
+ 141  *ppl_constr_up(d)..
+ 142  *    sum(i, assign(i,d)*sum(P,num(i,P))) =l= Upper;
+ 143  *ppl_constr_lo(d)..
+ 144  *    sum(i, assign(i,d)*sum(P,num(i,P))) =g= Lower;
+ 145   
+ 146  total_population(d)..
+ 147      sum(i, assign(i,d)*sum(P,num(i,P))) =e= pop(d);
+ 148  decide_win_rep(d)..
+ 149      sum(i, assign(i,d)*(num(i,'republicans') - num(i,'democrats'))) - (totalPeople)*z(d) =l= 0;
+ 150   
+ 151  decide_win_rep2(d)..
+ 152      sum(i, assign(i,d)*(num(i,'republicans') - num(i,'democrats'))) + (-totalPeople-1)*z(d) =g= -totalPeople ;
+ 153   
+ 154  objective..
+ 155      forRepub * obj =e= 100 * sum(d,pop(d)*z(d))/totalPeople;
+ 156   
+ 157   
+ 158  model spanning_tree /all/;
+ 159   
+ 160  solve spanning_tree using minlp maximizing obj;
+ 161  set gerryHeader /result1,result2/;
+ 163  table assign_result(nodes,district,gerryHeader) 'assigned';
+ 165  assign_result(nodes,d,'result1') = assign.l(nodes,d);
+ 166  display assign_result;
+ 167   
+GAMS 32.2.0  rc62c018 Released Aug 26, 2020 DEX-DEG x86 64bit/Mac OS X - 02/03/21 00:10:49 Page 2
+gerrymandering model
+Include File Summary
+
+
+   SEQ   GLOBAL TYPE      PARENT   LOCAL  FILENAME
+
+     1        1 INPUT          0       0  /Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO/Gerrymander.gms
+     2        9 GDXIN          1       9  /Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO/_miro_gdxin_.gdx
+
+
+COMPILATION TIME     =        0.021 SECONDS      3 MB  32.2.0 rc62c018 DEX-DEG
+GAMS 32.2.0  rc62c018 Released Aug 26, 2020 DEX-DEG x86 64bit/Mac OS X - 02/03/21 00:10:49 Page 3
+gerrymandering model
+E x e c u t i o n
+
+
+----     52 PARAMETER node_num             =       15.000  
+GAMS 32.2.0  rc62c018 Released Aug 26, 2020 DEX-DEG x86 64bit/Mac OS X - 02/03/21 00:10:49 Page 4
+gerrymandering model
+Equation Listing    SOLVE spanning_tree Using MINLP From line 160
+
+
+---- objective  =E=  
+
+objective..  obj + (0)*pop(d1) + (0)*pop(d2) + (0)*pop(d3) + (0)*z(d1) + (0)*z(d2) + (0)*z(d3) =E= 0 ; (LHS = 0)
+     
+
+---- each_assign_one  =E=  each county is assigned to one district
+
+each_assign_one(04001)..  assign(04001,d1) + assign(04001,d2) + assign(04001,d3) =E= 1 ; (LHS = 0, INFES = 1 ****)
+     
+each_assign_one(04009)..  assign(04009,d1) + assign(04009,d2) + assign(04009,d3) =E= 1 ; (LHS = 0, INFES = 1 ****)
+     
+each_assign_one(04011)..  assign(04011,d1) + assign(04011,d2) + assign(04011,d3) =E= 1 ; (LHS = 0, INFES = 1 ****)
+     
+REMAINING 12 ENTRIES SKIPPED
+
+
+---- one_root_constr  =E=  
+
+one_root_constr(d1)..  root(d1,04001) + root(d1,04009) + root(d1,04011) + root(d1,04017) + root(d1,04003) + root(d1,04019) + root(d1,04023) + root(d1,04005) + root(d1,04007) + root(d1,04015) + root(d1,04025) + root(d1,04013) + root(d1,04021) + root(d1,04012) + root(d1,04027) =E= 1 ; (LHS = 0, INFES = 1 ****)
+     
+one_root_constr(d2)..  root(d2,04001) + root(d2,04009) + root(d2,04011) + root(d2,04017) + root(d2,04003) + root(d2,04019) + root(d2,04023) + root(d2,04005) + root(d2,04007) + root(d2,04015) + root(d2,04025) + root(d2,04013) + root(d2,04021) + root(d2,04012) + root(d2,04027) =E= 1 ; (LHS = 0, INFES = 1 ****)
+     
+one_root_constr(d3)..  root(d3,04001) + root(d3,04009) + root(d3,04011) + root(d3,04017) + root(d3,04003) + root(d3,04019) + root(d3,04023) + root(d3,04005) + root(d3,04007) + root(d3,04015) + root(d3,04025) + root(d3,04013) + root(d3,04021) + root(d3,04012) + root(d3,04027) =E= 1 ; (LHS = 0, INFES = 1 ****)
+     
+
+---- root_constr  =L=  
+
+root_constr(04001,d1)..  - assign(04001,d1) + root(d1,04001) =L= 0 ; (LHS = 0)
+     
+root_constr(04001,d2)..  - assign(04001,d2) + root(d2,04001) =L= 0 ; (LHS = 0)
+     
+root_constr(04001,d3)..  - assign(04001,d3) + root(d3,04001) =L= 0 ; (LHS = 0)
+     
+REMAINING 42 ENTRIES SKIPPED
+
+
+---- flow_district_constr_1  =L=  
+
+flow_district_constr_1(d1,04001,04009)..  x(d1,04001,04009) - 15*assign(04001,d1) =L= 0 ; (LHS = 0)
+     
+flow_district_constr_1(d1,04001,04011)..  x(d1,04001,04011) - 15*assign(04001,d1) =L= 0 ; (LHS = 0)
+     
+flow_district_constr_1(d1,04001,04017)..  x(d1,04001,04017) - 15*assign(04001,d1) =L= 0 ; (LHS = 0)
+     
+REMAINING 189 ENTRIES SKIPPED
+
+
+---- flow_district_constr_2  =L=  
+
+flow_district_constr_2(d1,04001,04009)..  x(d1,04001,04009) - 15*assign(04009,d1) =L= 0 ; (LHS = 0)
+     
+flow_district_constr_2(d1,04001,04011)..  x(d1,04001,04011) - 15*assign(04011,d1) =L= 0 ; (LHS = 0)
+     
+flow_district_constr_2(d1,04001,04017)..  x(d1,04001,04017) - 15*assign(04017,d1) =L= 0 ; (LHS = 0)
+     
+REMAINING 189 ENTRIES SKIPPED
+
+
+---- min_node_district  =G=  
+
+min_node_district(d1)..  assign(04001,d1) + assign(04009,d1) + assign(04011,d1) + assign(04017,d1) + assign(04003,d1) + assign(04019,d1) + assign(04023,d1) + assign(04005,d1) + assign(04007,d1) + assign(04015,d1) + assign(04025,d1) + assign(04013,d1) + assign(04021,d1) + assign(04012,d1) + assign(04027,d1) =G= 2 ; (LHS = 0, INFES = 2 ****)
+     
+min_node_district(d2)..  assign(04001,d2) + assign(04009,d2) + assign(04011,d2) + assign(04017,d2) + assign(04003,d2) + assign(04019,d2) + assign(04023,d2) + assign(04005,d2) + assign(04007,d2) + assign(04015,d2) + assign(04025,d2) + assign(04013,d2) + assign(04021,d2) + assign(04012,d2) + assign(04027,d2) =G= 2 ; (LHS = 0, INFES = 2 ****)
+     
+min_node_district(d3)..  assign(04001,d3) + assign(04009,d3) + assign(04011,d3) + assign(04017,d3) + assign(04003,d3) + assign(04019,d3) + assign(04023,d3) + assign(04005,d3) + assign(04007,d3) + assign(04015,d3) + assign(04025,d3) + assign(04013,d3) + assign(04021,d3) + assign(04012,d3) + assign(04027,d3) =G= 2 ; (LHS = 0, INFES = 2 ****)
+     
+
+---- assign_1_root_0_constr_1  =L=  
+
+assign_1_root_0_constr_1(04001,d1)..  assign(04001,d1) - root(d1,04001) - assign_1_root_0(04001,d1) =L= 0 ; (LHS = 0)
+     
+assign_1_root_0_constr_1(04001,d2)..  assign(04001,d2) - root(d2,04001) - assign_1_root_0(04001,d2) =L= 0 ; (LHS = 0)
+     
+assign_1_root_0_constr_1(04001,d3)..  assign(04001,d3) - root(d3,04001) - assign_1_root_0(04001,d3) =L= 0 ; (LHS = 0)
+     
+REMAINING 42 ENTRIES SKIPPED
+
+
+---- assign_1_root_0_constr_2  =G=  
+
+assign_1_root_0_constr_2(04001,d1)..  assign(04001,d1) - root(d1,04001) - 2*assign_1_root_0(04001,d1) =G= -1 ; (LHS = 0)
+     
+assign_1_root_0_constr_2(04001,d2)..  assign(04001,d2) - root(d2,04001) - 2*assign_1_root_0(04001,d2) =G= -1 ; (LHS = 0)
+     
+assign_1_root_0_constr_2(04001,d3)..  assign(04001,d3) - root(d3,04001) - 2*assign_1_root_0(04001,d3) =G= -1 ; (LHS = 0)
+     
+REMAINING 42 ENTRIES SKIPPED
+
+
+---- root_balance_1  =L=  
+
+root_balance_1(d1,04001)..  x(d1,04001,04009) + x(d1,04001,04011) + x(d1,04001,04017) - x(d1,04009,04001) - x(d1,04011,04001) - x(d1,04017,04001) - assign(04001,d1) - assign(04009,d1) - assign(04011,d1) - assign(04017,d1) - assign(04003,d1) - assign(04019,d1) - assign(04023,d1) - assign(04005,d1) - assign(04007,d1) - assign(04015,d1) - assign(04025,d1) - assign(04013,d1) - assign(04021,d1) - assign(04012,d1) - assign(04027,d1) + 15*root(d1,04001) =L= 14 ; (LHS = 0)
+     
+root_balance_1(d1,04009)..  - x(d1,04001,04009) + x(d1,04009,04001) + x(d1,04009,04011) + x(d1,04009,04017) + x(d1,04009,04003) + x(d1,04009,04019) + x(d1,04009,04007) + x(d1,04009,04021) - x(d1,04011,04009) - x(d1,04017,04009) - x(d1,04003,04009) - x(d1,04019,04009) - x(d1,04007,04009) - x(d1,04021,04009) - assign(04001,d1) - assign(04009,d1) - assign(04011,d1) - assign(04017,d1) - assign(04003,d1) - assign(04019,d1) - assign(04023,d1) - assign(04005,d1) - assign(04007,d1) - assign(04015,d1) - assign(04025,d1) - assign(04013,d1) - assign(04021,d1) - assign(04012,d1) - assign(04027,d1) + 15*root(d1,04009) =L= 14 ; (LHS = 0)
+     
+root_balance_1(d1,04011)..  - x(d1,04001,04011) - x(d1,04009,04011) + x(d1,04011,04001) + x(d1,04011,04009) + x(d1,04011,04003) - x(d1,04003,04011) - assign(04001,d1) - assign(04009,d1) - assign(04011,d1) - assign(04017,d1) - assign(04003,d1) - assign(04019,d1) - assign(04023,d1) - assign(04005,d1) - assign(04007,d1) - assign(04015,d1) - assign(04025,d1) - assign(04013,d1) - assign(04021,d1) - assign(04012,d1) - assign(04027,d1) + 15*root(d1,04011) =L= 14 ; (LHS = 0)
+     
+REMAINING 42 ENTRIES SKIPPED
+
+
+---- root_balance_2  =G=  
+
+root_balance_2(d1,04001)..  x(d1,04001,04009) + x(d1,04001,04011) + x(d1,04001,04017) - x(d1,04009,04001) - x(d1,04011,04001) - x(d1,04017,04001) - assign(04001,d1) - assign(04009,d1) - assign(04011,d1) - assign(04017,d1) - assign(04003,d1) - assign(04019,d1) - assign(04023,d1) - assign(04005,d1) - assign(04007,d1) - assign(04015,d1) - assign(04025,d1) - assign(04013,d1) - assign(04021,d1) - assign(04012,d1) - assign(04027,d1) - 15*root(d1,04001) =G= -16 ; (LHS = 0)
+     
+root_balance_2(d1,04009)..  - x(d1,04001,04009) + x(d1,04009,04001) + x(d1,04009,04011) + x(d1,04009,04017) + x(d1,04009,04003) + x(d1,04009,04019) + x(d1,04009,04007) + x(d1,04009,04021) - x(d1,04011,04009) - x(d1,04017,04009) - x(d1,04003,04009) - x(d1,04019,04009) - x(d1,04007,04009) - x(d1,04021,04009) - assign(04001,d1) - assign(04009,d1) - assign(04011,d1) - assign(04017,d1) - assign(04003,d1) - assign(04019,d1) - assign(04023,d1) - assign(04005,d1) - assign(04007,d1) - assign(04015,d1) - assign(04025,d1) - assign(04013,d1) - assign(04021,d1) - assign(04012,d1) - assign(04027,d1) - 15*root(d1,04009) =G= -16 ; (LHS = 0)
+     
+root_balance_2(d1,04011)..  - x(d1,04001,04011) - x(d1,04009,04011) + x(d1,04011,04001) + x(d1,04011,04009) + x(d1,04011,04003) - x(d1,04003,04011) - assign(04001,d1) - assign(04009,d1) - assign(04011,d1) - assign(04017,d1) - assign(04003,d1) - assign(04019,d1) - assign(04023,d1) - assign(04005,d1) - assign(04007,d1) - assign(04015,d1) - assign(04025,d1) - assign(04013,d1) - assign(04021,d1) - assign(04012,d1) - assign(04027,d1) - 15*root(d1,04011) =G= -16 ; (LHS = 0)
+     
+REMAINING 42 ENTRIES SKIPPED
+
+
+---- non_root_balance_1  =L=  
+
+non_root_balance_1(d1,04001)..  x(d1,04001,04009) + x(d1,04001,04011) + x(d1,04001,04017) - x(d1,04009,04001) - x(d1,04011,04001) - x(d1,04017,04001) + 15*assign_1_root_0(04001,d1) =L= 14 ; (LHS = 0)
+     
+non_root_balance_1(d1,04009)..  - x(d1,04001,04009) + x(d1,04009,04001) + x(d1,04009,04011) + x(d1,04009,04017) + x(d1,04009,04003) + x(d1,04009,04019) + x(d1,04009,04007) + x(d1,04009,04021) - x(d1,04011,04009) - x(d1,04017,04009) - x(d1,04003,04009) - x(d1,04019,04009) - x(d1,04007,04009) - x(d1,04021,04009) + 15*assign_1_root_0(04009,d1) =L= 14 ; (LHS = 0)
+     
+non_root_balance_1(d1,04011)..  - x(d1,04001,04011) - x(d1,04009,04011) + x(d1,04011,04001) + x(d1,04011,04009) + x(d1,04011,04003) - x(d1,04003,04011) + 15*assign_1_root_0(04011,d1) =L= 14 ; (LHS = 0)
+     
+REMAINING 42 ENTRIES SKIPPED
+
+
+---- non_root_balance_2  =G=  
+
+non_root_balance_2(d1,04001)..  x(d1,04001,04009) + x(d1,04001,04011) + x(d1,04001,04017) - x(d1,04009,04001) - x(d1,04011,04001) - x(d1,04017,04001) =G= -1 ; (LHS = 0)
+     
+non_root_balance_2(d1,04009)..  - x(d1,04001,04009) + x(d1,04009,04001) + x(d1,04009,04011) + x(d1,04009,04017) + x(d1,04009,04003) + x(d1,04009,04019) + x(d1,04009,04007) + x(d1,04009,04021) - x(d1,04011,04009) - x(d1,04017,04009) - x(d1,04003,04009) - x(d1,04019,04009) - x(d1,04007,04009) - x(d1,04021,04009) =G= -1 ; (LHS = 0)
+     
+non_root_balance_2(d1,04011)..  - x(d1,04001,04011) - x(d1,04009,04011) + x(d1,04011,04001) + x(d1,04011,04009) + x(d1,04011,04003) - x(d1,04003,04011) =G= -1 ; (LHS = 0)
+     
+REMAINING 42 ENTRIES SKIPPED
+
+
+---- total_population  =E=  
+
+total_population(d1)..  - pop(d1) + 17511*assign(04001,d1) + 11325*assign(04009,d1) + 2984*assign(04011,d1) + 33527*assign(04017,d1) + 40326*assign(04003,d1) + 342668*assign(04019,d1) + 14334*assign(04023,d1) + 41881*assign(04005,d1) + 20418*assign(04007,d1) + 71141*assign(04015,d1) + 88567*assign(04025,d1) + 1139504*assign(04013,d1) + 89594*assign(04021,d1) + 4698*assign(04012,d1) + 38922*assign(04027,d1) =E= 0 ; (LHS = 0)
+     
+total_population(d2)..  - pop(d2) + 17511*assign(04001,d2) + 11325*assign(04009,d2) + 2984*assign(04011,d2) + 33527*assign(04017,d2) + 40326*assign(04003,d2) + 342668*assign(04019,d2) + 14334*assign(04023,d2) + 41881*assign(04005,d2) + 20418*assign(04007,d2) + 71141*assign(04015,d2) + 88567*assign(04025,d2) + 1139504*assign(04013,d2) + 89594*assign(04021,d2) + 4698*assign(04012,d2) + 38922*assign(04027,d2) =E= 0 ; (LHS = 0)
+     
+total_population(d3)..  - pop(d3) + 17511*assign(04001,d3) + 11325*assign(04009,d3) + 2984*assign(04011,d3) + 33527*assign(04017,d3) + 40326*assign(04003,d3) + 342668*assign(04019,d3) + 14334*assign(04023,d3) + 41881*assign(04005,d3) + 20418*assign(04007,d3) + 71141*assign(04015,d3) + 88567*assign(04025,d3) + 1139504*assign(04013,d3) + 89594*assign(04021,d3) + 4698*assign(04012,d3) + 38922*assign(04027,d3) =E= 0 ; (LHS = 0)
+     
+
+---- decide_win_rep  =L=  See if in District J republicans are the winner
+
+decide_win_rep(d1)..  - 6881*assign(04001,d1) + 4723*assign(04009,d1) + 800*assign(04011,d1) + 2803*assign(04017,d1) + 9746*assign(04003,d1) - 48630*assign(04019,d1) - 7034*assign(04023,d1) - 8735*assign(04005,d1) + 6926*assign(04007,d1) + 38171*assign(04015,d1) + 29157*assign(04025,d1) + 41426*assign(04013,d1) + 18120*assign(04021,d1) + 2062*assign(04012,d1) + 2250*assign(04027,d1) - 1957400*z(d1) =L= 0 ; (LHS = 0)
+     
+decide_win_rep(d2)..  - 6881*assign(04001,d2) + 4723*assign(04009,d2) + 800*assign(04011,d2) + 2803*assign(04017,d2) + 9746*assign(04003,d2) - 48630*assign(04019,d2) - 7034*assign(04023,d2) - 8735*assign(04005,d2) + 6926*assign(04007,d2) + 38171*assign(04015,d2) + 29157*assign(04025,d2) + 41426*assign(04013,d2) + 18120*assign(04021,d2) + 2062*assign(04012,d2) + 2250*assign(04027,d2) - 1957400*z(d2) =L= 0 ; (LHS = 0)
+     
+decide_win_rep(d3)..  - 6881*assign(04001,d3) + 4723*assign(04009,d3) + 800*assign(04011,d3) + 2803*assign(04017,d3) + 9746*assign(04003,d3) - 48630*assign(04019,d3) - 7034*assign(04023,d3) - 8735*assign(04005,d3) + 6926*assign(04007,d3) + 38171*assign(04015,d3) + 29157*assign(04025,d3) + 41426*assign(04013,d3) + 18120*assign(04021,d3) + 2062*assign(04012,d3) + 2250*assign(04027,d3) - 1957400*z(d3) =L= 0 ; (LHS = 0)
+     
+
+---- decide_win_rep2  =G=  See if in District J republicans are the winner
+
+decide_win_rep2(d1)..  - 6881*assign(04001,d1) + 4723*assign(04009,d1) + 800*assign(04011,d1) + 2803*assign(04017,d1) + 9746*assign(04003,d1) - 48630*assign(04019,d1) - 7034*assign(04023,d1) - 8735*assign(04005,d1) + 6926*assign(04007,d1) + 38171*assign(04015,d1) + 29157*assign(04025,d1) + 41426*assign(04013,d1) + 18120*assign(04021,d1) + 2062*assign(04012,d1) + 2250*assign(04027,d1) - 1957401*z(d1) =G= -1957400 ; (LHS = 0)
+     
+decide_win_rep2(d2)..  - 6881*assign(04001,d2) + 4723*assign(04009,d2) + 800*assign(04011,d2) + 2803*assign(04017,d2) + 9746*assign(04003,d2) - 48630*assign(04019,d2) - 7034*assign(04023,d2) - 8735*assign(04005,d2) + 6926*assign(04007,d2) + 38171*assign(04015,d2) + 29157*assign(04025,d2) + 41426*assign(04013,d2) + 18120*assign(04021,d2) + 2062*assign(04012,d2) + 2250*assign(04027,d2) - 1957401*z(d2) =G= -1957400 ; (LHS = 0)
+     
+decide_win_rep2(d3)..  - 6881*assign(04001,d3) + 4723*assign(04009,d3) + 800*assign(04011,d3) + 2803*assign(04017,d3) + 9746*assign(04003,d3) - 48630*assign(04019,d3) - 7034*assign(04023,d3) - 8735*assign(04005,d3) + 6926*assign(04007,d3) + 38171*assign(04015,d3) + 29157*assign(04025,d3) + 41426*assign(04013,d3) + 18120*assign(04021,d3) + 2062*assign(04012,d3) + 2250*assign(04027,d3) - 1957401*z(d3) =G= -1957400 ; (LHS = 0)
+     
+GAMS 32.2.0  rc62c018 Released Aug 26, 2020 DEX-DEG x86 64bit/Mac OS X - 02/03/21 00:10:49 Page 5
+gerrymandering model
+Column Listing      SOLVE spanning_tree Using MINLP From line 160
+
+
+---- obj  
+
+obj
+                (.LO, .L, .UP, .M = -INF, 0, +INF, 0)
+        1       objective
+
+
+---- x  flow from i to j in district d
+
+x(d1,04001,04009)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+        1       flow_district_constr_1(d1,04001,04009)
+        1       flow_district_constr_2(d1,04001,04009)
+        1       root_balance_1(d1,04001)
+       -1       root_balance_1(d1,04009)
+        1       root_balance_2(d1,04001)
+       -1       root_balance_2(d1,04009)
+        1       non_root_balance_1(d1,04001)
+       -1       non_root_balance_1(d1,04009)
+        1       non_root_balance_2(d1,04001)
+       -1       non_root_balance_2(d1,04009)
+
+x(d1,04001,04011)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+        1       flow_district_constr_1(d1,04001,04011)
+        1       flow_district_constr_2(d1,04001,04011)
+        1       root_balance_1(d1,04001)
+       -1       root_balance_1(d1,04011)
+        1       root_balance_2(d1,04001)
+       -1       root_balance_2(d1,04011)
+        1       non_root_balance_1(d1,04001)
+       -1       non_root_balance_1(d1,04011)
+        1       non_root_balance_2(d1,04001)
+       -1       non_root_balance_2(d1,04011)
+
+x(d1,04001,04017)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+        1       flow_district_constr_1(d1,04001,04017)
+        1       flow_district_constr_2(d1,04001,04017)
+        1       root_balance_1(d1,04001)
+       -1       root_balance_1(d1,04017)
+        1       root_balance_2(d1,04001)
+       -1       root_balance_2(d1,04017)
+        1       non_root_balance_1(d1,04001)
+       -1       non_root_balance_1(d1,04017)
+        1       non_root_balance_2(d1,04001)
+       -1       non_root_balance_2(d1,04017)
+
+REMAINING 189 ENTRIES SKIPPED
+
+---- pop  
+
+pop(d1)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+       (0)      objective
+       -1       total_population(d1)
+
+pop(d2)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+       (0)      objective
+       -1       total_population(d2)
+
+pop(d3)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+       (0)      objective
+       -1       total_population(d3)
+
+
+---- assign  if i is assigned to d
+
+assign(04001,d1)
+                (.LO, .L, .UP, .M = 0, 0, 1, 0)
+        1       each_assign_one(04001)
+       -1       root_constr(04001,d1)
+      -15       flow_district_constr_1(d1,04001,04009)
+      -15       flow_district_constr_1(d1,04001,04011)
+      -15       flow_district_constr_1(d1,04001,04017)
+      -15       flow_district_constr_2(d1,04009,04001)
+      -15       flow_district_constr_2(d1,04011,04001)
+      -15       flow_district_constr_2(d1,04017,04001)
+        1       min_node_district(d1)
+        1       assign_1_root_0_constr_1(04001,d1)
+        1       assign_1_root_0_constr_2(04001,d1)
+       -1       root_balance_1(d1,04001)
+       -1       root_balance_1(d1,04009)
+       -1       root_balance_1(d1,04011)
+       -1       root_balance_1(d1,04017)
+       -1       root_balance_1(d1,04003)
+       -1       root_balance_1(d1,04019)
+       -1       root_balance_1(d1,04023)
+       -1       root_balance_1(d1,04005)
+       -1       root_balance_1(d1,04007)
+       -1       root_balance_1(d1,04015)
+       -1       root_balance_1(d1,04025)
+       -1       root_balance_1(d1,04013)
+       -1       root_balance_1(d1,04021)
+       -1       root_balance_1(d1,04012)
+       -1       root_balance_1(d1,04027)
+       -1       root_balance_2(d1,04001)
+       -1       root_balance_2(d1,04009)
+       -1       root_balance_2(d1,04011)
+       -1       root_balance_2(d1,04017)
+       -1       root_balance_2(d1,04003)
+       -1       root_balance_2(d1,04019)
+       -1       root_balance_2(d1,04023)
+       -1       root_balance_2(d1,04005)
+       -1       root_balance_2(d1,04007)
+       -1       root_balance_2(d1,04015)
+       -1       root_balance_2(d1,04025)
+       -1       root_balance_2(d1,04013)
+       -1       root_balance_2(d1,04021)
+       -1       root_balance_2(d1,04012)
+       -1       root_balance_2(d1,04027)
+    17511       total_population(d1)
+    -6881       decide_win_rep(d1)
+    -6881       decide_win_rep2(d1)
+
+assign(04001,d2)
+                (.LO, .L, .UP, .M = 0, 0, 1, 0)
+        1       each_assign_one(04001)
+       -1       root_constr(04001,d2)
+      -15       flow_district_constr_1(d2,04001,04009)
+      -15       flow_district_constr_1(d2,04001,04011)
+      -15       flow_district_constr_1(d2,04001,04017)
+      -15       flow_district_constr_2(d2,04009,04001)
+      -15       flow_district_constr_2(d2,04011,04001)
+      -15       flow_district_constr_2(d2,04017,04001)
+        1       min_node_district(d2)
+        1       assign_1_root_0_constr_1(04001,d2)
+        1       assign_1_root_0_constr_2(04001,d2)
+       -1       root_balance_1(d2,04001)
+       -1       root_balance_1(d2,04009)
+       -1       root_balance_1(d2,04011)
+       -1       root_balance_1(d2,04017)
+       -1       root_balance_1(d2,04003)
+       -1       root_balance_1(d2,04019)
+       -1       root_balance_1(d2,04023)
+       -1       root_balance_1(d2,04005)
+       -1       root_balance_1(d2,04007)
+       -1       root_balance_1(d2,04015)
+       -1       root_balance_1(d2,04025)
+       -1       root_balance_1(d2,04013)
+       -1       root_balance_1(d2,04021)
+       -1       root_balance_1(d2,04012)
+       -1       root_balance_1(d2,04027)
+       -1       root_balance_2(d2,04001)
+       -1       root_balance_2(d2,04009)
+       -1       root_balance_2(d2,04011)
+       -1       root_balance_2(d2,04017)
+       -1       root_balance_2(d2,04003)
+       -1       root_balance_2(d2,04019)
+       -1       root_balance_2(d2,04023)
+       -1       root_balance_2(d2,04005)
+       -1       root_balance_2(d2,04007)
+       -1       root_balance_2(d2,04015)
+       -1       root_balance_2(d2,04025)
+       -1       root_balance_2(d2,04013)
+       -1       root_balance_2(d2,04021)
+       -1       root_balance_2(d2,04012)
+       -1       root_balance_2(d2,04027)
+    17511       total_population(d2)
+    -6881       decide_win_rep(d2)
+    -6881       decide_win_rep2(d2)
+
+assign(04001,d3)
+                (.LO, .L, .UP, .M = 0, 0, 1, 0)
+        1       each_assign_one(04001)
+       -1       root_constr(04001,d3)
+      -15       flow_district_constr_1(d3,04001,04009)
+      -15       flow_district_constr_1(d3,04001,04011)
+      -15       flow_district_constr_1(d3,04001,04017)
+      -15       flow_district_constr_2(d3,04009,04001)
+      -15       flow_district_constr_2(d3,04011,04001)
+      -15       flow_district_constr_2(d3,04017,04001)
+        1       min_node_district(d3)
+        1       assign_1_root_0_constr_1(04001,d3)
+        1       assign_1_root_0_constr_2(04001,d3)
+       -1       root_balance_1(d3,04001)
+       -1       root_balance_1(d3,04009)
+       -1       root_balance_1(d3,04011)
+       -1       root_balance_1(d3,04017)
+       -1       root_balance_1(d3,04003)
+       -1       root_balance_1(d3,04019)
+       -1       root_balance_1(d3,04023)
+       -1       root_balance_1(d3,04005)
+       -1       root_balance_1(d3,04007)
+       -1       root_balance_1(d3,04015)
+       -1       root_balance_1(d3,04025)
+       -1       root_balance_1(d3,04013)
+       -1       root_balance_1(d3,04021)
+       -1       root_balance_1(d3,04012)
+       -1       root_balance_1(d3,04027)
+       -1       root_balance_2(d3,04001)
+       -1       root_balance_2(d3,04009)
+       -1       root_balance_2(d3,04011)
+       -1       root_balance_2(d3,04017)
+       -1       root_balance_2(d3,04003)
+       -1       root_balance_2(d3,04019)
+       -1       root_balance_2(d3,04023)
+       -1       root_balance_2(d3,04005)
+       -1       root_balance_2(d3,04007)
+       -1       root_balance_2(d3,04015)
+       -1       root_balance_2(d3,04025)
+       -1       root_balance_2(d3,04013)
+       -1       root_balance_2(d3,04021)
+       -1       root_balance_2(d3,04012)
+       -1       root_balance_2(d3,04027)
+    17511       total_population(d3)
+    -6881       decide_win_rep(d3)
+    -6881       decide_win_rep2(d3)
+
+REMAINING 42 ENTRIES SKIPPED
+
+---- root  1 if i s the root in d
+
+root(d1,04001)
+                (.LO, .L, .UP, .M = 0, 0, 1, 0)
+        1       one_root_constr(d1)
+        1       root_constr(04001,d1)
+       -1       assign_1_root_0_constr_1(04001,d1)
+       -1       assign_1_root_0_constr_2(04001,d1)
+       15       root_balance_1(d1,04001)
+      -15       root_balance_2(d1,04001)
+
+root(d1,04009)
+                (.LO, .L, .UP, .M = 0, 0, 1, 0)
+        1       one_root_constr(d1)
+        1       root_constr(04009,d1)
+       -1       assign_1_root_0_constr_1(04009,d1)
+       -1       assign_1_root_0_constr_2(04009,d1)
+       15       root_balance_1(d1,04009)
+      -15       root_balance_2(d1,04009)
+
+root(d1,04011)
+                (.LO, .L, .UP, .M = 0, 0, 1, 0)
+        1       one_root_constr(d1)
+        1       root_constr(04011,d1)
+       -1       assign_1_root_0_constr_1(04011,d1)
+       -1       assign_1_root_0_constr_2(04011,d1)
+       15       root_balance_1(d1,04011)
+      -15       root_balance_2(d1,04011)
+
+REMAINING 42 ENTRIES SKIPPED
+
+---- assign_1_root_0  if i is assigned to d and is not a root return 1
+
+assign_1_root_0(04001,d1)
+                (.LO, .L, .UP, .M = 0, 0, 1, 0)
+       -1       assign_1_root_0_constr_1(04001,d1)
+       -2       assign_1_root_0_constr_2(04001,d1)
+       15       non_root_balance_1(d1,04001)
+
+assign_1_root_0(04001,d2)
+                (.LO, .L, .UP, .M = 0, 0, 1, 0)
+       -1       assign_1_root_0_constr_1(04001,d2)
+       -2       assign_1_root_0_constr_2(04001,d2)
+       15       non_root_balance_1(d2,04001)
+
+assign_1_root_0(04001,d3)
+                (.LO, .L, .UP, .M = 0, 0, 1, 0)
+       -1       assign_1_root_0_constr_1(04001,d3)
+       -2       assign_1_root_0_constr_2(04001,d3)
+       15       non_root_balance_1(d3,04001)
+
+REMAINING 42 ENTRIES SKIPPED
+
+---- z  1 if republican win in district d
+
+z(d1)
+                (.LO, .L, .UP, .M = 0, 0, 1, 0)
+       (0)      objective
+  -1.957400E+6  decide_win_rep(d1)
+  -1.957401E+6  decide_win_rep2(d1)
+
+z(d2)
+                (.LO, .L, .UP, .M = 0, 0, 1, 0)
+       (0)      objective
+  -1.957400E+6  decide_win_rep(d2)
+  -1.957401E+6  decide_win_rep2(d2)
+
+z(d3)
+                (.LO, .L, .UP, .M = 0, 0, 1, 0)
+       (0)      objective
+  -1.957400E+6  decide_win_rep(d3)
+  -1.957401E+6  decide_win_rep2(d3)
+
+GAMS 32.2.0  rc62c018 Released Aug 26, 2020 DEX-DEG x86 64bit/Mac OS X - 02/03/21 00:10:49 Page 6
+gerrymandering model
+Model Statistics    SOLVE spanning_tree Using MINLP From line 160
+
+
+MODEL STATISTICS
+
+BLOCKS OF EQUATIONS          16     SINGLE EQUATIONS          730
+BLOCKS OF VARIABLES           7     SINGLE VARIABLES          334
+NON ZERO ELEMENTS         4,435     NON LINEAR N-Z              6
+DERIVATIVE POOL              20     CONSTANT POOL              18
+CODE LENGTH                  13     DISCRETE VARIABLES        138
+
+
+GENERATION TIME      =        0.035 SECONDS      4 MB  32.2.0 rc62c018 DEX-DEG
+GAMS 32.2.0  rc62c018 Released Aug 26, 2020 DEX-DEG x86 64bit/Mac OS X - 02/03/21 00:10:49 Page 7
+gerrymandering model
+Solution Report     SOLVE spanning_tree Using MINLP From line 160
+
+
+               S O L V E      S U M M A R Y
+
+     MODEL   spanning_tree       OBJECTIVE  obj
+     TYPE    MINLP               DIRECTION  MAXIMIZE
+     SOLVER  DICOPT              FROM LINE  160
+
+**** SOLVER STATUS     1 Normal Completion         
+**** MODEL STATUS      8 Integer Solution          
+**** OBJECTIVE VALUE              100.0000
+
+ RESOURCE USAGE, LIMIT          0.390 10000000000.000
+ ITERATION COUNT, LIMIT        57    2147483647
+ EVALUATION ERRORS              0             0
+-------------------------------------------------------------------------------
+Dicopt 2         32.2.0 rc62c018 Released Aug 26, 2020 DEG x86 64bit/Mac OS X 
+-------------------------------------------------------------------------------
+by Aldo Vecchietti, Director del Instituto INGAR,
+   CONICET, UTN, Santa Fe, Argentina
+by Ignacio E. Grossmann, Chemical Engineering Faculty,
+   Carnegie Mellon University, Pittsburgh, PA, USA
+-------------------------------------------------------------------------------
+CONOPT 3         32.2.0 rc62c018 Released Aug 26, 2020 DEG x86 64bit/Mac OS X 
+ 
+ 
+    C O N O P T 3   version 3.17L
+    Copyright (C)   ARKI Consulting and Development A/S
+                    Bagsvaerdvej 246 A
+                    DK-2880 Bagsvaerd, Denmark
+ 
+ 
+    The model has 334 variables and 730 constraints
+    with 4435 Jacobian elements, 6 of which are nonlinear.
+    The Hessian of the Lagrangian has 0 elements on the diagonal,
+    3 elements below the diagonal, and 6 nonlinear variables.
+ 
+                   Pre-triangular equations:   0
+                   Post-triangular equations:  4
+ 
+ 
+ ** Optimal solution. There are no superbasic variables.
+ 
+ 
+ CONOPT time Total                            0.030 seconds
+   of which: Function evaluations             0.002 =  6.7%
+             1st Derivative evaluations       0.000 =  0.0%
+ 
+
+IBM ILOG CPLEX   32.2.0 rc62c018 Released Aug 26, 2020 DEG x86 64bit/Mac OS X 
+--- GAMS/Cplex Link licensed for continuous and discrete problems.
+Cplex 12.10.0.0
+
+3: *** Value Error Value brought in range for option "itlim" saw "2147483638"
+3: *** Value Error    Value set to 2100000000
+Unable to load names.
+MIP status(101): integer optimal solution
+Cplex Time: 0.05sec (det. 14.29 ticks)
+Fixing integer variables, and solving final LP...
+Fixed MIP status(1): optimal
+Cplex Time: 0.00sec (det. 0.67 ticks)
+Proven optimal solution.
+
+MIP Solution:          100.000000    (1 iterations, 0 nodes)
+Final Solve:           100.000000    (0 iterations)
+
+Best possible:         100.000000
+Absolute gap:            0.000000
+Relative gap:            0.000000
+
+--- DICOPT: Setting up next NLP
+CONOPT 3         32.2.0 rc62c018 Released Aug 26, 2020 DEG x86 64bit/Mac OS X 
+ 
+ 
+    C O N O P T 3   version 3.17L
+    Copyright (C)   ARKI Consulting and Development A/S
+                    Bagsvaerdvej 246 A
+                    DK-2880 Bagsvaerd, Denmark
+ 
+ 
+    The model has 334 variables and 730 constraints
+    with 4435 Jacobian elements, 6 of which are nonlinear.
+    The Hessian of the Lagrangian has 0 elements on the diagonal,
+    3 elements below the diagonal, and 6 nonlinear variables.
+ 
+                   Pre-triangular equations:   166
+                   Post-triangular equations:  0
+ 
+ 
+ ** Optimal solution. There are no superbasic variables.
+ 
+ 
+ CONOPT time Total                            0.187 seconds
+   of which: Function evaluations             0.000 =  0.0%
+             1st Derivative evaluations       0.000 =  0.0%
+ 
+--- GMO Resort Time 1ms
+
+IBM ILOG CPLEX   32.2.0 rc62c018 Released Aug 26, 2020 DEG x86 64bit/Mac OS X 
+--- GAMS/Cplex Link licensed for continuous and discrete problems.
+Cplex 12.10.0.0
+
+3: *** Value Error Value brought in range for option "itlim" saw "2147483633"
+3: *** Value Error    Value set to 2100000000
+Unable to load names.
+MIP status(101): integer optimal solution
+Cplex Time: 0.09sec (det. 38.85 ticks)
+Fixing integer variables, and solving final LP...
+Fixed MIP status(1): optimal
+Cplex Time: 0.00sec (det. 0.69 ticks)
+Proven optimal solution.
+
+MIP Solution:          100.000000    (39 iterations, 0 nodes)
+Final Solve:           100.000000    (0 iterations)
+
+Best possible:         100.000000
+Absolute gap:            0.000000
+Relative gap:            0.000000
+
+--- DICOPT: Setting up next NLP
+CONOPT 3         32.2.0 rc62c018 Released Aug 26, 2020 DEG x86 64bit/Mac OS X 
+ 
+ 
+    C O N O P T 3   version 3.17L
+    Copyright (C)   ARKI Consulting and Development A/S
+                    Bagsvaerdvej 246 A
+                    DK-2880 Bagsvaerd, Denmark
+ 
+ 
+    The model has 334 variables and 730 constraints
+    with 4435 Jacobian elements, 6 of which are nonlinear.
+    The Hessian of the Lagrangian has 0 elements on the diagonal,
+    3 elements below the diagonal, and 6 nonlinear variables.
+ 
+                   Pre-triangular equations:   166
+                   Post-triangular equations:  0
+ 
+ 
+ ** Optimal solution. There are no superbasic variables.
+ 
+ 
+ CONOPT time Total                            0.003 seconds
+   of which: Function evaluations             0.000 =  0.0%
+             1st Derivative evaluations       0.000 =  0.0%
+ 
+--- DICOPT: Stopped on NLP worsening
+
+      The search was stopped because the objective function
+      of the NLP subproblems started to deteriorate.
+
+--- DICOPT: Best integer solution found: 100.000000
+
+                           LOWER          LEVEL          UPPER         MARGINAL
+
+---- EQU objective           .              .              .             1.0000      
+
+---- EQU each_assign_one  each county is assigned to one district
+
+             LOWER          LEVEL          UPPER         MARGINAL
+
+04001         1.0000         1.0000         1.0000          .          
+04009         1.0000         1.0000         1.0000          .          
+04011         1.0000         1.0000         1.0000          .          
+04017         1.0000         1.0000         1.0000          .          
+04003         1.0000         1.0000         1.0000          .          
+04019         1.0000         1.0000         1.0000          .          
+04023         1.0000         1.0000         1.0000          .          
+04005         1.0000         1.0000         1.0000          .          
+04007         1.0000         1.0000         1.0000          .          
+04015         1.0000         1.0000         1.0000          .          
+04025         1.0000         1.0000         1.0000          .          
+04013         1.0000         1.0000         1.0000          .          
+04021         1.0000         1.0000         1.0000          .          
+04012         1.0000         1.0000         1.0000          .          
+04027         1.0000         1.0000         1.0000          .          
+
+---- EQU one_root_constr  
+
+          LOWER          LEVEL          UPPER         MARGINAL
+
+d1         1.0000         1.0000         1.0000          .          
+d2         1.0000         1.0000         1.0000          .          
+d3         1.0000         1.0000         1.0000          .          
+
+---- EQU root_constr  
+
+                LOWER          LEVEL          UPPER         MARGINAL
+
+04001.d1        -INF           -1.0000          .              .          
+04001.d2        -INF             .              .              .          
+04001.d3        -INF             .              .              .          
+04009.d1        -INF             .              .              .          
+04009.d2        -INF             .              .              .          
+04009.d3        -INF             .              .              .          
+04011.d1        -INF           -1.0000          .              .          
+04011.d2        -INF             .              .              .          
+04011.d3        -INF             .              .              .          
+04017.d1        -INF             .              .              .          
+04017.d2        -INF             .              .              .          
+04017.d3        -INF             .              .              .          
+04003.d1        -INF           -1.0000          .              .          
+04003.d2        -INF             .              .              .          
+04003.d3        -INF             .              .              .          
+04019.d1        -INF           -1.0000          .              .          
+04019.d2        -INF             .              .              .          
+04019.d3        -INF             .              .              .          
+04023.d1        -INF           -1.0000          .              .          
+04023.d2        -INF             .              .              .          
+04023.d3        -INF             .              .              .          
+04005.d1        -INF             .              .              .          
+04005.d2        -INF           -1.0000          .              .          
+04005.d3        -INF             .              .              .          
+04007.d1        -INF             .              .              .          
+04007.d2        -INF           -1.0000          .              .          
+04007.d3        -INF             .              .              .          
+04015.d1        -INF           -1.0000          .              .          
+04015.d2        -INF             .              .              .          
+04015.d3        -INF             .              .              .          
+04025.d1        -INF           -1.0000          .              .          
+04025.d2        -INF             .              .              .          
+04025.d3        -INF             .              .              .          
+04013.d1        -INF           -1.0000          .              .          
+04013.d2        -INF             .              .              .          
+04013.d3        -INF             .              .              .          
+04021.d1        -INF             .              .              .          
+04021.d2        -INF           -1.0000          .              .          
+04021.d3        -INF             .              .              .          
+04012.d1        -INF             .              .              .          
+04012.d2        -INF             .              .              .          
+04012.d3        -INF           -1.0000          .              .          
+04027.d1        -INF             .              .              .          
+04027.d2        -INF             .              .              .          
+04027.d3        -INF             .              .              .          
+
+---- EQU flow_district_constr_1  
+
+                      LOWER          LEVEL          UPPER         MARGINAL
+
+d1.04001.04009        -INF          -15.0000          .              .          
+d1.04001.04011        -INF           -8.0000          .              .          
+d1.04001.04017        -INF          -15.0000          .              .          
+d1.04009.04001        -INF             .              .             EPS         
+d1.04009.04011        -INF             .              .             EPS         
+d1.04009.04017        -INF             .              .             EPS         
+d1.04009.04003        -INF             .              .             EPS         
+d1.04009.04019        -INF             .              .             EPS         
+d1.04009.04007        -INF             .              .             EPS         
+d1.04009.04021        -INF             .              .             EPS         
+d1.04011.04001        -INF          -15.0000          .              .          
+d1.04011.04009        -INF          -15.0000          .              .          
+d1.04011.04003        -INF           -9.0000          .              .          
+d1.04017.04001        -INF           -7.0000          .              .          
+d1.04017.04009        -INF          -15.0000          .              .          
+d1.04017.04005        -INF          -15.0000          .              .          
+d1.04017.04007        -INF          -15.0000          .              .          
+d1.04003.04009        -INF          -15.0000          .              .          
+d1.04003.04011        -INF          -15.0000          .              .          
+d1.04003.04019        -INF             .              .             EPS         
+d1.04003.04023        -INF          -15.0000          .              .          
+d1.04019.04009        -INF          -15.0000          .              .          
+d1.04019.04003        -INF          -15.0000          .              .          
+d1.04019.04023        -INF           -4.0000          .              .          
+d1.04019.04013        -INF          -12.0000          .              .          
+d1.04019.04021        -INF          -15.0000          .              .          
+d1.04019.04027        -INF          -15.0000          .              .          
+d1.04023.04003        -INF           -5.0000          .              .          
+d1.04023.04019        -INF          -15.0000          .              .          
+d1.04005.04017        -INF             .              .             EPS         
+d1.04005.04007        -INF             .              .             EPS         
+d1.04005.04015        -INF             .              .             EPS         
+d1.04005.04025        -INF             .              .             EPS         
+d1.04007.04009        -INF             .              .             EPS         
+d1.04007.04017        -INF             .              .             EPS         
+d1.04007.04005        -INF             .              .             EPS         
+d1.04007.04025        -INF             .              .             EPS         
+d1.04007.04013        -INF             .              .             EPS         
+d1.04007.04021        -INF             .              .             EPS         
+d1.04015.04005        -INF          -15.0000          .              .          
+d1.04015.04025        -INF          -15.0000          .              .          
+d1.04015.04012        -INF          -15.0000          .              .          
+d1.04025.04005        -INF          -15.0000          .              .          
+d1.04025.04007        -INF          -15.0000          .              .          
+d1.04025.04015        -INF          -14.0000          .              .          
+d1.04025.04013        -INF          -15.0000          .              .          
+d1.04025.04012        -INF          -15.0000          .              .          
+d1.04013.04019        -INF          -15.0000          .              .          
+d1.04013.04007        -INF          -15.0000          .              .          
+d1.04013.04025        -INF          -13.0000          .              .          
+d1.04013.04021        -INF          -15.0000          .              .          
+d1.04013.04012        -INF          -15.0000          .              .          
+d1.04013.04027        -INF          -15.0000          .              .          
+d1.04021.04009        -INF             .              .             EPS         
+d1.04021.04019        -INF             .              .             EPS         
+d1.04021.04007        -INF             .              .             EPS         
+d1.04021.04013        -INF             .              .             EPS         
+d1.04012.04015        -INF             .              .             EPS         
+d1.04012.04025        -INF             .              .             EPS         
+d1.04012.04013        -INF             .              .             EPS         
+d1.04012.04027        -INF             .              .             EPS         
+d1.04027.04019        -INF             .              .             EPS         
+d1.04027.04013        -INF             .              .             EPS         
+d1.04027.04012        -INF             .              .             EPS         
+d2.04001.04009        -INF             .              .             EPS         
+d2.04001.04011        -INF             .              .             EPS         
+d2.04001.04017        -INF             .              .             EPS         
+d2.04009.04001        -INF          -15.0000          .              .          
+d2.04009.04011        -INF          -15.0000          .              .          
+d2.04009.04017        -INF          -15.0000          .              .          
+d2.04009.04003        -INF          -15.0000          .              .          
+d2.04009.04019        -INF          -15.0000          .              .          
+d2.04009.04007        -INF          -15.0000          .              .          
+d2.04009.04021        -INF             .              .             EPS         
+d2.04011.04001        -INF             .              .             EPS         
+d2.04011.04009        -INF             .              .             EPS         
+d2.04011.04003        -INF             .              .             EPS         
+d2.04017.04001        -INF             .              .             EPS         
+d2.04017.04009        -INF             .              .             EPS         
+d2.04017.04005        -INF             .              .             EPS         
+d2.04017.04007        -INF             .              .             EPS         
+d2.04003.04009        -INF             .              .             EPS         
+d2.04003.04011        -INF             .              .             EPS         
+d2.04003.04019        -INF             .              .             EPS         
+d2.04003.04023        -INF             .              .             EPS         
+d2.04019.04009        -INF             .              .             EPS         
+d2.04019.04003        -INF             .              .             EPS         
+d2.04019.04023        -INF             .              .             EPS         
+d2.04019.04013        -INF             .              .             EPS         
+d2.04019.04021        -INF             .              .             EPS         
+d2.04019.04027        -INF             .              .             EPS         
+d2.04023.04003        -INF             .              .             EPS         
+d2.04023.04019        -INF             .              .             EPS         
+d2.04005.04017        -INF          -15.0000          .              .          
+d2.04005.04007        -INF          -15.0000          .              .          
+d2.04005.04015        -INF          -15.0000          .              .          
+d2.04005.04025        -INF          -15.0000          .              .          
+d2.04007.04009        -INF           -3.0000          .              .          
+d2.04007.04017        -INF          -15.0000          .              .          
+d2.04007.04005        -INF          -14.0000          .              .          
+d2.04007.04025        -INF          -15.0000          .              .          
+d2.04007.04013        -INF          -15.0000          .              .          
+d2.04007.04021        -INF          -15.0000          .              .          
+d2.04015.04005        -INF             .              .             EPS         
+d2.04015.04025        -INF             .              .             EPS         
+d2.04015.04012        -INF             .              .             EPS         
+d2.04025.04005        -INF             .              .             EPS         
+d2.04025.04007        -INF             .              .             EPS         
+d2.04025.04015        -INF             .              .             EPS         
+d2.04025.04013        -INF             .              .             EPS         
+d2.04025.04012        -INF             .              .             EPS         
+d2.04013.04019        -INF             .              .             EPS         
+d2.04013.04007        -INF             .              .             EPS         
+d2.04013.04025        -INF             .              .             EPS         
+d2.04013.04021        -INF             .              .             EPS         
+d2.04013.04012        -INF             .              .             EPS         
+d2.04013.04027        -INF             .              .             EPS         
+d2.04021.04009        -INF          -15.0000          .              .          
+d2.04021.04019        -INF          -15.0000          .              .          
+d2.04021.04007        -INF           -1.0000          .              .          
+d2.04021.04013        -INF          -15.0000          .              .          
+d2.04012.04015        -INF             .              .             EPS         
+d2.04012.04025        -INF             .              .             EPS         
+d2.04012.04013        -INF             .              .             EPS         
+d2.04012.04027        -INF             .              .             EPS         
+d2.04027.04019        -INF             .              .             EPS         
+d2.04027.04013        -INF             .              .             EPS         
+d2.04027.04012        -INF             .              .             EPS         
+d3.04001.04009        -INF             .              .             EPS         
+d3.04001.04011        -INF             .              .             EPS         
+d3.04001.04017        -INF             .              .             EPS         
+d3.04009.04001        -INF             .              .             EPS         
+d3.04009.04011        -INF             .              .             EPS         
+d3.04009.04017        -INF             .              .             EPS         
+d3.04009.04003        -INF             .              .             EPS         
+d3.04009.04019        -INF             .              .             EPS         
+d3.04009.04007        -INF             .              .             EPS         
+d3.04009.04021        -INF             .              .             EPS         
+d3.04011.04001        -INF             .              .             EPS         
+d3.04011.04009        -INF             .              .             EPS         
+d3.04011.04003        -INF             .              .             EPS         
+d3.04017.04001        -INF             .              .             EPS         
+d3.04017.04009        -INF             .              .             EPS         
+d3.04017.04005        -INF             .              .             EPS         
+d3.04017.04007        -INF             .              .             EPS         
+d3.04003.04009        -INF             .              .             EPS         
+d3.04003.04011        -INF             .              .             EPS         
+d3.04003.04019        -INF             .              .             EPS         
+d3.04003.04023        -INF             .              .             EPS         
+d3.04019.04009        -INF             .              .             EPS         
+d3.04019.04003        -INF             .              .             EPS         
+d3.04019.04023        -INF             .              .             EPS         
+d3.04019.04013        -INF             .              .             EPS         
+d3.04019.04021        -INF             .              .             EPS         
+d3.04019.04027        -INF             .              .             EPS         
+d3.04023.04003        -INF             .              .             EPS         
+d3.04023.04019        -INF             .              .             EPS         
+d3.04005.04017        -INF             .              .             EPS         
+d3.04005.04007        -INF             .              .             EPS         
+d3.04005.04015        -INF             .              .             EPS         
+d3.04005.04025        -INF             .              .             EPS         
+d3.04007.04009        -INF             .              .             EPS         
+d3.04007.04017        -INF             .              .             EPS         
+d3.04007.04005        -INF             .              .             EPS         
+d3.04007.04025        -INF             .              .             EPS         
+d3.04007.04013        -INF             .              .             EPS         
+d3.04007.04021        -INF             .              .             EPS         
+d3.04015.04005        -INF             .              .             EPS         
+d3.04015.04025        -INF             .              .             EPS         
+d3.04015.04012        -INF             .              .             EPS         
+d3.04025.04005        -INF             .              .             EPS         
+d3.04025.04007        -INF             .              .             EPS         
+d3.04025.04015        -INF             .              .             EPS         
+d3.04025.04013        -INF             .              .             EPS         
+d3.04025.04012        -INF             .              .             EPS         
+d3.04013.04019        -INF             .              .             EPS         
+d3.04013.04007        -INF             .              .             EPS         
+d3.04013.04025        -INF             .              .             EPS         
+d3.04013.04021        -INF             .              .             EPS         
+d3.04013.04012        -INF             .              .             EPS         
+d3.04013.04027        -INF             .              .             EPS         
+d3.04021.04009        -INF             .              .             EPS         
+d3.04021.04019        -INF             .              .             EPS         
+d3.04021.04007        -INF             .              .             EPS         
+d3.04021.04013        -INF             .              .             EPS         
+d3.04012.04015        -INF          -15.0000          .              .          
+d3.04012.04025        -INF          -15.0000          .              .          
+d3.04012.04013        -INF          -15.0000          .              .          
+d3.04012.04027        -INF          -15.0000          .              .          
+d3.04027.04019        -INF          -15.0000          .              .          
+d3.04027.04013        -INF          -15.0000          .              .          
+d3.04027.04012        -INF          -14.0000          .              .          
+
+---- EQU flow_district_constr_2  
+
+                      LOWER          LEVEL          UPPER         MARGINAL
+
+d1.04001.04009        -INF             .              .             EPS         
+d1.04001.04011        -INF           -8.0000          .              .          
+d1.04001.04017        -INF          -15.0000          .              .          
+d1.04009.04001        -INF          -15.0000          .              .          
+d1.04009.04011        -INF          -15.0000          .              .          
+d1.04009.04017        -INF          -15.0000          .              .          
+d1.04009.04003        -INF          -15.0000          .              .          
+d1.04009.04019        -INF          -15.0000          .              .          
+d1.04009.04007        -INF             .              .              .          
+d1.04009.04021        -INF             .              .              .          
+d1.04011.04001        -INF          -15.0000          .              .          
+d1.04011.04009        -INF             .              .             EPS         
+d1.04011.04003        -INF           -9.0000          .              .          
+d1.04017.04001        -INF           -7.0000          .              .          
+d1.04017.04009        -INF             .              .             EPS         
+d1.04017.04005        -INF             .              .             EPS         
+d1.04017.04007        -INF             .              .             EPS         
+d1.04003.04009        -INF             .              .             EPS         
+d1.04003.04011        -INF          -15.0000          .              .          
+d1.04003.04019        -INF             .              .              .          
+d1.04003.04023        -INF          -15.0000          .              .          
+d1.04019.04009        -INF             .              .             EPS         
+d1.04019.04003        -INF          -15.0000          .              .          
+d1.04019.04023        -INF           -4.0000          .              .          
+d1.04019.04013        -INF          -12.0000          .              .          
+d1.04019.04021        -INF             .              .             EPS         
+d1.04019.04027        -INF             .              .             EPS         
+d1.04023.04003        -INF           -5.0000          .              .          
+d1.04023.04019        -INF          -15.0000          .              .          
+d1.04005.04017        -INF          -15.0000          .              .          
+d1.04005.04007        -INF             .              .              .          
+d1.04005.04015        -INF          -15.0000          .              .          
+d1.04005.04025        -INF          -15.0000          .              .          
+d1.04007.04009        -INF             .              .              .          
+d1.04007.04017        -INF          -15.0000          .              .          
+d1.04007.04005        -INF             .              .              .          
+d1.04007.04025        -INF          -15.0000          .              .          
+d1.04007.04013        -INF          -15.0000          .              .          
+d1.04007.04021        -INF             .              .              .          
+d1.04015.04005        -INF             .              .             EPS         
+d1.04015.04025        -INF          -15.0000          .              .          
+d1.04015.04012        -INF             .              .             EPS         
+d1.04025.04005        -INF             .              .             EPS         
+d1.04025.04007        -INF             .              .             EPS         
+d1.04025.04015        -INF          -14.0000          .              .          
+d1.04025.04013        -INF          -15.0000          .              .          
+d1.04025.04012        -INF             .              .             EPS         
+d1.04013.04019        -INF          -15.0000          .              .          
+d1.04013.04007        -INF             .              .             EPS         
+d1.04013.04025        -INF          -13.0000          .              .          
+d1.04013.04021        -INF             .              .             EPS         
+d1.04013.04012        -INF             .              .             EPS         
+d1.04013.04027        -INF             .              .             EPS         
+d1.04021.04009        -INF             .              .              .          
+d1.04021.04019        -INF          -15.0000          .              .          
+d1.04021.04007        -INF             .              .              .          
+d1.04021.04013        -INF          -15.0000          .              .          
+d1.04012.04015        -INF          -15.0000          .              .          
+d1.04012.04025        -INF          -15.0000          .              .          
+d1.04012.04013        -INF          -15.0000          .              .          
+d1.04012.04027        -INF             .              .              .          
+d1.04027.04019        -INF          -15.0000          .              .          
+d1.04027.04013        -INF          -15.0000          .              .          
+d1.04027.04012        -INF             .              .              .          
+d2.04001.04009        -INF          -15.0000          .              .          
+d2.04001.04011        -INF             .              .              .          
+d2.04001.04017        -INF             .              .              .          
+d2.04009.04001        -INF             .              .             EPS         
+d2.04009.04011        -INF             .              .             EPS         
+d2.04009.04017        -INF             .              .             EPS         
+d2.04009.04003        -INF             .              .             EPS         
+d2.04009.04019        -INF             .              .             EPS         
+d2.04009.04007        -INF          -15.0000          .              .          
+d2.04009.04021        -INF             .              .              .          
+d2.04011.04001        -INF             .              .              .          
+d2.04011.04009        -INF          -15.0000          .              .          
+d2.04011.04003        -INF             .              .              .          
+d2.04017.04001        -INF             .              .              .          
+d2.04017.04009        -INF          -15.0000          .              .          
+d2.04017.04005        -INF          -15.0000          .              .          
+d2.04017.04007        -INF          -15.0000          .              .          
+d2.04003.04009        -INF          -15.0000          .              .          
+d2.04003.04011        -INF             .              .              .          
+d2.04003.04019        -INF             .              .              .          
+d2.04003.04023        -INF             .              .              .          
+d2.04019.04009        -INF          -15.0000          .              .          
+d2.04019.04003        -INF             .              .              .          
+d2.04019.04023        -INF             .              .              .          
+d2.04019.04013        -INF             .              .              .          
+d2.04019.04021        -INF          -15.0000          .              .          
+d2.04019.04027        -INF             .              .              .          
+d2.04023.04003        -INF             .              .              .          
+d2.04023.04019        -INF             .              .              .          
+d2.04005.04017        -INF             .              .             EPS         
+d2.04005.04007        -INF          -15.0000          .              .          
+d2.04005.04015        -INF             .              .             EPS         
+d2.04005.04025        -INF             .              .             EPS         
+d2.04007.04009        -INF           -3.0000          .              .          
+d2.04007.04017        -INF             .              .             EPS         
+d2.04007.04005        -INF          -14.0000          .              .          
+d2.04007.04025        -INF             .              .             EPS         
+d2.04007.04013        -INF             .              .             EPS         
+d2.04007.04021        -INF          -15.0000          .              .          
+d2.04015.04005        -INF          -15.0000          .              .          
+d2.04015.04025        -INF             .              .              .          
+d2.04015.04012        -INF             .              .              .          
+d2.04025.04005        -INF          -15.0000          .              .          
+d2.04025.04007        -INF          -15.0000          .              .          
+d2.04025.04015        -INF             .              .              .          
+d2.04025.04013        -INF             .              .              .          
+d2.04025.04012        -INF             .              .              .          
+d2.04013.04019        -INF             .              .              .          
+d2.04013.04007        -INF          -15.0000          .              .          
+d2.04013.04025        -INF             .              .              .          
+d2.04013.04021        -INF          -15.0000          .              .          
+d2.04013.04012        -INF             .              .              .          
+d2.04013.04027        -INF             .              .              .          
+d2.04021.04009        -INF          -15.0000          .              .          
+d2.04021.04019        -INF             .              .             EPS         
+d2.04021.04007        -INF           -1.0000          .              .          
+d2.04021.04013        -INF             .              .             EPS         
+d2.04012.04015        -INF             .              .              .          
+d2.04012.04025        -INF             .              .              .          
+d2.04012.04013        -INF             .              .              .          
+d2.04012.04027        -INF             .              .              .          
+d2.04027.04019        -INF             .              .              .          
+d2.04027.04013        -INF             .              .              .          
+d2.04027.04012        -INF             .              .              .          
+d3.04001.04009        -INF             .              .              .          
+d3.04001.04011        -INF             .              .              .          
+d3.04001.04017        -INF             .              .              .          
+d3.04009.04001        -INF             .              .              .          
+d3.04009.04011        -INF             .              .              .          
+d3.04009.04017        -INF             .              .              .          
+d3.04009.04003        -INF             .              .              .          
+d3.04009.04019        -INF             .              .              .          
+d3.04009.04007        -INF             .              .              .          
+d3.04009.04021        -INF             .              .              .          
+d3.04011.04001        -INF             .              .              .          
+d3.04011.04009        -INF             .              .              .          
+d3.04011.04003        -INF             .              .              .          
+d3.04017.04001        -INF             .              .              .          
+d3.04017.04009        -INF             .              .              .          
+d3.04017.04005        -INF             .              .              .          
+d3.04017.04007        -INF             .              .              .          
+d3.04003.04009        -INF             .              .              .          
+d3.04003.04011        -INF             .              .              .          
+d3.04003.04019        -INF             .              .              .          
+d3.04003.04023        -INF             .              .              .          
+d3.04019.04009        -INF             .              .              .          
+d3.04019.04003        -INF             .              .              .          
+d3.04019.04023        -INF             .              .              .          
+d3.04019.04013        -INF             .              .              .          
+d3.04019.04021        -INF             .              .              .          
+d3.04019.04027        -INF          -15.0000          .              .          
+d3.04023.04003        -INF             .              .              .          
+d3.04023.04019        -INF             .              .              .          
+d3.04005.04017        -INF             .              .              .          
+d3.04005.04007        -INF             .              .              .          
+d3.04005.04015        -INF             .              .              .          
+d3.04005.04025        -INF             .              .              .          
+d3.04007.04009        -INF             .              .              .          
+d3.04007.04017        -INF             .              .              .          
+d3.04007.04005        -INF             .              .              .          
+d3.04007.04025        -INF             .              .              .          
+d3.04007.04013        -INF             .              .              .          
+d3.04007.04021        -INF             .              .              .          
+d3.04015.04005        -INF             .              .              .          
+d3.04015.04025        -INF             .              .              .          
+d3.04015.04012        -INF          -15.0000          .              .          
+d3.04025.04005        -INF             .              .              .          
+d3.04025.04007        -INF             .              .              .          
+d3.04025.04015        -INF             .              .              .          
+d3.04025.04013        -INF             .              .              .          
+d3.04025.04012        -INF          -15.0000          .              .          
+d3.04013.04019        -INF             .              .              .          
+d3.04013.04007        -INF             .              .              .          
+d3.04013.04025        -INF             .              .              .          
+d3.04013.04021        -INF             .              .              .          
+d3.04013.04012        -INF          -15.0000          .              .          
+d3.04013.04027        -INF          -15.0000          .              .          
+d3.04021.04009        -INF             .              .              .          
+d3.04021.04019        -INF             .              .              .          
+d3.04021.04007        -INF             .              .              .          
+d3.04021.04013        -INF             .              .              .          
+d3.04012.04015        -INF             .              .             EPS         
+d3.04012.04025        -INF             .              .             EPS         
+d3.04012.04013        -INF             .              .             EPS         
+d3.04012.04027        -INF          -15.0000          .              .          
+d3.04027.04019        -INF             .              .             EPS         
+d3.04027.04013        -INF             .              .             EPS         
+d3.04027.04012        -INF          -14.0000          .              .          
+
+---- EQU min_node_district  
+
+          LOWER          LEVEL          UPPER         MARGINAL
+
+d1         2.0000         9.0000        +INF             .          
+d2         2.0000         4.0000        +INF             .          
+d3         2.0000         2.0000        +INF             .          
+
+---- EQU assign_1_root_0_constr_1  
+
+                LOWER          LEVEL          UPPER         MARGINAL
+
+04001.d1        -INF             .              .              .          
+04001.d2        -INF             .              .              .          
+04001.d3        -INF             .              .              .          
+04009.d1        -INF             .              .              .          
+04009.d2        -INF             .              .              .          
+04009.d3        -INF             .              .              .          
+04011.d1        -INF             .              .              .          
+04011.d2        -INF             .              .              .          
+04011.d3        -INF             .              .              .          
+04017.d1        -INF             .              .              .          
+04017.d2        -INF             .              .              .          
+04017.d3        -INF             .              .              .          
+04003.d1        -INF             .              .              .          
+04003.d2        -INF             .              .              .          
+04003.d3        -INF             .              .              .          
+04019.d1        -INF             .              .              .          
+04019.d2        -INF             .              .              .          
+04019.d3        -INF             .              .              .          
+04023.d1        -INF             .              .              .          
+04023.d2        -INF             .              .              .          
+04023.d3        -INF             .              .              .          
+04005.d1        -INF             .              .              .          
+04005.d2        -INF             .              .              .          
+04005.d3        -INF             .              .              .          
+04007.d1        -INF             .              .              .          
+04007.d2        -INF             .              .              .          
+04007.d3        -INF             .              .              .          
+04015.d1        -INF             .              .              .          
+04015.d2        -INF             .              .              .          
+04015.d3        -INF             .              .              .          
+04025.d1        -INF             .              .              .          
+04025.d2        -INF             .              .              .          
+04025.d3        -INF             .              .              .          
+04013.d1        -INF             .              .              .          
+04013.d2        -INF             .              .              .          
+04013.d3        -INF             .              .              .          
+04021.d1        -INF             .              .              .          
+04021.d2        -INF             .              .              .          
+04021.d3        -INF             .              .              .          
+04012.d1        -INF             .              .              .          
+04012.d2        -INF             .              .              .          
+04012.d3        -INF             .              .              .          
+04027.d1        -INF             .              .              .          
+04027.d2        -INF             .              .              .          
+04027.d3        -INF             .              .              .          
+
+---- EQU assign_1_root_0_constr_2  
+
+                LOWER          LEVEL          UPPER         MARGINAL
+
+04001.d1        -1.0000        -1.0000        +INF             .          
+04001.d2        -1.0000          .            +INF             .          
+04001.d3        -1.0000          .            +INF             .          
+04009.d1        -1.0000          .            +INF             .          
+04009.d2        -1.0000          .            +INF             .          
+04009.d3        -1.0000          .            +INF             .          
+04011.d1        -1.0000        -1.0000        +INF             .          
+04011.d2        -1.0000          .            +INF             .          
+04011.d3        -1.0000          .            +INF             .          
+04017.d1        -1.0000          .            +INF             .          
+04017.d2        -1.0000          .            +INF             .          
+04017.d3        -1.0000          .            +INF             .          
+04003.d1        -1.0000        -1.0000        +INF             .          
+04003.d2        -1.0000          .            +INF             .          
+04003.d3        -1.0000          .            +INF             .          
+04019.d1        -1.0000        -1.0000        +INF             .          
+04019.d2        -1.0000          .            +INF             .          
+04019.d3        -1.0000          .            +INF             .          
+04023.d1        -1.0000        -1.0000        +INF             .          
+04023.d2        -1.0000          .            +INF             .          
+04023.d3        -1.0000          .            +INF             .          
+04005.d1        -1.0000          .            +INF             .          
+04005.d2        -1.0000        -1.0000        +INF             .          
+04005.d3        -1.0000          .            +INF             .          
+04007.d1        -1.0000          .            +INF             .          
+04007.d2        -1.0000        -1.0000        +INF             .          
+04007.d3        -1.0000          .            +INF             .          
+04015.d1        -1.0000        -1.0000        +INF             .          
+04015.d2        -1.0000          .            +INF             .          
+04015.d3        -1.0000          .            +INF             .          
+04025.d1        -1.0000        -1.0000        +INF             .          
+04025.d2        -1.0000          .            +INF             .          
+04025.d3        -1.0000          .            +INF             .          
+04013.d1        -1.0000        -1.0000        +INF             .          
+04013.d2        -1.0000          .            +INF             .          
+04013.d3        -1.0000          .            +INF             .          
+04021.d1        -1.0000          .            +INF             .          
+04021.d2        -1.0000        -1.0000        +INF             .          
+04021.d3        -1.0000          .            +INF             .          
+04012.d1        -1.0000          .            +INF             .          
+04012.d2        -1.0000          .            +INF             .          
+04012.d3        -1.0000        -1.0000        +INF             .          
+04027.d1        -1.0000          .            +INF             .          
+04027.d2        -1.0000          .            +INF             .          
+04027.d3        -1.0000          .            +INF             .          
+
+---- EQU root_balance_1  
+
+                LOWER          LEVEL          UPPER         MARGINAL
+
+d1.04001        -INF          -10.0000        14.0000          .          
+d1.04009        -INF           -9.0000        14.0000          .          
+d1.04011        -INF          -10.0000        14.0000          .          
+d1.04017        -INF           14.0000        14.0000         EPS         
+d1.04003        -INF          -10.0000        14.0000          .          
+d1.04019        -INF          -10.0000        14.0000          .          
+d1.04023        -INF          -10.0000        14.0000          .          
+d1.04005        -INF           -9.0000        14.0000          .          
+d1.04007        -INF           -9.0000        14.0000          .          
+d1.04015        -INF          -10.0000        14.0000          .          
+d1.04025        -INF          -10.0000        14.0000          .          
+d1.04013        -INF          -10.0000        14.0000          .          
+d1.04021        -INF           -9.0000        14.0000          .          
+d1.04012        -INF           -9.0000        14.0000          .          
+d1.04027        -INF           -9.0000        14.0000          .          
+d2.04001        -INF           -4.0000        14.0000          .          
+d2.04009        -INF           14.0000        14.0000         EPS         
+d2.04011        -INF           -4.0000        14.0000          .          
+d2.04017        -INF           -4.0000        14.0000          .          
+d2.04003        -INF           -4.0000        14.0000          .          
+d2.04019        -INF           -4.0000        14.0000          .          
+d2.04023        -INF           -4.0000        14.0000          .          
+d2.04005        -INF           -5.0000        14.0000          .          
+d2.04007        -INF           -5.0000        14.0000          .          
+d2.04015        -INF           -4.0000        14.0000          .          
+d2.04025        -INF           -4.0000        14.0000          .          
+d2.04013        -INF           -4.0000        14.0000          .          
+d2.04021        -INF           -5.0000        14.0000          .          
+d2.04012        -INF           -4.0000        14.0000          .          
+d2.04027        -INF           -4.0000        14.0000          .          
+d3.04001        -INF           -2.0000        14.0000          .          
+d3.04009        -INF           -2.0000        14.0000          .          
+d3.04011        -INF           -2.0000        14.0000          .          
+d3.04017        -INF           -2.0000        14.0000          .          
+d3.04003        -INF           -2.0000        14.0000          .          
+d3.04019        -INF           -2.0000        14.0000          .          
+d3.04023        -INF           -2.0000        14.0000          .          
+d3.04005        -INF           -2.0000        14.0000          .          
+d3.04007        -INF           -2.0000        14.0000          .          
+d3.04015        -INF           -2.0000        14.0000          .          
+d3.04025        -INF           -2.0000        14.0000          .          
+d3.04013        -INF           -2.0000        14.0000          .          
+d3.04021        -INF           -2.0000        14.0000          .          
+d3.04012        -INF           -3.0000        14.0000          .          
+d3.04027        -INF           14.0000        14.0000         EPS         
+
+---- EQU root_balance_2  
+
+                LOWER          LEVEL          UPPER         MARGINAL
+
+d1.04001       -16.0000       -10.0000        +INF             .          
+d1.04009       -16.0000        -9.0000        +INF             .          
+d1.04011       -16.0000       -10.0000        +INF             .          
+d1.04017       -16.0000       -16.0000        +INF             .          
+d1.04003       -16.0000       -10.0000        +INF             .          
+d1.04019       -16.0000       -10.0000        +INF             .          
+d1.04023       -16.0000       -10.0000        +INF             .          
+d1.04005       -16.0000        -9.0000        +INF             .          
+d1.04007       -16.0000        -9.0000        +INF             .          
+d1.04015       -16.0000       -10.0000        +INF             .          
+d1.04025       -16.0000       -10.0000        +INF             .          
+d1.04013       -16.0000       -10.0000        +INF             .          
+d1.04021       -16.0000        -9.0000        +INF             .          
+d1.04012       -16.0000        -9.0000        +INF             .          
+d1.04027       -16.0000        -9.0000        +INF             .          
+d2.04001       -16.0000        -4.0000        +INF             .          
+d2.04009       -16.0000       -16.0000        +INF             .          
+d2.04011       -16.0000        -4.0000        +INF             .          
+d2.04017       -16.0000        -4.0000        +INF             .          
+d2.04003       -16.0000        -4.0000        +INF             .          
+d2.04019       -16.0000        -4.0000        +INF             .          
+d2.04023       -16.0000        -4.0000        +INF             .          
+d2.04005       -16.0000        -5.0000        +INF             .          
+d2.04007       -16.0000        -5.0000        +INF             .          
+d2.04015       -16.0000        -4.0000        +INF             .          
+d2.04025       -16.0000        -4.0000        +INF             .          
+d2.04013       -16.0000        -4.0000        +INF             .          
+d2.04021       -16.0000        -5.0000        +INF             .          
+d2.04012       -16.0000        -4.0000        +INF             .          
+d2.04027       -16.0000        -4.0000        +INF             .          
+d3.04001       -16.0000        -2.0000        +INF             .          
+d3.04009       -16.0000        -2.0000        +INF             .          
+d3.04011       -16.0000        -2.0000        +INF             .          
+d3.04017       -16.0000        -2.0000        +INF             .          
+d3.04003       -16.0000        -2.0000        +INF             .          
+d3.04019       -16.0000        -2.0000        +INF             .          
+d3.04023       -16.0000        -2.0000        +INF             .          
+d3.04005       -16.0000        -2.0000        +INF             .          
+d3.04007       -16.0000        -2.0000        +INF             .          
+d3.04015       -16.0000        -2.0000        +INF             .          
+d3.04025       -16.0000        -2.0000        +INF             .          
+d3.04013       -16.0000        -2.0000        +INF             .          
+d3.04021       -16.0000        -2.0000        +INF             .          
+d3.04012       -16.0000        -3.0000        +INF             .          
+d3.04027       -16.0000       -16.0000        +INF             .          
+
+---- EQU non_root_balance_1  
+
+                LOWER          LEVEL          UPPER         MARGINAL
+
+d1.04001        -INF           14.0000        14.0000          .          
+d1.04009        -INF             .            14.0000          .          
+d1.04011        -INF           14.0000        14.0000          .          
+d1.04017        -INF            8.0000        14.0000          .          
+d1.04003        -INF           14.0000        14.0000          .          
+d1.04019        -INF           14.0000        14.0000          .          
+d1.04023        -INF           14.0000        14.0000          .          
+d1.04005        -INF             .            14.0000          .          
+d1.04007        -INF             .            14.0000          .          
+d1.04015        -INF           14.0000        14.0000          .          
+d1.04025        -INF           14.0000        14.0000          .          
+d1.04013        -INF           14.0000        14.0000         EPS         
+d1.04021        -INF             .            14.0000          .          
+d1.04012        -INF             .            14.0000          .          
+d1.04027        -INF             .            14.0000          .          
+d2.04001        -INF             .            14.0000          .          
+d2.04009        -INF            3.0000        14.0000          .          
+d2.04011        -INF             .            14.0000          .          
+d2.04017        -INF             .            14.0000          .          
+d2.04003        -INF             .            14.0000          .          
+d2.04019        -INF             .            14.0000          .          
+d2.04023        -INF             .            14.0000          .          
+d2.04005        -INF           14.0000        14.0000          .          
+d2.04007        -INF           14.0000        14.0000          .          
+d2.04015        -INF             .            14.0000          .          
+d2.04025        -INF             .            14.0000          .          
+d2.04013        -INF             .            14.0000          .          
+d2.04021        -INF           14.0000        14.0000         EPS         
+d2.04012        -INF             .            14.0000          .          
+d2.04027        -INF             .            14.0000          .          
+d3.04001        -INF             .            14.0000          .          
+d3.04009        -INF             .            14.0000          .          
+d3.04011        -INF             .            14.0000          .          
+d3.04017        -INF             .            14.0000          .          
+d3.04003        -INF             .            14.0000          .          
+d3.04019        -INF             .            14.0000          .          
+d3.04023        -INF             .            14.0000          .          
+d3.04005        -INF             .            14.0000          .          
+d3.04007        -INF             .            14.0000          .          
+d3.04015        -INF             .            14.0000          .          
+d3.04025        -INF             .            14.0000          .          
+d3.04013        -INF             .            14.0000          .          
+d3.04021        -INF             .            14.0000          .          
+d3.04012        -INF           14.0000        14.0000          .          
+d3.04027        -INF            1.0000        14.0000          .          
+
+---- EQU non_root_balance_2  
+
+                LOWER          LEVEL          UPPER         MARGINAL
+
+d1.04001        -1.0000        -1.0000        +INF            EPS         
+d1.04009        -1.0000          .            +INF             .          
+d1.04011        -1.0000        -1.0000        +INF            EPS         
+d1.04017        -1.0000         8.0000        +INF             .          
+d1.04003        -1.0000        -1.0000        +INF             .          
+d1.04019        -1.0000        -1.0000        +INF            EPS         
+d1.04023        -1.0000        -1.0000        +INF            EPS         
+d1.04005        -1.0000          .            +INF             .          
+d1.04007        -1.0000          .            +INF             .          
+d1.04015        -1.0000        -1.0000        +INF            EPS         
+d1.04025        -1.0000        -1.0000        +INF            EPS         
+d1.04013        -1.0000        -1.0000        +INF             .          
+d1.04021        -1.0000          .            +INF             .          
+d1.04012        -1.0000          .            +INF             .          
+d1.04027        -1.0000          .            +INF             .          
+d2.04001        -1.0000          .            +INF             .          
+d2.04009        -1.0000         3.0000        +INF             .          
+d2.04011        -1.0000          .            +INF             .          
+d2.04017        -1.0000          .            +INF             .          
+d2.04003        -1.0000          .            +INF             .          
+d2.04019        -1.0000          .            +INF             .          
+d2.04023        -1.0000          .            +INF             .          
+d2.04005        -1.0000        -1.0000        +INF            EPS         
+d2.04007        -1.0000        -1.0000        +INF             .          
+d2.04015        -1.0000          .            +INF             .          
+d2.04025        -1.0000          .            +INF             .          
+d2.04013        -1.0000          .            +INF             .          
+d2.04021        -1.0000        -1.0000        +INF             .          
+d2.04012        -1.0000          .            +INF             .          
+d2.04027        -1.0000          .            +INF             .          
+d3.04001        -1.0000          .            +INF             .          
+d3.04009        -1.0000          .            +INF             .          
+d3.04011        -1.0000          .            +INF             .          
+d3.04017        -1.0000          .            +INF             .          
+d3.04003        -1.0000          .            +INF             .          
+d3.04019        -1.0000          .            +INF             .          
+d3.04023        -1.0000          .            +INF             .          
+d3.04005        -1.0000          .            +INF             .          
+d3.04007        -1.0000          .            +INF             .          
+d3.04015        -1.0000          .            +INF             .          
+d3.04025        -1.0000          .            +INF             .          
+d3.04013        -1.0000          .            +INF             .          
+d3.04021        -1.0000          .            +INF             .          
+d3.04012        -1.0000        -1.0000        +INF             .          
+d3.04027        -1.0000         1.0000        +INF             .          
+
+---- EQU total_population  
+
+          LOWER          LEVEL          UPPER         MARGINAL
+
+d1          .              .              .       -5.108818E-5      
+d2          .              .              .       -5.108818E-5      
+d3          .              .              .       -5.108818E-5      
+
+---- EQU decide_win_rep  See if in District J republicans are the winner
+
+          LOWER          LEVEL          UPPER         MARGINAL
+
+d1        -INF      -1.897842E+6          .              .          
+d2        -INF      -1.936366E+6          .              .          
+d3        -INF      -1.953088E+6          .              .          
+
+---- EQU decide_win_rep2  See if in District J republicans are the winner
+
+          LOWER          LEVEL          UPPER         MARGINAL
+
+d1   -1.957400E+6   -1.897843E+6        +INF             .          
+d2   -1.957400E+6   -1.936367E+6        +INF             .          
+d3   -1.957400E+6   -1.953089E+6        +INF             .          
+
+                           LOWER          LEVEL          UPPER         MARGINAL
+
+---- VAR obj               -INF          100.0000        +INF             .          
+
+---- VAR x  flow from i to j in district d
+
+                      LOWER          LEVEL          UPPER         MARGINAL
+
+d1.04001.04009          .              .            +INF             .          
+d1.04001.04011          .             7.0000        +INF             .          
+d1.04001.04017          .              .            +INF            EPS         
+d1.04009.04001          .              .            +INF             .          
+d1.04009.04011          .              .            +INF             .          
+d1.04009.04017          .              .            +INF             .          
+d1.04009.04003          .              .            +INF             .          
+d1.04009.04019          .              .            +INF             .          
+d1.04009.04007          .              .            +INF             .          
+d1.04009.04021          .              .            +INF             .          
+d1.04011.04001          .              .            +INF            EPS         
+d1.04011.04009          .              .            +INF             .          
+d1.04011.04003          .             6.0000        +INF             .          
+d1.04017.04001          .             8.0000        +INF             .          
+d1.04017.04009          .              .            +INF             .          
+d1.04017.04005          .              .            +INF             .          
+d1.04017.04007          .              .            +INF             .          
+d1.04003.04009          .              .            +INF             .          
+d1.04003.04011          .              .            +INF            EPS         
+d1.04003.04019          .            15.0000        +INF             .          
+d1.04003.04023          .              .            +INF            EPS         
+d1.04019.04009          .              .            +INF             .          
+d1.04019.04003          .              .            +INF            EPS         
+d1.04019.04023          .            11.0000        +INF             .          
+d1.04019.04013          .             3.0000        +INF             .          
+d1.04019.04021          .              .            +INF             .          
+d1.04019.04027          .              .            +INF             .          
+d1.04023.04003          .            10.0000        +INF             .          
+d1.04023.04019          .              .            +INF            EPS         
+d1.04005.04017          .              .            +INF             .          
+d1.04005.04007          .              .            +INF             .          
+d1.04005.04015          .              .            +INF             .          
+d1.04005.04025          .              .            +INF             .          
+d1.04007.04009          .              .            +INF             .          
+d1.04007.04017          .              .            +INF             .          
+d1.04007.04005          .              .            +INF             .          
+d1.04007.04025          .              .            +INF             .          
+d1.04007.04013          .              .            +INF             .          
+d1.04007.04021          .              .            +INF             .          
+d1.04015.04005          .              .            +INF             .          
+d1.04015.04025          .              .            +INF            EPS         
+d1.04015.04012          .              .            +INF             .          
+d1.04025.04005          .              .            +INF             .          
+d1.04025.04007          .              .            +INF             .          
+d1.04025.04015          .             1.0000        +INF             .          
+d1.04025.04013          .              .            +INF            EPS         
+d1.04025.04012          .              .            +INF             .          
+d1.04013.04019          .              .            +INF            EPS         
+d1.04013.04007          .              .            +INF             .          
+d1.04013.04025          .             2.0000        +INF             .          
+d1.04013.04021          .              .            +INF             .          
+d1.04013.04012          .              .            +INF             .          
+d1.04013.04027          .              .            +INF             .          
+d1.04021.04009          .              .            +INF             .          
+d1.04021.04019          .              .            +INF             .          
+d1.04021.04007          .              .            +INF             .          
+d1.04021.04013          .              .            +INF             .          
+d1.04012.04015          .              .            +INF             .          
+d1.04012.04025          .              .            +INF             .          
+d1.04012.04013          .              .            +INF             .          
+d1.04012.04027          .              .            +INF             .          
+d1.04027.04019          .              .            +INF             .          
+d1.04027.04013          .              .            +INF             .          
+d1.04027.04012          .              .            +INF             .          
+d2.04001.04009          .              .            +INF             .          
+d2.04001.04011          .              .            +INF             .          
+d2.04001.04017          .              .            +INF             .          
+d2.04009.04001          .              .            +INF             .          
+d2.04009.04011          .              .            +INF             .          
+d2.04009.04017          .              .            +INF             .          
+d2.04009.04003          .              .            +INF             .          
+d2.04009.04019          .              .            +INF             .          
+d2.04009.04007          .              .            +INF            EPS         
+d2.04009.04021          .            15.0000        +INF             .          
+d2.04011.04001          .              .            +INF             .          
+d2.04011.04009          .              .            +INF             .          
+d2.04011.04003          .              .            +INF             .          
+d2.04017.04001          .              .            +INF             .          
+d2.04017.04009          .              .            +INF             .          
+d2.04017.04005          .              .            +INF             .          
+d2.04017.04007          .              .            +INF             .          
+d2.04003.04009          .              .            +INF             .          
+d2.04003.04011          .              .            +INF             .          
+d2.04003.04019          .              .            +INF             .          
+d2.04003.04023          .              .            +INF             .          
+d2.04019.04009          .              .            +INF             .          
+d2.04019.04003          .              .            +INF             .          
+d2.04019.04023          .              .            +INF             .          
+d2.04019.04013          .              .            +INF             .          
+d2.04019.04021          .              .            +INF             .          
+d2.04019.04027          .              .            +INF             .          
+d2.04023.04003          .              .            +INF             .          
+d2.04023.04019          .              .            +INF             .          
+d2.04005.04017          .              .            +INF             .          
+d2.04005.04007          .              .            +INF            EPS         
+d2.04005.04015          .              .            +INF             .          
+d2.04005.04025          .              .            +INF             .          
+d2.04007.04009          .            12.0000        +INF             .          
+d2.04007.04017          .              .            +INF             .          
+d2.04007.04005          .             1.0000        +INF             .          
+d2.04007.04025          .              .            +INF             .          
+d2.04007.04013          .              .            +INF             .          
+d2.04007.04021          .              .            +INF            EPS         
+d2.04015.04005          .              .            +INF             .          
+d2.04015.04025          .              .            +INF             .          
+d2.04015.04012          .              .            +INF             .          
+d2.04025.04005          .              .            +INF             .          
+d2.04025.04007          .              .            +INF             .          
+d2.04025.04015          .              .            +INF             .          
+d2.04025.04013          .              .            +INF             .          
+d2.04025.04012          .              .            +INF             .          
+d2.04013.04019          .              .            +INF             .          
+d2.04013.04007          .              .            +INF             .          
+d2.04013.04025          .              .            +INF             .          
+d2.04013.04021          .              .            +INF             .          
+d2.04013.04012          .              .            +INF             .          
+d2.04013.04027          .              .            +INF             .          
+d2.04021.04009          .              .            +INF            EPS         
+d2.04021.04019          .              .            +INF             .          
+d2.04021.04007          .            14.0000        +INF             .          
+d2.04021.04013          .              .            +INF             .          
+d2.04012.04015          .              .            +INF             .          
+d2.04012.04025          .              .            +INF             .          
+d2.04012.04013          .              .            +INF             .          
+d2.04012.04027          .              .            +INF             .          
+d2.04027.04019          .              .            +INF             .          
+d2.04027.04013          .              .            +INF             .          
+d2.04027.04012          .              .            +INF             .          
+d3.04001.04009          .              .            +INF             .          
+d3.04001.04011          .              .            +INF             .          
+d3.04001.04017          .              .            +INF             .          
+d3.04009.04001          .              .            +INF             .          
+d3.04009.04011          .              .            +INF             .          
+d3.04009.04017          .              .            +INF             .          
+d3.04009.04003          .              .            +INF             .          
+d3.04009.04019          .              .            +INF             .          
+d3.04009.04007          .              .            +INF             .          
+d3.04009.04021          .              .            +INF             .          
+d3.04011.04001          .              .            +INF             .          
+d3.04011.04009          .              .            +INF             .          
+d3.04011.04003          .              .            +INF             .          
+d3.04017.04001          .              .            +INF             .          
+d3.04017.04009          .              .            +INF             .          
+d3.04017.04005          .              .            +INF             .          
+d3.04017.04007          .              .            +INF             .          
+d3.04003.04009          .              .            +INF             .          
+d3.04003.04011          .              .            +INF             .          
+d3.04003.04019          .              .            +INF             .          
+d3.04003.04023          .              .            +INF             .          
+d3.04019.04009          .              .            +INF             .          
+d3.04019.04003          .              .            +INF             .          
+d3.04019.04023          .              .            +INF             .          
+d3.04019.04013          .              .            +INF             .          
+d3.04019.04021          .              .            +INF             .          
+d3.04019.04027          .              .            +INF             .          
+d3.04023.04003          .              .            +INF             .          
+d3.04023.04019          .              .            +INF             .          
+d3.04005.04017          .              .            +INF             .          
+d3.04005.04007          .              .            +INF             .          
+d3.04005.04015          .              .            +INF             .          
+d3.04005.04025          .              .            +INF             .          
+d3.04007.04009          .              .            +INF             .          
+d3.04007.04017          .              .            +INF             .          
+d3.04007.04005          .              .            +INF             .          
+d3.04007.04025          .              .            +INF             .          
+d3.04007.04013          .              .            +INF             .          
+d3.04007.04021          .              .            +INF             .          
+d3.04015.04005          .              .            +INF             .          
+d3.04015.04025          .              .            +INF             .          
+d3.04015.04012          .              .            +INF             .          
+d3.04025.04005          .              .            +INF             .          
+d3.04025.04007          .              .            +INF             .          
+d3.04025.04015          .              .            +INF             .          
+d3.04025.04013          .              .            +INF             .          
+d3.04025.04012          .              .            +INF             .          
+d3.04013.04019          .              .            +INF             .          
+d3.04013.04007          .              .            +INF             .          
+d3.04013.04025          .              .            +INF             .          
+d3.04013.04021          .              .            +INF             .          
+d3.04013.04012          .              .            +INF             .          
+d3.04013.04027          .              .            +INF             .          
+d3.04021.04009          .              .            +INF             .          
+d3.04021.04019          .              .            +INF             .          
+d3.04021.04007          .              .            +INF             .          
+d3.04021.04013          .              .            +INF             .          
+d3.04012.04015          .              .            +INF             .          
+d3.04012.04025          .              .            +INF             .          
+d3.04012.04013          .              .            +INF             .          
+d3.04012.04027          .              .            +INF            EPS         
+d3.04027.04019          .              .            +INF             .          
+d3.04027.04013          .              .            +INF             .          
+d3.04027.04012          .             1.0000        +INF             .          
+
+---- VAR pop  
+
+          LOWER          LEVEL          UPPER         MARGINAL
+
+d1          .       1750562.0000        +INF             .          
+d2          .        163218.0000        +INF             .          
+d3          .         43620.0000        +INF             .          
+
+---- VAR assign  if i is assigned to d
+
+                LOWER          LEVEL          UPPER         MARGINAL
+
+04001.d1          .             1.0000         1.0000         0.8946      
+04001.d2          .              .             1.0000         0.8946      
+04001.d3          .              .             1.0000         0.8946      
+04009.d1          .              .             1.0000         0.5786      
+04009.d2          .             1.0000         1.0000         0.5786      
+04009.d3          .              .             1.0000         0.5786      
+04011.d1          .             1.0000         1.0000         0.1524      
+04011.d2          .              .             1.0000         0.1524      
+04011.d3          .              .             1.0000         0.1524      
+04017.d1          .             1.0000         1.0000         1.7128      
+04017.d2          .              .             1.0000         1.7128      
+04017.d3          .              .             1.0000         1.7128      
+04003.d1          .             1.0000         1.0000         2.0602      
+04003.d2          .              .             1.0000         2.0602      
+04003.d3          .              .             1.0000         2.0602      
+04019.d1          .             1.0000         1.0000        17.5063      
+04019.d2          .              .             1.0000        17.5063      
+04019.d3          .              .             1.0000        17.5063      
+04023.d1          .             1.0000         1.0000         0.7323      
+04023.d2          .              .             1.0000         0.7323      
+04023.d3          .              .             1.0000         0.7323      
+04005.d1          .              .             1.0000         2.1396      
+04005.d2          .             1.0000         1.0000         2.1396      
+04005.d3          .              .             1.0000         2.1396      
+04007.d1          .              .             1.0000         1.0431      
+04007.d2          .             1.0000         1.0000         1.0431      
+04007.d3          .              .             1.0000         1.0431      
+04015.d1          .             1.0000         1.0000         3.6345      
+04015.d2          .              .             1.0000         3.6345      
+04015.d3          .              .             1.0000         3.6345      
+04025.d1          .             1.0000         1.0000         4.5247      
+04025.d2          .              .             1.0000         4.5247      
+04025.d3          .              .             1.0000         4.5247      
+04013.d1          .             1.0000         1.0000        58.2152      
+04013.d2          .              .             1.0000        58.2152      
+04013.d3          .              .             1.0000        58.2152      
+04021.d1          .              .             1.0000         4.5772      
+04021.d2          .             1.0000         1.0000         4.5772      
+04021.d3          .              .             1.0000         4.5772      
+04012.d1          .              .             1.0000         0.2400      
+04012.d2          .              .             1.0000         0.2400      
+04012.d3          .             1.0000         1.0000         0.2400      
+04027.d1          .              .             1.0000         1.9885      
+04027.d2          .              .             1.0000         1.9885      
+04027.d3          .             1.0000         1.0000         1.9885      
+
+---- VAR root  1 if i s the root in d
+
+                LOWER          LEVEL          UPPER         MARGINAL
+
+d1.04001          .              .             1.0000         EPS         
+d1.04009          .              .             1.0000         EPS         
+d1.04011          .              .             1.0000         EPS         
+d1.04017          .             1.0000         1.0000         EPS         
+d1.04003          .              .             1.0000         EPS         
+d1.04019          .              .             1.0000         EPS         
+d1.04023          .              .             1.0000         EPS         
+d1.04005          .              .             1.0000         EPS         
+d1.04007          .              .             1.0000         EPS         
+d1.04015          .              .             1.0000         EPS         
+d1.04025          .              .             1.0000         EPS         
+d1.04013          .              .             1.0000         EPS         
+d1.04021          .              .             1.0000         EPS         
+d1.04012          .              .             1.0000         EPS         
+d1.04027          .              .             1.0000         EPS         
+d2.04001          .              .             1.0000         EPS         
+d2.04009          .             1.0000         1.0000         EPS         
+d2.04011          .              .             1.0000         EPS         
+d2.04017          .              .             1.0000         EPS         
+d2.04003          .              .             1.0000         EPS         
+d2.04019          .              .             1.0000         EPS         
+d2.04023          .              .             1.0000         EPS         
+d2.04005          .              .             1.0000         EPS         
+d2.04007          .              .             1.0000         EPS         
+d2.04015          .              .             1.0000         EPS         
+d2.04025          .              .             1.0000         EPS         
+d2.04013          .              .             1.0000         EPS         
+d2.04021          .              .             1.0000         EPS         
+d2.04012          .              .             1.0000         EPS         
+d2.04027          .              .             1.0000         EPS         
+d3.04001          .              .             1.0000         EPS         
+d3.04009          .              .             1.0000         EPS         
+d3.04011          .              .             1.0000         EPS         
+d3.04017          .              .             1.0000         EPS         
+d3.04003          .              .             1.0000         EPS         
+d3.04019          .              .             1.0000         EPS         
+d3.04023          .              .             1.0000         EPS         
+d3.04005          .              .             1.0000         EPS         
+d3.04007          .              .             1.0000         EPS         
+d3.04015          .              .             1.0000         EPS         
+d3.04025          .              .             1.0000         EPS         
+d3.04013          .              .             1.0000         EPS         
+d3.04021          .              .             1.0000         EPS         
+d3.04012          .              .             1.0000         EPS         
+d3.04027          .             1.0000         1.0000         EPS         
+
+---- VAR assign_1_root_0  if i is assigned to d and is not a root return 1
+
+                LOWER          LEVEL          UPPER         MARGINAL
+
+04001.d1          .             1.0000         1.0000         EPS         
+04001.d2          .              .             1.0000         EPS         
+04001.d3          .              .             1.0000         EPS         
+04009.d1          .              .             1.0000         EPS         
+04009.d2          .              .             1.0000         EPS         
+04009.d3          .              .             1.0000         EPS         
+04011.d1          .             1.0000         1.0000         EPS         
+04011.d2          .              .             1.0000         EPS         
+04011.d3          .              .             1.0000         EPS         
+04017.d1          .              .             1.0000         EPS         
+04017.d2          .              .             1.0000         EPS         
+04017.d3          .              .             1.0000         EPS         
+04003.d1          .             1.0000         1.0000         EPS         
+04003.d2          .              .             1.0000         EPS         
+04003.d3          .              .             1.0000         EPS         
+04019.d1          .             1.0000         1.0000         EPS         
+04019.d2          .              .             1.0000         EPS         
+04019.d3          .              .             1.0000         EPS         
+04023.d1          .             1.0000         1.0000         EPS         
+04023.d2          .              .             1.0000         EPS         
+04023.d3          .              .             1.0000         EPS         
+04005.d1          .              .             1.0000         EPS         
+04005.d2          .             1.0000         1.0000         EPS         
+04005.d3          .              .             1.0000         EPS         
+04007.d1          .              .             1.0000         EPS         
+04007.d2          .             1.0000         1.0000         EPS         
+04007.d3          .              .             1.0000         EPS         
+04015.d1          .             1.0000         1.0000         EPS         
+04015.d2          .              .             1.0000         EPS         
+04015.d3          .              .             1.0000         EPS         
+04025.d1          .             1.0000         1.0000         EPS         
+04025.d2          .              .             1.0000         EPS         
+04025.d3          .              .             1.0000         EPS         
+04013.d1          .             1.0000         1.0000         EPS         
+04013.d2          .              .             1.0000         EPS         
+04013.d3          .              .             1.0000         EPS         
+04021.d1          .              .             1.0000         EPS         
+04021.d2          .             1.0000         1.0000         EPS         
+04021.d3          .              .             1.0000         EPS         
+04012.d1          .              .             1.0000         EPS         
+04012.d2          .              .             1.0000         EPS         
+04012.d3          .             1.0000         1.0000         EPS         
+04027.d1          .              .             1.0000         EPS         
+04027.d2          .              .             1.0000         EPS         
+04027.d3          .              .             1.0000         EPS         
+
+---- VAR z  1 if republican win in district d
+
+          LOWER          LEVEL          UPPER         MARGINAL
+
+d1          .             1.0000         1.0000        89.4330      
+d2          .             1.0000         1.0000         8.3385      
+d3          .             1.0000         1.0000         2.2285      
+
+
+**** REPORT SUMMARY :        0     NONOPT
+                             0 INFEASIBLE
+                             0  UNBOUNDED
+                             0     ERRORS
+GAMS 32.2.0  rc62c018 Released Aug 26, 2020 DEX-DEG x86 64bit/Mac OS X - 02/03/21 00:10:49 Page 8
+gerrymandering model
+E x e c u t i o n
+
+
+----    166 PARAMETER assign_result  assigned
+
+             result1
+
+04001.d1       1.000
+04009.d2       1.000
+04011.d1       1.000
+04017.d1       1.000
+04003.d1       1.000
+04019.d1       1.000
+04023.d1       1.000
+04005.d2       1.000
+04007.d2       1.000
+04015.d1       1.000
+04025.d1       1.000
+04013.d1       1.000
+04021.d2       1.000
+04012.d3       1.000
+04027.d3       1.000
+
+
+
+EXECUTION TIME       =        0.568 SECONDS      4 MB  32.2.0 rc62c018 DEX-DEG
+
+
+USER: Introduction to Optimization (CS/ISyE/ECE 524) S200826/0001AB-GEN
+      University of Wisconsin-Madison, Computer Sciences Dept.   DCE850
+      License for teaching and research at degree granting institutions
+
+
+**** FILE SUMMARY
+
+Input      /Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO/Gerrymander.gms
+Output     /Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO/Gerrymander.lst

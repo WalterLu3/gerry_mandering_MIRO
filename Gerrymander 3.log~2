@@ -1,0 +1,41 @@
+--- Job Gerrymander.gms Start 02/02/21 04:44:49 32.2.0 rc62c018 DEX-DEG x86 64bit/Mac OS X
+--- Applying:
+    /Library/Frameworks/GAMS.framework/Versions/32/Resources/gmsprmun.txt
+--- GAMS Parameters defined
+    Input /Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO/Gerrymander.gms
+    PageSize 0
+    ScrDir /Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO/225a/
+    SysDir /Library/Frameworks/GAMS.framework/Versions/32/Resources/
+    LogOption 3
+    ErrMsg 1
+    ErrorLog 99
+    IDE 1
+    LstTitleLeftAligned 1
+GAMS 32.2.0   Copyright (C) 1987-2020 GAMS Development. All rights reserved
+Licensee: Introduction to Optimization (CS/ISyE/ECE 524) S200826/0001AB-GEN
+          University of Wisconsin-Madison, Computer Sciences Dept.   DCE850
+          /Users/walter/Library/Application Support/GAMS/gamslice.txt
+          Evaluation license: Not for commercial or production use
+--- Starting compilation
+--- Gerrymander.gms(17) 3 Mb
+--- GDXin=/Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO/adjaceny_AZ.gdx
+--- Gerrymander.gms(26) 3 Mb
+--- GDXin=/Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO/county_vote_AZ.gdx
+--- Gerrymander.gms(164) 3 Mb 5 Errors
+*** Error   2 in /Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO/Gerrymander.gms
+    Identifier expected
+*** Error 185 in /Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO/Gerrymander.gms
+    Set identifier or '*' expected
+*** Error 120 in /Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO/Gerrymander.gms
+    Unknown identifier entered as set
+*** Error  10 in /Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO/Gerrymander.gms
+    ',' expected
+*** Error 185 in /Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO/Gerrymander.gms
+    Set identifier or '*' expected
+--- Gerrymander.gms(167) 3 Mb 6 Errors
+*** Error 148 in /Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO/Gerrymander.gms
+    Dimension different - The symbol is referenced with more/less
+       indices as declared
+--- Gerrymander.gms(169) 3 Mb 6 Errors
+*** Status: Compilation error(s)
+--- Job Gerrymander.gms Stop 02/02/21 04:44:49 elapsed 0:00:00.033

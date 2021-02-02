@@ -1,0 +1,56 @@
+B 3 C o m p i l a t i o n
+B 165 Include File Summary
+B 178 E x e c u t i o n
+I 180 node_num
+B 184 Equation Listing    SOLVE spanning_tree Using MINLP From line 160
+D 187 objective
+D 192 each_assign_one
+D 203 one_root_constr
+D 212 root_constr
+D 223 flow_district_constr_1
+D 234 flow_district_constr_2
+D 245 min_node_district
+D 254 assign_1_root_0_constr_1
+D 265 assign_1_root_0_constr_2
+D 276 root_balance_1
+D 287 root_balance_2
+D 298 non_root_balance_1
+D 309 non_root_balance_2
+D 320 total_population
+D 329 decide_win_rep
+D 338 decide_win_rep2
+B 348 Column Listing      SOLVE spanning_tree Using MINLP From line 160
+E 351 obj
+E 358 x
+E 401 pop
+E 419 assign
+E 564 root
+E 595 assign_1_root_0
+E 617 z
+B 639 Model Statistics    SOLVE spanning_tree Using MINLP From line 160
+B 654 Solution Report     SOLVE spanning_tree Using MINLP From line 160
+F 809 objective
+F 811 each_assign_one
+F 831 one_root_constr
+F 839 root_constr
+F 889 flow_district_constr_1
+F 1086 flow_district_constr_2
+F 1283 min_node_district
+F 1291 assign_1_root_0_constr_1
+F 1341 assign_1_root_0_constr_2
+F 1391 root_balance_1
+F 1441 root_balance_2
+F 1491 non_root_balance_1
+F 1541 non_root_balance_2
+F 1591 total_population
+F 1599 decide_win_rep
+F 1607 decide_win_rep2
+G 1617 obj
+G 1619 x
+G 1816 pop
+G 1824 assign
+G 1874 root
+G 1924 assign_1_root_0
+G 1974 z
+B 1989 E x e c u t i o n
+I 1989 assign_result

@@ -1,0 +1,562 @@
+--- Job abc.gms Start 02/02/21 03:58:21 32.2.0 rc62c018 DEX-DEG x86 64bit/Mac OS X
+--- Applying:
+    /Library/Frameworks/GAMS.framework/Versions/32/Resources/gmsprmun.txt
+--- GAMS Parameters defined
+    Input /Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO/abc.gms
+    PageSize 0
+    ScrDir /Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO/225a/
+    SysDir /Library/Frameworks/GAMS.framework/Versions/32/Resources/
+    LogOption 3
+    ErrMsg 1
+    ErrorLog 99
+    IDE 1
+    LstTitleLeftAligned 1
+GAMS 32.2.0   Copyright (C) 1987-2020 GAMS Development. All rights reserved
+Licensee: Introduction to Optimization (CS/ISyE/ECE 524) S200826/0001AB-GEN
+          University of Wisconsin-Madison, Computer Sciences Dept.   DCE850
+          /Users/walter/Library/Application Support/GAMS/gamslice.txt
+          Evaluation license: Not for commercial or production use
+--- Starting compilation
+--- abc.gms(17) 3 Mb
+--- GDXin=/Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO/adjaceny_AZ.gdx
+--- abc.gms(26) 3 Mb
+--- GDXin=/Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO/county_vote_AZ.gdx
+--- abc.gms(166) 3 Mb
+--- Starting execution: elapsed 0:00:00.008
+--- abc.gms(52) 4 Mb
+--- Generating MINLP model spanning_tree
+--- abc.gms(160) 6 Mb
+---   730 rows  334 columns  4,435 non-zeroes
+---   13 nl-code  6 nl-non-zeroes
+---   138 discrete-columns
+--- abc.gms(160) 4 Mb
+--- Executing DICOPT (Solvelink=2): elapsed 0:00:00.027
+-------------------------------------------------------------------------------
+Dicopt 2         32.2.0 rc62c018 Released Aug 26, 2020 DEG x86 64bit/Mac OS X 
+-------------------------------------------------------------------------------
+by Aldo Vecchietti, Director del Instituto INGAR,
+   CONICET, UTN, Santa Fe, Argentina
+by Ignacio E. Grossmann, Chemical Engineering Faculty,
+   Carnegie Mellon University, Pittsburgh, PA, USA
+-------------------------------------------------------------------------------
+--- DICOPT: Starting major iteration 1
+--- DICOPT: Setting up first (relaxed) NLP.
+CONOPT 3         32.2.0 rc62c018 Released Aug 26, 2020 DEG x86 64bit/Mac OS X 
+ 
+ 
+    C O N O P T 3   version 3.17L
+    Copyright (C)   ARKI Consulting and Development A/S
+                    Bagsvaerdvej 246 A
+                    DK-2880 Bagsvaerd, Denmark
+ 
+ 
+   Iter Phase Ninf   Infeasibility   RGmax    NSB   Step InItr MX OK
+      0   0        2.4000000000E+01 (Input point)
+ 
+                   Pre-triangular equations:   0
+                   Post-triangular equations:  4
+ 
+      1   0        2.4000000000E+01 (After pre-processing)
+      2   0        2.1000000000E+01 (After scaling)
+      3   1    18  1.3500000000E+01 2.2E+03     3 1.0E+00    3 T  T
+      4   1    15  7.6601020408E+00 1.5E+01    39 1.0E+00    8 T  T
+ 
+ ** Feasible solution. Value of objective =   -1.71372210331
+ 
+   Iter Phase Ninf     Objective     RGmax    NSB   Step InItr MX OK
+      5   3       -1.4672085383E+00 5.0E-01    42 5.1E-01   12 F  T
+      6   3       -1.4524788631E+00 6.5E-02    47 1.4E-01    9 F  T
+     11   3       -1.4524788631E+00 9.1E-02    23 0.0E+00      T  T
+     16   3       -1.4467475513E+00 4.3E-02    23 0.0E+00      T  T
+     21   3       -1.4453075091E+00 3.0E-02    24 0.0E+00      T  T
+     26   3       -1.4453075091E+00 3.0E-02    24 0.0E+00      T  T
+     31   3       -1.4237440376E+00 3.3E-01    21 5.0E-02      T  T
+     36   3       -1.4188907402E+00 3.5E-01    16 3.1E-02      T  T
+     41   4       -1.3616119254E+00 4.2E-01    14 2.8E-01      T  T
+     46   3       -1.2878710427E+00 2.1E-01    12 9.8E-02      T  T
+ 
+   Iter Phase Ninf     Objective     RGmax    NSB   Step InItr MX OK
+     51   3       -1.2878710427E+00 1.3E-01     8 0.0E+00      T  T
+     56   3       -1.2878710427E+00 2.1E-01     8 0.0E+00      T  T
+     61   3       -1.2878710427E+00 4.6E-01     8 0.0E+00      T  T
+     66   3       -1.2878710427E+00 2.3E-01     8 0.0E+00      T  T
+     71   3       -1.2878710427E+00 2.3E-01     8 0.0E+00      T  T
+     74   3       -1.2573161951E+00 1.6E-01    10 3.8E-01    2 F  T
+     75   3       -1.2173398443E+00 2.9E-01    15 1.0E+00    1 F  T
+     76   3       -1.1688047672E+00 2.8E-01    11 5.0E-01      T  T
+     81   3       -7.9294180747E-01 4.6E+00    11 1.0E+00    3 T  T
+     82   3       -5.8634766980E-01 1.3E+00     8 1.0E+00    8 T  T
+ 
+   Iter Phase Ninf     Objective     RGmax    NSB   Step InItr MX OK
+     83   3       -4.0328838302E-01 1.3E+00    27 1.0E+00    8 F  T
+     84   3       -3.8710094798E-01 1.8E+00    19 6.4E-01    8 F  T
+     86   3       -3.8551210971E-01 4.1E-01    12 7.7E-03      T  T
+     89   3       -3.7670709541E-01 5.5E-02     4 1.0E+00    3 T  T
+     90   3       -3.5395637826E-01 5.8E-02     9 1.0E+00    5 T  T
+     91   3       -3.1977926051E-01 8.9E-02    11 1.0E+00   11 T  T
+     92   3       -2.8965735912E-01 6.7E-02    32 1.0E+00   14 T  T
+     93   3       -2.7501546445E-01 4.9E-01    43 2.4E-01   14 F  T
+     94   3       -2.6811295205E-01 2.8E-01    18 1.0E+00    7 T  T
+     95   3       -2.6747746451E-01 7.3E-02    25 6.6E-02   10 F  T
+ 
+   Iter Phase Ninf     Objective     RGmax    NSB   Step InItr MX OK
+     96   3       -2.6674563103E-01 7.4E-02    12 1.0E+00    5 T  T
+     97   3       -2.6146271701E-01 1.1E-01    11 4.8E-01    9 F  T
+     98   3       -2.5805218302E-01 2.4E-01     8 6.2E-01    6 F  T
+    101   3       -2.5727726967E-01 1.3E-01     5 2.8E-02      T  T
+    106   3       -2.5698818744E-01 8.4E-03     3 1.2E+00      F  T
+    111   3       -2.5259917102E-01 4.5E-03     2 3.3E+00      F  T
+    116   3       -2.5142644078E-01 4.7E-03     2 3.3E+00      F  T
+    121   3       -2.5115445638E-01 3.9E-03     2 7.9E+00      F  T
+    126   4       -2.5088650386E-01 4.3E-03     2 0.0E+00      T  T
+    131   3       -2.5088433420E-01 5.7E-03     2 0.0E+00      T  T
+ 
+   Iter Phase Ninf     Objective     RGmax    NSB   Step InItr MX OK
+    136   3       -2.5088433420E-01 3.5E-03     2 0.0E+00      T  T
+    141   3       -2.5088433420E-01 1.1E-02     2 0.0E+00      T  T
+    146   4       -2.4950849560E-01 1.1E-02     2 3.9E+00      T  T
+    151   3       -2.4764477324E-01 2.2E-02     6 3.9E-01      F  T
+    156   3       -2.4541759760E-01 2.2E-03     1 3.6E+00      F  T
+    161   3       -2.4404579021E-01 6.2E-03     2 5.8E+01      T  T
+    166   3       -2.4102663066E-01 2.6E-02     2 1.0E+00    1 T  T
+    167   3       -2.4079852580E-01 7.3E-02     5 2.5E-01    3 F  T
+    168   3       -2.4071428176E-01 1.6E-01     5 1.0E+00    2 T  T
+    169   3       -2.4038180130E-01 1.5E-02     2 1.0E+00    1 T  T
+ 
+   Iter Phase Ninf     Objective     RGmax    NSB   Step InItr MX OK
+    170   3       -2.4023495187E-01 9.7E-03     2 5.3E-02    1 F  T
+    171   3       -2.3907012564E-01 2.6E-02     6 1.0E+00    1 T  T
+    172   3       -2.3862205516E-01 2.9E-02     5 9.8E-02    2 F  T
+    173   3       -2.3848803392E-01 3.6E-02     4 1.0E+00    2 T  T
+    174   3       -2.3846483585E-01 6.8E-03     1 2.4E-02    1 F  T
+    175   3       -2.3795015495E-01 8.5E-03     3 1.0E+00    1 T  T
+    176   3       -2.3567751093E-01 2.3E-03     7 1.0E+00    5 T  T
+    177   3       -2.3547399912E-01 2.0E-02    20 4.8E-02    7 F  T
+    178   3       -2.3546874826E-01 7.1E-02    14 6.7E-02    5 F  T
+    181   3       -2.3545412787E-01 9.8E-04    11 4.9E+00      F  T
+ 
+   Iter Phase Ninf     Objective     RGmax    NSB   Step InItr MX OK
+    186   4       -2.3524948229E-01 2.5E-03     8 1.0E+00      F  T
+    191   3       -2.3498500487E-01 5.4E-03     3 0.0E+00      T  T
+    196   3       -2.3482576056E-01 6.6E-03     2 3.1E+00      F  T
+    201   3       -2.3268124968E-01 6.7E-05     2 0.0E+00      T  T
+    206   4       -2.3266000475E-01 6.7E-05     1 6.9E-01      F  T
+    211   3       -2.3266000475E-01 5.4E-05     2 0.0E+00      T  T
+    216   3       -2.3265849751E-01 4.7E-04     2 8.5E+00      F  T
+    221   4       -2.3260586834E-01 5.4E-05     2 1.6E+03      T  T
+    226   4       -2.3255154442E-01 8.1E-04     2 0.0E+00      T  T
+    231   3       -2.3253873740E-01 9.5E-05     2 0.0E+00      T  T
+ 
+   Iter Phase Ninf     Objective     RGmax    NSB   Step InItr MX OK
+    236   4       -2.3236015019E-01 4.0E-04     4 0.0E+00      T  T
+    241   3       -2.3205829764E-01 2.4E-04     2 1.1E+03      T  T
+    246   4       -2.3198334518E-01 7.4E-04     4 0.0E+00      T  T
+    251   3       -2.3191048889E-01 5.6E-03     2 0.0E+00      T  T
+    256   3       -2.3184448172E-01 3.8E-03     5 2.6E+00      F  T
+    261   4       -2.3183128328E-01 1.2E-03     6 0.0E+00      T  T
+    264   4       -2.3182827651E-01 1.5E-04    11 3.4E+02    1 T  T
+    265   4       -2.3182827049E-01 8.7E-05     4 1.2E+00      F  T
+    266   4       -2.3182827048E-01 3.3E-04    12 1.0E+00    2 T  T
+    267   4       -2.3182827048E-01 8.4E-06     6 0.0E+00      T  T
+ 
+   Iter Phase Ninf     Objective     RGmax    NSB   Step InItr MX OK
+    268   4       -2.3182827048E-01 8.4E-06     6 0.0E+00      T  T
+    269   3       -2.3182827048E-01 6.7E-05     6 0.0E+00      T  T
+    270   3       -2.3182825296E-01 6.7E-05     5 7.7E+00      F  T
+    271   3       -2.3182823543E-01 1.5E-04     5 1.6E+00      F  T
+    272   4       -2.3182560955E-01 6.7E-05     5 3.6E+02      T  T
+    273   4       -2.3182559172E-01 6.7E-05     4 5.9E+00      F  T
+    274   4       -2.3182559172E-01 1.4E-04    13 0.0E+00      T  T
+    275   4       -2.3182557362E-01 1.4E-04     5 1.0E+00      F  T
+    276   4       -2.3181810018E-01 6.9E-05     5 2.1E+02      T  T
+    277   4       -2.3181803326E-01 1.9E-04     4 2.0E+00      F  T
+ 
+   Iter Phase Ninf     Objective     RGmax    NSB   Step InItr MX OK
+    278   4       -2.3181803326E-01 9.3E-05     9 0.0E+00      T  T
+    279   4       -2.3181792341E-01 9.3E-05     5 9.0E+00      F  T
+    280   4       -2.3180938688E-01 2.0E-04     5 3.7E+01      T  T
+    281   4       -2.3180890589E-01 2.0E-04     4 5.4E+00      F  T
+    282   4       -2.3180691268E-01 2.5E-04     4 8.4E+00      T  T
+    283   4       -2.3180658123E-01 2.5E-04     3 3.8E+00      F  T
+    284   4       -2.3180658123E-01 2.0E-04    17 0.0E+00      T  T
+    285   4       -2.3180639432E-01 2.0E-04     4 4.8E+00      F  T
+    286   4       -2.3180639432E-01 3.1E-04     8 0.0E+00      T  T
+    287   4       -2.3180639432E-01 3.1E-04     5 0.0E+00      T  T
+ 
+   Iter Phase Ninf     Objective     RGmax    NSB   Step InItr MX OK
+    288   4       -2.3180569824E-01 3.1E-04     5 2.4E+00      F  T
+    289   4       -2.3178601955E-01 5.6E-04     5 8.0E+00      T  T
+    290   4       -2.3178383470E-01 2.4E-04     4 1.2E+00      T  T
+    291   4       -2.3178383470E-01 2.8E-04    17 0.0E+00      T  T
+    292   3       -2.3178383129E-01 2.8E-04     4 6.0E-01      F  T
+    293   3       -2.3178124727E-01 5.6E-05     4 1.0E+03      T  T
+    294   3       -2.3178059347E-01 3.2E-04     1 1.3E+01      F  T
+    295   3       -2.3178059347E-01 1.5E-04    17 0.0E+00      T  T
+    296   3       -2.3178058160E-01 1.5E-04     2 1.1E+00      F  T
+    297   3       -2.3178056973E-01 4.3E-05     2 1.3E+01      F  T
+ 
+   Iter Phase Ninf     Objective     RGmax    NSB   Step InItr MX OK
+    298   4       -2.3177545491E-01 1.5E-04     2 1.8E+01      T  T
+    299   4       -2.3177480200E-01 1.5E-04     2 5.9E+01      F  T
+    300   4       -2.3177480200E-01 1.5E-04     3 0.0E+00      T  T
+    301   4       -2.3176847519E-01 1.5E-04     3 1.7E+01      T  T
+    302   3       -2.3176793835E-01 1.5E-04     2 2.5E+01      T  T
+    303   3       -2.3176793835E-01 3.8E-05     2 0.0E+00      T  T
+    304   3       -2.3173401907E-01 3.8E-05     2 5.5E+04      F  T
+    305   3       -2.3168878429E-01 1.2E-03     2 6.4E+01      F  T
+    306   4       -2.3168878429E-01 9.3E-05    11 0.0E+00      T  T
+    307   4       -2.3168843422E-01 9.3E-05     2 1.0E+00      F  T
+ 
+   Iter Phase Ninf     Objective     RGmax    NSB   Step InItr MX OK
+    308   4       -2.3168802992E-01 3.8E-05     2 4.5E+00      T  T
+    309   4       -2.3168780799E-01 8.6E-05     1 2.0E+00      F  T
+    310   4       -2.3168780799E-01 1.4E-04     3 0.0E+00      T  T
+    311   4       -2.3167932036E-01 1.4E-04     2 7.6E+00      T  T
+    312   4       -2.3167932036E-01 1.3E-04     2 0.0E+00      T  T
+    313   4       -2.3167897073E-01 1.6E-03     1 1.2E+00      T  T
+    314   4       -2.3167897073E-01 4.5E-05    17 0.0E+00      T  T
+    315   4       -2.3167891159E-01 4.5E-05     1 1.0E+00      F  T
+    316   4       -2.3167891159E-01 1.9E-05    10 0.0E+00      T  T
+    317   4       -2.3167891126E-01 3.3E-06     1 1.0E+00      F  T
+ 
+   Iter Phase Ninf     Objective     RGmax    NSB   Step InItr MX OK
+    318   4       -2.3167891126E-01 3.9E-05     6 0.0E+00      T  T
+    319   4       -2.3166983407E-01 3.9E-05     2 1.0E+02      T  T
+    320   4       -2.3166927254E-01 1.4E-04     1 2.0E+00      F  T
+    321   4       -2.3166927254E-01 5.9E-15     1
+ 
+ ** Optimal solution. Reduced gradient less than tolerance.
+ 
+--- DICOPT: Setting up first MIP
+IBM ILOG CPLEX   32.2.0 rc62c018 Released Aug 26, 2020 DEG x86 64bit/Mac OS X 
+--- GAMS/Cplex Link licensed for continuous and discrete problems.
+Cplex 12.10.0.0
+3: *** Value Error Value brought in range for option "itlim" saw "2147483326"
+3: *** Value Error    Value set to 2100000000
+Reading data...
+Starting Cplex...
+Unable to load names.
+Version identifier: 12.10.0.0 | 2019-11-26 | 843d4de
+CPXPARAM_Advance                                 0
+CPXPARAM_Threads                                 1
+CPXPARAM_Parallel                                1
+CPXPARAM_MIP_Display                             4
+CPXPARAM_TimeLimit                               9999999999.8829994
+CPXPARAM_Tune_TimeLimit                          1999999999.9765999
+CPXPARAM_MIP_Tolerances_AbsMIPGap                0
+CPXPARAM_MIP_Tolerances_MIPGap                   0
+CPXPARAM_WorkDir                                 "/Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO/225a/"
+Tried aggregator 1 time.
+MIP Presolve eliminated 95 rows and 7 columns.
+MIP Presolve modified 234 coefficients.
+Reduced MIP has 636 rows, 330 columns, and 4155 nonzeros.
+Reduced MIP has 138 binaries, 0 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.01 sec. (3.58 ticks)
+Found incumbent of value -101.558874 after 0.01 sec. (6.88 ticks)
+Probing time = 0.00 sec. (1.26 ticks)
+Tried aggregator 1 time.
+Detecting symmetries...
+Reduced MIP has 636 rows, 330 columns, and 4155 nonzeros.
+Reduced MIP has 138 binaries, 0 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.00 sec. (2.01 ticks)
+Probing time = 0.00 sec. (1.25 ticks)
+Clique table members: 423.
+MIP emphasis: balance optimality and feasibility.
+MIP search method: dynamic search.
+Parallel mode: none, using 1 thread.
+Tried aggregator 1 time.
+No LP presolve or aggregator reductions.
+Presolve time = 0.00 sec. (0.32 ticks)
+Initializing dual steep norms . . .
+Iteration log . . .
+Iteration:     1   Dual objective     =             0.229892
+Root relaxation solution time = 0.00 sec. (1.32 ticks)
+        Nodes                                         Cuts/
+   Node  Left     Objective  IInf  Best Integer    Best Bound    ItCnt     Gap
+*     0+    0                         -101.5589        0.2317           100.23%
+Found incumbent of value -101.558874 after 0.03 sec. (14.69 ticks)
+      0     0       -2.6203    37     -101.5589       -2.6203       48   97.42%
+      0     0       -4.8183    37     -101.5589      Cuts: 22       99   95.26%
+      0     0       -4.8221    37     -101.5589      Cuts: 47      177   95.25%
+      0     0       -4.8284    37     -101.5589      Cuts: 40      249   95.25%
+      0     0       -4.8367    37     -101.5589      Cuts: 32      328   95.24%
+      0     0       -4.8404    37     -101.5589      Cuts: 41      422   95.23%
+Detecting symmetries...
+      0     0       -4.8407    37     -101.5589      Cuts: 57      482   95.23%
+      0     0       -4.8410    37     -101.5589      Cuts: 35      517   95.23%
+*     0+    0                          -94.0387       -4.8410            94.85%
+Found incumbent of value -94.038726 after 0.12 sec. (61.29 ticks)
+Detecting symmetries...
+      0     2       -4.8410    54      -94.0387       -4.8411      517   94.85%
+Elapsed time = 0.13 sec. (72.24 ticks, tree = 0.01 MB, solutions = 2)
+*    30    28      integral     0       -4.9739       -4.8415     1129    2.66%
+Found incumbent of value -4.973864 after 0.15 sec. (87.28 ticks)
+*   126    50      integral     0       -4.9683       -4.8510     2811    2.36%
+                                                     Cuts: 23                  
+Found incumbent of value -4.968283 after 0.21 sec. (139.38 ticks)
+*   160+   24                           -4.8620       -4.8512             0.22%
+                                                      Cuts: 6                  
+Found incumbent of value -4.861985 after 0.24 sec. (158.37 ticks)
+Cover cuts applied:  9
+Implied bound cuts applied:  36
+Flow cuts applied:  10
+Mixed integer rounding cuts applied:  18
+Zero-half cuts applied:  1
+Lift and project cuts applied:  1
+Gomory fractional cuts applied:  3
+Root node processing (before b&c):
+  Real time             =    0.13 sec. (72.24 ticks)
+Sequential b&c:
+  Real time             =    0.14 sec. (104.75 ticks)
+                          ------------
+Total (root+branch&cut) =    0.27 sec. (176.99 ticks)
+MIP status(101): integer optimal solution
+Cplex Time: 0.27sec (det. 176.99 ticks)
+Fixing integer variables, and solving final LP...
+Version identifier: 12.10.0.0 | 2019-11-26 | 843d4de
+CPXPARAM_Advance                                 2
+CPXPARAM_Threads                                 1
+CPXPARAM_Parallel                                1
+CPXPARAM_MIP_Display                             4
+CPXPARAM_TimeLimit                               9999999999.8829994
+CPXPARAM_Tune_TimeLimit                          1999999999.9765999
+CPXPARAM_MIP_Tolerances_AbsMIPGap                0
+CPXPARAM_MIP_Tolerances_MIPGap                   0
+CPXPARAM_WorkDir                                 "/Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO/225a/"
+Tried aggregator 1 time.
+LP Presolve eliminated 726 rows and 331 columns.
+Aggregator did 3 substitutions.
+Reduced LP has 2 rows, 3 columns, and 4 nonzeros.
+Presolve time = 0.00 sec. (0.39 ticks)
+Initializing dual steep norms . . .
+Iteration log . . .
+Iteration:     1   Dual objective     =            -4.861985
+Fixed MIP status(1): optimal
+Cplex Time: 0.00sec (det. 0.68 ticks)
+Proven optimal solution.
+MIP Solution:           -4.861985    (4280 iterations, 194 nodes)
+Final Solve:            -4.861985    (1 iterations)
+Best possible:          -4.861985
+Absolute gap:            0.000000
+Relative gap:            0.000000
+--- DICOPT: Starting major iteration 2
+--- DICOPT: Setting up next NLP
+CONOPT 3         32.2.0 rc62c018 Released Aug 26, 2020 DEG x86 64bit/Mac OS X 
+ 
+ 
+    C O N O P T 3   version 3.17L
+    Copyright (C)   ARKI Consulting and Development A/S
+                    Bagsvaerdvej 246 A
+                    DK-2880 Bagsvaerd, Denmark
+ 
+ 
+   Iter Phase Ninf   Infeasibility   RGmax    NSB   Step InItr MX OK
+      0   0        8.9175187917E+00 (Input point)
+ 
+                   Pre-triangular equations:   166
+                   Post-triangular equations:  0
+ 
+      1   0        0.0000000000E+00 (After pre-processing)
+      2   0        0.0000000000E+00 (After scaling)
+ 
+ ** Feasible solution. Value of objective =   -13.7795034229
+ 
+   Iter Phase Ninf     Objective     RGmax    NSB   Step InItr MX OK
+      3   3       -1.3779503423E+01 0.0E+00     0 0.0E+00    0 F  T
+      4   3       -1.3779503423E+01 0.0E+00     0
+ 
+ ** Optimal solution. There are no superbasic variables.
+ 
+--- DICOPT: Checking convergence
+--- DICOPT: Setting up next MIP
+--- GMO Resort Time 0ms
+--- DICOPT: Log File:
+ Major Major     Objective    CPU time  Itera- Evaluation Solver
+ Step  Iter       Function     (Sec)    tions   Errors
+  NLP    1        -0.23167      0.12      321      0      conopt
+  MIP    1        -4.86198      0.29     4281      0      cplex
+  NLP    2       -13.77950<     0.00        4      0      conopt
+IBM ILOG CPLEX   32.2.0 rc62c018 Released Aug 26, 2020 DEG x86 64bit/Mac OS X 
+--- GAMS/Cplex Link licensed for continuous and discrete problems.
+Cplex 12.10.0.0
+3: *** Value Error Value brought in range for option "itlim" saw "2147479041"
+3: *** Value Error    Value set to 2100000000
+Reading data...
+Starting Cplex...
+Unable to load names.
+Version identifier: 12.10.0.0 | 2019-11-26 | 843d4de
+CPXPARAM_Advance                                 0
+CPXPARAM_Threads                                 1
+CPXPARAM_Parallel                                1
+CPXPARAM_MIP_Display                             4
+CPXPARAM_TimeLimit                               9999999999.5939999
+CPXPARAM_Tune_TimeLimit                          1999999999.9187999
+CPXPARAM_MIP_Tolerances_AbsMIPGap                0
+CPXPARAM_MIP_Tolerances_MIPGap                   0
+CPXPARAM_WorkDir                                 "/Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO/225a/"
+Tried aggregator 2 times.
+MIP Presolve eliminated 92 rows and 4 columns.
+MIP Presolve modified 304 coefficients.
+Aggregator did 1 substitutions.
+Reduced MIP has 640 rows, 334 columns, and 4267 nonzeros.
+Reduced MIP has 138 binaries, 0 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.01 sec. (4.48 ticks)
+Found incumbent of value -89.350835 after 0.02 sec. (8.88 ticks)
+Probing time = 0.00 sec. (1.32 ticks)
+Cover probing fixed 0 vars, tightened 2 bounds.
+Tried aggregator 1 time.
+Detecting symmetries...
+Reduced MIP has 640 rows, 334 columns, and 4267 nonzeros.
+Reduced MIP has 138 binaries, 1 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.00 sec. (2.10 ticks)
+Probing time = 0.00 sec. (1.32 ticks)
+Clique table members: 423.
+MIP emphasis: balance optimality and feasibility.
+MIP search method: dynamic search.
+Parallel mode: none, using 1 thread.
+Tried aggregator 1 time.
+No LP presolve or aggregator reductions.
+Presolve time = 0.00 sec. (0.33 ticks)
+Initializing dual steep norms . . .
+Iteration log . . .
+Iteration:     1   Scaled dual infeas =             1.942422
+Iteration:     3   Dual objective     =             0.224046
+Root relaxation solution time = 0.00 sec. (1.89 ticks)
+        Nodes                                         Cuts/
+   Node  Left     Objective  IInf  Best Integer    Best Bound    ItCnt     Gap
+*     0+    0                          -89.3508                           0.00%
+Found incumbent of value -89.350835 after 0.03 sec. (17.54 ticks)
+      0     0       -2.6618    40      -89.3508       -2.6618       74   97.02%
+      0     0       -3.4629    40      -89.3508      Cuts: 23      308   96.12%
+      0     0       -3.5739    40      -89.3508      Cuts: 48      487   96.00%
+      0     0       -3.6369    40      -89.3508      Cuts: 50      737   95.93%
+      0     0       -3.6651    40      -89.3508      Cuts: 53      808   95.90%
+      0     0       -3.8750    40      -89.3508      Cuts: 58     1101   95.66%
+Detecting symmetries...
+      0     0       -3.8835    40      -89.3508      Cuts: 61     1179   95.65%
+      0     0       -3.8894    40      -89.3508      Cuts: 47     1236   95.65%
+      0     0       -3.8920    40      -89.3508      Cuts: 57     1281   95.64%
+*     0+    0                           -6.2725       -3.8920            37.95%
+Found incumbent of value -6.272496 after 0.13 sec. (75.91 ticks)
+      0     0       -3.8943    40       -6.2725      Cuts: 38     1405   37.92%
+      0     0       -3.8964    40       -6.2725      Cuts: 59     1446   37.88%
+*     0+    0                           -6.2674       -3.8964            37.83%
+Found incumbent of value -6.267361 after 0.15 sec. (88.78 ticks)
+      0     0       -3.9003    40       -6.2674      Cuts: 63     1538   37.77%
+      0     0       -3.9152    40       -6.2674      Cuts: 44     1662   37.53%
+      0     0       -3.9187    40       -6.2674      Cuts: 54     1722   37.47%
+      0     0       -3.9230    40       -6.2674      Cuts: 52     1770   37.41%
+      0     0       -3.9283    40       -6.2674      Cuts: 44     1849   37.32%
+      0     0       -3.9328    40       -6.2674      Cuts: 58     1932   37.25%
+      0     0       -3.9404    40       -6.2674      Cuts: 44     2010   37.13%
+      0     0       -3.9492    40       -6.2674      Cuts: 67     2071   36.99%
+      0     0       -3.9627    40       -6.2674      Cuts: 38     2154   36.77%
+      0     0       -3.9651    40       -6.2674      Cuts: 55     2225   36.73%
+      0     0       -3.9684    40       -6.2674      Cuts: 62     2268   36.68%
+      0     0       -3.9742    40       -6.2674      Cuts: 60     2322   36.59%
+      0     0       -3.9781    40       -6.2674      Cuts: 45     2346   36.53%
+      0     0       -3.9792    40       -6.2674      Cuts: 21     2373   36.51%
+      0     0       -3.9863    40       -6.2674      Cuts: 42     2441   36.40%
+      0     0       -3.9880    40       -6.2674      Cuts: 64     2494   36.37%
+      0     0       -3.9899    40       -6.2674      Cuts: 47     2536   36.34%
+      0     0       -3.9902    40       -6.2674      Cuts: 22     2565   36.33%
+      0     0       -3.9923    40       -6.2674       Cuts: 8     2596   36.30%
+      0     0       -3.9938    40       -6.2674      Cuts: 64     2650   36.28%
+      0     0       -3.9946    40       -6.2674      Cuts: 37     2705   36.26%
+Detecting symmetries...
+      0     2       -3.9946    78       -6.2674       -3.9980     2705   36.21%
+Elapsed time = 0.40 sec. (249.51 ticks, tree = 0.01 MB, solutions = 3)
+*     8     4      integral     0       -6.1437       -6.1042     3225    0.64%
+Found incumbent of value -6.143699 after 0.41 sec. (259.95 ticks)
+*    88    19      integral     0       -6.1390       -6.1121     5328    0.44%
+                                                     Cuts: 24                  
+Found incumbent of value -6.139037 after 0.49 sec. (316.14 ticks)
+Cover cuts applied:  7
+Implied bound cuts applied:  38
+Flow cuts applied:  26
+Mixed integer rounding cuts applied:  24
+Zero-half cuts applied:  7
+Gomory fractional cuts applied:  1
+Root node processing (before b&c):
+  Real time             =    0.40 sec. (249.51 ticks)
+Sequential b&c:
+  Real time             =    0.18 sec. (141.48 ticks)
+                          ------------
+Total (root+branch&cut) =    0.58 sec. (390.99 ticks)
+MIP status(101): integer optimal solution
+Cplex Time: 0.58sec (det. 390.99 ticks)
+Fixing integer variables, and solving final LP...
+Version identifier: 12.10.0.0 | 2019-11-26 | 843d4de
+CPXPARAM_Advance                                 2
+CPXPARAM_Threads                                 1
+CPXPARAM_Parallel                                1
+CPXPARAM_MIP_Display                             4
+CPXPARAM_TimeLimit                               9999999999.5939999
+CPXPARAM_Tune_TimeLimit                          1999999999.9187999
+CPXPARAM_MIP_Tolerances_AbsMIPGap                0
+CPXPARAM_MIP_Tolerances_MIPGap                   0
+CPXPARAM_WorkDir                                 "/Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO/225a/"
+Tried aggregator 1 time.
+LP Presolve eliminated 728 rows and 333 columns.
+Aggregator did 3 substitutions.
+Reduced LP has 2 rows, 3 columns, and 4 nonzeros.
+Presolve time = 0.00 sec. (0.40 ticks)
+Initializing dual steep norms . . .
+Iteration log . . .
+Iteration:     1   Dual objective     =            -6.139037
+Fixed MIP status(1): optimal
+Cplex Time: 0.00sec (det. 0.69 ticks)
+Proven optimal solution.
+MIP Solution:           -6.139037    (8462 iterations, 219 nodes)
+Final Solve:            -6.139037    (1 iterations)
+Best possible:          -6.139037
+Absolute gap:            0.000000
+Relative gap:            0.000000
+--- DICOPT: Starting major iteration 3
+--- DICOPT: Setting up next NLP
+CONOPT 3         32.2.0 rc62c018 Released Aug 26, 2020 DEG x86 64bit/Mac OS X 
+ 
+ 
+    C O N O P T 3   version 3.17L
+    Copyright (C)   ARKI Consulting and Development A/S
+                    Bagsvaerdvej 246 A
+                    DK-2880 Bagsvaerd, Denmark
+ 
+ 
+   Iter Phase Ninf   Infeasibility   RGmax    NSB   Step InItr MX OK
+      0   0        7.6404666479E+00 (Input point)
+ 
+                   Pre-triangular equations:   166
+                   Post-triangular equations:  0
+ 
+      1   0        0.0000000000E+00 (After pre-processing)
+      2   0        0.0000000000E+00 (After scaling)
+ 
+ ** Feasible solution. Value of objective =   -13.7795034229
+ 
+   Iter Phase Ninf     Objective     RGmax    NSB   Step InItr MX OK
+      3   3       -1.3779503423E+01 0.0E+00     0 0.0E+00    0 F  T
+      4   3       -1.3779503423E+01 0.0E+00     0
+ 
+ ** Optimal solution. There are no superbasic variables.
+ 
+--- DICOPT: Checking convergence
+--- DICOPT: Search stopped on worsening of NLP subproblems
+--- DICOPT: Log File:
+ Major Major     Objective    CPU time  Itera- Evaluation Solver
+ Step  Iter       Function     (Sec)    tions   Errors
+  NLP    1        -0.23167      0.12      321      0      conopt
+  MIP    1        -4.86198      0.29     4281      0      cplex
+  NLP    2       -13.77950<     0.00        4      0      conopt
+  MIP    2        -6.13904      0.59     8463      0      cplex
+  NLP    3       -13.77950      0.00        4      0      conopt
+--- DICOPT: Terminating...
+--- DICOPT: Stopped on NLP worsening
+      The search was stopped because the objective function
+      of the NLP subproblems started to deteriorate.
+--- DICOPT: Best integer solution found: -13.779503
+--- Reading solution for model spanning_tree
+--- Executing after solve: elapsed 0:00:01.118
+--- abc.gms(165) 4 Mb
+*** Status: Normal completion
+--- Job abc.gms Stop 02/02/21 03:58:22 elapsed 0:00:01.118

@@ -1,0 +1,45 @@
+--- Job Gerrymander.gms Start 02/02/21 04:49:45 32.2.0 rc62c018 DEX-DEG x86 64bit/Mac OS X
+--- Applying:
+    /Library/Frameworks/GAMS.framework/Versions/32/Resources/gmsprmun.txt
+--- GAMS Parameters defined
+    Input /Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO/Gerrymander.gms
+    ScrDir /Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO/225a/
+    SysDir /Library/Frameworks/GAMS.framework/Versions/32/Resources/
+    CurDir /Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO/
+    LogOption 3
+    Trace /Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO/_sys_trace_gerrymander.trc
+    InputDir1 /Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO/
+    TraceOpt 3
+    ExecMode 0
+    LstTitleLeftAligned 1
+    IDCGDXInput _miro_gdxin_.gdx
+    IDCGDXOutput _miro_gdxout_.gdx
+GAMS 32.2.0   Copyright (C) 1987-2020 GAMS Development. All rights reserved
+Licensee: Introduction to Optimization (CS/ISyE/ECE 524) S200826/0001AB-GEN
+          University of Wisconsin-Madison, Computer Sciences Dept.   DCE850
+          /Users/walter/Library/Application Support/GAMS/gamslice.txt
+          Evaluation license: Not for commercial or production use
+--- Starting compilation
+--- Gerrymander.gms(9) 3 Mb
+--- GDXin=/Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO/_miro_gdxin_.gdx
+--- Gerrymander.gms(17) 3 Mb
+--- Ignoring $gdxIn in externalInput section
+--- Gerrymander.gms(18) 3 Mb
+--- Ignoring symbol renaming with $load in externalInput section
+--- Gerrymander.gms(23) 3 Mb
+--- Ignoring symbol renaming with $load in externalInput section
+--- Gerrymander.gms(26) 3 Mb
+--- Ignoring $gdxIn in externalInput section
+--- Gerrymander.gms(27) 3 Mb
+--- Ignoring symbol renaming with $load in externalInput section
+--- Gerrymander.gms(169) 3 Mb
+--- Starting execution: elapsed 0:00:00.049
+--- Gerrymander.gms(52) 4 Mb
+--- Generating MINLP model spanning_tree
+--- Gerrymander.gms(154) 6 Mb
+*** Error at line 154: division by zero (0)
+--- Gerrymander.gms(160) 4 Mb 1 Error
+*** SOLVE aborted
+--- Gerrymander.gms(160) 4 Mb 1 Error
+*** Status: Execution error(s)
+--- Job Gerrymander.gms Stop 02/02/21 04:49:45 elapsed 0:00:00.063
