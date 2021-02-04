@@ -48,9 +48,6 @@ scalar node_num;
 node_num = card(nodes);
 
 
-
-display node_num;
-
 free variable
     obj;
 nonnegative variable

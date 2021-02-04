@@ -1,4 +1,4 @@
-GAMS 32.2.0  rc62c018 Released Aug 26, 2020 DEX-DEG x86 64bit/Mac OS X - 02/03/21 00:10:49 Page 1
+GAMS 32.2.0  rc62c018 Released Aug 26, 2020 DEX-DEG x86 64bit/Mac OS X - 02/05/21 04:50:46 Page 1
 gerrymandering model
 C o m p i l a t i o n
 
@@ -51,118 +51,115 @@ GDXIN   /Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO/_miro_
   48  node_num = card(nodes);
   49   
   50   
-  51   
-  52  display node_num;
-  53   
-  54  free variable
-  55      obj;
-  56  nonnegative variable
-  57      x(district,i,j) flow from i to j in district d
-  58      pop(district)
-  59  ;
-  60   
-  61  binary variable
-  62      assign(i,district) if i is assigned to d
-  63      root(district,i) 1 if i s the root in d
-  64      assign_1_root_0(i,district) if i is assigned to d and is not a root return 1
-  65      z(district) 1 if republican win in district d
-  66  ;
-  67  equation
-  68  *------------------------------connectiviy constraint------------------------------
-  69      objective
-  70      each_assign_one(i) each county is assigned to one district
-  71      one_root_constr(district)
-  72      root_constr(i,district)
-  73      flow_district_constr_1(district,i,j)
-  74      flow_district_constr_2(district,i,j)
-  75      min_node_district(district)
-  76  *    max_node_district(d)
-  77      assign_1_root_0_constr_1(i,district)
-  78      assign_1_root_0_constr_2(i,district)
-  79      root_balance_1(district,i)
-  80      root_balance_2(district,i)
-  81      non_root_balance_1(district,i)
-  82      non_root_balance_2(district,i)
-  83  *------------------------------vote calculation constraint------------------------------
-  84  *    ppl_constr_up(d) Number of PPL should be in the interval for every district
-  85  *    ppl_constr_lo(d) Number of PPL should be in the interval for every district
-  86      total_population(district)
-  87      decide_win_rep(district) See if in District J republicans are the winner
-  88      decide_win_rep2(district) See if in District J republicans are the winner
-  89  ;
-  90   
+  51  free variable
+  52      obj;
+  53  nonnegative variable
+  54      x(district,i,j) flow from i to j in district d
+  55      pop(district)
+  56  ;
+  57   
+  58  binary variable
+  59      assign(i,district) if i is assigned to d
+  60      root(district,i) 1 if i s the root in d
+  61      assign_1_root_0(i,district) if i is assigned to d and is not a root return 1
+  62      z(district) 1 if republican win in district d
+  63  ;
+  64  equation
+  65  *------------------------------connectiviy constraint------------------------------
+  66      objective
+  67      each_assign_one(i) each county is assigned to one district
+  68      one_root_constr(district)
+  69      root_constr(i,district)
+  70      flow_district_constr_1(district,i,j)
+  71      flow_district_constr_2(district,i,j)
+  72      min_node_district(district)
+  73  *    max_node_district(d)
+  74      assign_1_root_0_constr_1(i,district)
+  75      assign_1_root_0_constr_2(i,district)
+  76      root_balance_1(district,i)
+  77      root_balance_2(district,i)
+  78      non_root_balance_1(district,i)
+  79      non_root_balance_2(district,i)
+  80  *------------------------------vote calculation constraint------------------------------
+  81  *    ppl_constr_up(d) Number of PPL should be in the interval for every district
+  82  *    ppl_constr_lo(d) Number of PPL should be in the interval for every district
+  83      total_population(district)
+  84      decide_win_rep(district) See if in District J republicans are the winner
+  85      decide_win_rep2(district) See if in District J republicans are the winner
+  86  ;
+  87   
       ------------------------------connectiviy constraint------------------------------
-  94  each_assign_one(i)..
-  95      sum(d, assign(i,d)) =e= 1;
+  91  each_assign_one(i)..
+  92      sum(d, assign(i,d)) =e= 1;
+  93   
+  94  one_root_constr(d)..
+  95      sum(i, root(d,i)) =e= 1;
   96   
-  97  one_root_constr(d)..
-  98      sum(i, root(d,i)) =e= 1;
+  97  root_constr(i,d)..
+  98      root(d,i) =l= assign(i,d);
   99   
- 100  root_constr(i,d)..
- 101      root(d,i) =l= assign(i,d);
+ 100  flow_district_constr_1(d,i,j)$(arcs(i,j) or arcs(j,i))..
+ 101      x(d,i,j) =l= (node_num)*(assign(i,d));
  102   
- 103  flow_district_constr_1(d,i,j)$(arcs(i,j) or arcs(j,i))..
- 104      x(d,i,j) =l= (node_num)*(assign(i,d));
+ 103  flow_district_constr_2(d,i,j)$(arcs(i,j) or arcs(j,i))..
+ 104      x(d,i,j) =l= (node_num)*(assign(j,d));
  105   
- 106  flow_district_constr_2(d,i,j)$(arcs(i,j) or arcs(j,i))..
- 107      x(d,i,j) =l= (node_num)*(assign(j,d));
+ 106  min_node_district(d)..
+ 107      sum(i,assign(i,d)) =g= 2;
  108   
- 109  min_node_district(d)..
- 110      sum(i,assign(i,d)) =g= 2;
+ 109  *max_node_district(d)..
+ 110  *    sum(i,assign(i,d)) =l= 4;
  111   
- 112  *max_node_district(d)..
- 113  *    sum(i,assign(i,d)) =l= 4;
- 114   
+ 112   
+ 113  assign_1_root_0_constr_1(i,d)..
+ 114      assign(i,d) + (1-root(d,i)) - assign_1_root_0(i,d) =l= 1;
  115   
- 116  assign_1_root_0_constr_1(i,d)..
- 117      assign(i,d) + (1-root(d,i)) - assign_1_root_0(i,d) =l= 1;
+ 116  assign_1_root_0_constr_2(i,d)..
+ 117      assign(i,d) + (1-root(d,i)) - 2*assign_1_root_0(i,d) =g= 0;
  118   
- 119  assign_1_root_0_constr_2(i,d)..
- 120      assign(i,d) + (1-root(d,i)) - 2*assign_1_root_0(i,d) =g= 0;
- 121   
- 122  root_balance_1(d,i)..
- 123      sum(j$(arcs(i,j) or arcs(j,i)), x(d,i,j)) - sum(j$(arcs(i,j) or arcs(j,i)), x(d,j,i)) - (sum(j,assign(j,d))-1) +
- 124      root(d,i)*(node_num) =l= (node_num);
- 125   
- 126  root_balance_2(d,i)..
- 127      sum(j$(arcs(i,j) or arcs(j,i)), x(d,i,j) ) - sum(j$(arcs(i,j) or arcs(j,i)), x(d,j,i)) - (sum(j,assign(j,d))-1) +
- 128      root(d,i)*(-node_num) =g= (-node_num);
- 129   
- 130  non_root_balance_1(d,i)..
- 131      sum(j$(arcs(i,j) or arcs(j,i)), x(d,i,j) ) - sum(j$(arcs(i,j) or arcs(j,i)), x(d,j,i)) - (-1) +
- 132      (assign_1_root_0(i,d))*(node_num) =l= node_num;
+ 119  root_balance_1(d,i)..
+ 120      sum(j$(arcs(i,j) or arcs(j,i)), x(d,i,j)) - sum(j$(arcs(i,j) or arcs(j,i)), x(d,j,i)) - (sum(j,assign(j,d))-1) +
+ 121      root(d,i)*(node_num) =l= (node_num);
+ 122   
+ 123  root_balance_2(d,i)..
+ 124      sum(j$(arcs(i,j) or arcs(j,i)), x(d,i,j) ) - sum(j$(arcs(i,j) or arcs(j,i)), x(d,j,i)) - (sum(j,assign(j,d))-1) +
+ 125      root(d,i)*(-node_num) =g= (-node_num);
+ 126   
+ 127  non_root_balance_1(d,i)..
+ 128      sum(j$(arcs(i,j) or arcs(j,i)), x(d,i,j) ) - sum(j$(arcs(i,j) or arcs(j,i)), x(d,j,i)) - (-1) +
+ 129      (assign_1_root_0(i,d))*(node_num) =l= node_num;
+ 130   
+ 131  non_root_balance_2(d,i)..
+ 132      sum(j$(arcs(i,j) or arcs(j,i)), x(d,i,j) ) - sum(j$(arcs(i,j) or arcs(j,i)), x(d,j,i)) - (-1)=g= 0;
  133   
- 134  non_root_balance_2(d,i)..
- 135      sum(j$(arcs(i,j) or arcs(j,i)), x(d,i,j) ) - sum(j$(arcs(i,j) or arcs(j,i)), x(d,j,i)) - (-1)=g= 0;
- 136   
       ------------------------------vote calculattion constraint------------------------------
- 140   
- 141  *ppl_constr_up(d)..
- 142  *    sum(i, assign(i,d)*sum(P,num(i,P))) =l= Upper;
- 143  *ppl_constr_lo(d)..
- 144  *    sum(i, assign(i,d)*sum(P,num(i,P))) =g= Lower;
- 145   
- 146  total_population(d)..
- 147      sum(i, assign(i,d)*sum(P,num(i,P))) =e= pop(d);
- 148  decide_win_rep(d)..
- 149      sum(i, assign(i,d)*(num(i,'republicans') - num(i,'democrats'))) - (totalPeople)*z(d) =l= 0;
+ 137   
+ 138  *ppl_constr_up(d)..
+ 139  *    sum(i, assign(i,d)*sum(P,num(i,P))) =l= Upper;
+ 140  *ppl_constr_lo(d)..
+ 141  *    sum(i, assign(i,d)*sum(P,num(i,P))) =g= Lower;
+ 142   
+ 143  total_population(d)..
+ 144      sum(i, assign(i,d)*sum(P,num(i,P))) =e= pop(d);
+ 145  decide_win_rep(d)..
+ 146      sum(i, assign(i,d)*(num(i,'republicans') - num(i,'democrats'))) - (totalPeople)*z(d) =l= 0;
+ 147   
+ 148  decide_win_rep2(d)..
+ 149      sum(i, assign(i,d)*(num(i,'republicans') - num(i,'democrats'))) + (-totalPeople-1)*z(d) =g= -totalPeople ;
  150   
- 151  decide_win_rep2(d)..
- 152      sum(i, assign(i,d)*(num(i,'republicans') - num(i,'democrats'))) + (-totalPeople-1)*z(d) =g= -totalPeople ;
+ 151  objective..
+ 152      forRepub * obj =e= 100 * sum(d,pop(d)*z(d))/totalPeople;
  153   
- 154  objective..
- 155      forRepub * obj =e= 100 * sum(d,pop(d)*z(d))/totalPeople;
+ 154   
+ 155  model spanning_tree /all/;
  156   
- 157   
- 158  model spanning_tree /all/;
- 159   
- 160  solve spanning_tree using minlp maximizing obj;
- 161  set gerryHeader /result1,result2/;
- 163  table assign_result(nodes,district,gerryHeader) 'assigned';
- 165  assign_result(nodes,d,'result1') = assign.l(nodes,d);
- 166  display assign_result;
- 167   
-GAMS 32.2.0  rc62c018 Released Aug 26, 2020 DEX-DEG x86 64bit/Mac OS X - 02/03/21 00:10:49 Page 2
+ 157  solve spanning_tree using minlp maximizing obj;
+ 158  set gerryHeader /result1,result2/;
+ 160  table assign_result(nodes,district,gerryHeader) 'assigned';
+ 162  assign_result(nodes,d,'result1') = assign.l(nodes,d);
+ 163  display assign_result;
+ 164   
+GAMS 32.2.0  rc62c018 Released Aug 26, 2020 DEX-DEG x86 64bit/Mac OS X - 02/05/21 04:50:46 Page 2
 gerrymandering model
 Include File Summary
 
@@ -173,16 +170,10 @@ Include File Summary
      2        9 GDXIN          1       9  /Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO/_miro_gdxin_.gdx
 
 
-COMPILATION TIME     =        0.021 SECONDS      3 MB  32.2.0 rc62c018 DEX-DEG
-GAMS 32.2.0  rc62c018 Released Aug 26, 2020 DEX-DEG x86 64bit/Mac OS X - 02/03/21 00:10:49 Page 3
+COMPILATION TIME     =        0.019 SECONDS      3 MB  32.2.0 rc62c018 DEX-DEG
+GAMS 32.2.0  rc62c018 Released Aug 26, 2020 DEX-DEG x86 64bit/Mac OS X - 02/05/21 04:50:46 Page 3
 gerrymandering model
-E x e c u t i o n
-
-
-----     52 PARAMETER node_num             =       15.000  
-GAMS 32.2.0  rc62c018 Released Aug 26, 2020 DEX-DEG x86 64bit/Mac OS X - 02/03/21 00:10:49 Page 4
-gerrymandering model
-Equation Listing    SOLVE spanning_tree Using MINLP From line 160
+Equation Listing    SOLVE spanning_tree Using MINLP From line 157
 
 
 ---- objective  =E=  
@@ -344,9 +335,9 @@ decide_win_rep2(d2)..  - 6881*assign(04001,d2) + 4723*assign(04009,d2) + 800*ass
      
 decide_win_rep2(d3)..  - 6881*assign(04001,d3) + 4723*assign(04009,d3) + 800*assign(04011,d3) + 2803*assign(04017,d3) + 9746*assign(04003,d3) - 48630*assign(04019,d3) - 7034*assign(04023,d3) - 8735*assign(04005,d3) + 6926*assign(04007,d3) + 38171*assign(04015,d3) + 29157*assign(04025,d3) + 41426*assign(04013,d3) + 18120*assign(04021,d3) + 2062*assign(04012,d3) + 2250*assign(04027,d3) - 1957401*z(d3) =G= -1957400 ; (LHS = 0)
      
-GAMS 32.2.0  rc62c018 Released Aug 26, 2020 DEX-DEG x86 64bit/Mac OS X - 02/03/21 00:10:49 Page 5
+GAMS 32.2.0  rc62c018 Released Aug 26, 2020 DEX-DEG x86 64bit/Mac OS X - 02/05/21 04:50:46 Page 4
 gerrymandering model
-Column Listing      SOLVE spanning_tree Using MINLP From line 160
+Column Listing      SOLVE spanning_tree Using MINLP From line 157
 
 
 ---- obj  
@@ -635,9 +626,9 @@ z(d3)
   -1.957400E+6  decide_win_rep(d3)
   -1.957401E+6  decide_win_rep2(d3)
 
-GAMS 32.2.0  rc62c018 Released Aug 26, 2020 DEX-DEG x86 64bit/Mac OS X - 02/03/21 00:10:49 Page 6
+GAMS 32.2.0  rc62c018 Released Aug 26, 2020 DEX-DEG x86 64bit/Mac OS X - 02/05/21 04:50:46 Page 5
 gerrymandering model
-Model Statistics    SOLVE spanning_tree Using MINLP From line 160
+Model Statistics    SOLVE spanning_tree Using MINLP From line 157
 
 
 MODEL STATISTICS
@@ -649,23 +640,23 @@ DERIVATIVE POOL              20     CONSTANT POOL              18
 CODE LENGTH                  13     DISCRETE VARIABLES        138
 
 
-GENERATION TIME      =        0.035 SECONDS      4 MB  32.2.0 rc62c018 DEX-DEG
-GAMS 32.2.0  rc62c018 Released Aug 26, 2020 DEX-DEG x86 64bit/Mac OS X - 02/03/21 00:10:49 Page 7
+GENERATION TIME      =        0.039 SECONDS      4 MB  32.2.0 rc62c018 DEX-DEG
+GAMS 32.2.0  rc62c018 Released Aug 26, 2020 DEX-DEG x86 64bit/Mac OS X - 02/05/21 04:50:46 Page 6
 gerrymandering model
-Solution Report     SOLVE spanning_tree Using MINLP From line 160
+Solution Report     SOLVE spanning_tree Using MINLP From line 157
 
 
                S O L V E      S U M M A R Y
 
      MODEL   spanning_tree       OBJECTIVE  obj
      TYPE    MINLP               DIRECTION  MAXIMIZE
-     SOLVER  DICOPT              FROM LINE  160
+     SOLVER  DICOPT              FROM LINE  157
 
 **** SOLVER STATUS     1 Normal Completion         
 **** MODEL STATUS      8 Integer Solution          
 **** OBJECTIVE VALUE              100.0000
 
- RESOURCE USAGE, LIMIT          0.390 10000000000.000
+ RESOURCE USAGE, LIMIT          0.345 10000000000.000
  ITERATION COUNT, LIMIT        57    2147483647
  EVALUATION ERRORS              0             0
 -------------------------------------------------------------------------------
@@ -697,9 +688,9 @@ CONOPT 3         32.2.0 rc62c018 Released Aug 26, 2020 DEG x86 64bit/Mac OS X
  ** Optimal solution. There are no superbasic variables.
  
  
- CONOPT time Total                            0.030 seconds
-   of which: Function evaluations             0.002 =  6.7%
-             1st Derivative evaluations       0.000 =  0.0%
+ CONOPT time Total                            0.021 seconds
+   of which: Function evaluations             0.000 =  0.0%
+             1st Derivative evaluations       0.001 =  4.8%
  
 
 IBM ILOG CPLEX   32.2.0 rc62c018 Released Aug 26, 2020 DEG x86 64bit/Mac OS X 
@@ -745,11 +736,11 @@ CONOPT 3         32.2.0 rc62c018 Released Aug 26, 2020 DEG x86 64bit/Mac OS X
  ** Optimal solution. There are no superbasic variables.
  
  
- CONOPT time Total                            0.187 seconds
+ CONOPT time Total                            0.155 seconds
    of which: Function evaluations             0.000 =  0.0%
              1st Derivative evaluations       0.000 =  0.0%
  
---- GMO Resort Time 1ms
+--- GMO Resort Time 0ms
 
 IBM ILOG CPLEX   32.2.0 rc62c018 Released Aug 26, 2020 DEG x86 64bit/Mac OS X 
 --- GAMS/Cplex Link licensed for continuous and discrete problems.
@@ -794,7 +785,7 @@ CONOPT 3         32.2.0 rc62c018 Released Aug 26, 2020 DEG x86 64bit/Mac OS X
  ** Optimal solution. There are no superbasic variables.
  
  
- CONOPT time Total                            0.003 seconds
+ CONOPT time Total                            0.002 seconds
    of which: Function evaluations             0.000 =  0.0%
              1st Derivative evaluations       0.000 =  0.0%
  
@@ -1985,12 +1976,12 @@ d3          .             1.0000         1.0000         2.2285
                              0 INFEASIBLE
                              0  UNBOUNDED
                              0     ERRORS
-GAMS 32.2.0  rc62c018 Released Aug 26, 2020 DEX-DEG x86 64bit/Mac OS X - 02/03/21 00:10:49 Page 8
+GAMS 32.2.0  rc62c018 Released Aug 26, 2020 DEX-DEG x86 64bit/Mac OS X - 02/05/21 04:50:46 Page 7
 gerrymandering model
 E x e c u t i o n
 
 
-----    166 PARAMETER assign_result  assigned
+----    163 PARAMETER assign_result  assigned
 
              result1
 
@@ -2012,7 +2003,7 @@ E x e c u t i o n
 
 
 
-EXECUTION TIME       =        0.568 SECONDS      4 MB  32.2.0 rc62c018 DEX-DEG
+EXECUTION TIME       =        0.538 SECONDS      4 MB  32.2.0 rc62c018 DEX-DEG
 
 
 USER: Introduction to Optimization (CS/ISyE/ECE 524) S200826/0001AB-GEN

@@ -1,0 +1,28 @@
+--- Job Gerrymander.gms Start 02/05/21 01:39:02 32.2.0 rc62c018 DEX-DEG x86 64bit/Mac OS X
+--- Applying:
+    /Library/Frameworks/GAMS.framework/Versions/32/Resources/gmsprmun.txt
+--- GAMS Parameters defined
+    Input /Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO/Gerrymander.gms
+    PageSize 0
+    ScrDir /Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO/225a/
+    SysDir /Library/Frameworks/GAMS.framework/Versions/32/Resources/
+    LogOption 3
+    ErrMsg 1
+    ErrorLog 99
+    IDE 1
+    LstTitleLeftAligned 1
+GAMS 32.2.0   Copyright (C) 1987-2020 GAMS Development. All rights reserved
+Licensee: Introduction to Optimization (CS/ISyE/ECE 524) S200826/0001AB-GEN
+          University of Wisconsin-Madison, Computer Sciences Dept.   DCE850
+          /Users/walter/Library/Application Support/GAMS/gamslice.txt
+          Evaluation license: Not for commercial or production use
+--- Starting compilation
+--- Gerrymander.gms(17) 3 Mb
+--- GDXin=/Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO/adjaceny_AZ.gdx
+--- Gerrymander.gms(26) 3 Mb
+--- GDXin=/Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO/county_vote_AZ.gdx
+--- Gerrymander.gms(53) 3 Mb
+--- Starting execution: elapsed 0:00:00.025
+--- Gerrymander.gms(52) 4 Mb
+*** Status: Normal completion
+--- Job Gerrymander.gms Stop 02/05/21 01:39:02 elapsed 0:00:00.026

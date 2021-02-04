@@ -80,7 +80,8 @@
   },
   "dataRendering": {
     "assign_result": {
-      "outType": "gerry"
+      "outType": "gerry",
+      "packages": ["devtools", "tidyverse", "stringr", "ggplot2"]
     }
   },
   "handsontable": {

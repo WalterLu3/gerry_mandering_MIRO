@@ -1,0 +1,2730 @@
+--- Job Gerrymander.gms Start 02/05/21 04:19:59 32.2.0 rc62c018 DEX-DEG x86 64bit/Mac OS X
+--- Applying:
+    /Library/Frameworks/GAMS.framework/Versions/32/Resources/gmsprmun.txt
+--- GAMS Parameters defined
+    Input /Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO/Gerrymander.gms
+    PageSize 0
+    ScrDir /Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO/225a/
+    SysDir /Library/Frameworks/GAMS.framework/Versions/32/Resources/
+    LogOption 3
+    ErrMsg 1
+    ErrorLog 99
+    IDE 1
+    LstTitleLeftAligned 1
+    IDCGenerateJSON conf_Gerrymander/Gerrymander_io.json
+    IDCGenerateGDX data_Gerrymander/default.gdx
+GAMS 32.2.0   Copyright (C) 1987-2020 GAMS Development. All rights reserved
+Licensee: Introduction to Optimization (CS/ISyE/ECE 524) S200826/0001AB-GEN
+          University of Wisconsin-Madison, Computer Sciences Dept.   DCE850
+          /Users/walter/Library/Application Support/GAMS/gamslice.txt
+          Evaluation license: Not for commercial or production use
+--- Starting compilation
+--- Gerrymander.gms(17) 3 Mb
+--- GDXin=/Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO/adjaceny_AZ.gdx
+--- Gerrymander.gms(26) 3 Mb
+--- GDXin=/Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO/county_vote_AZ.gdx
+--- Gerrymander.gms(164) 3 Mb
+--- Resetting table request for foo due to external input request for domain nodes.
+--- Starting execution: elapsed 0:00:00.012
+--- Gerrymander.gms(48) 4 Mb
+--- Generating MINLP model spanning_tree
+--- Gerrymander.gms(157) 6 Mb
+---   730 rows  334 columns  4,435 non-zeroes
+---   13 nl-code  6 nl-non-zeroes
+---   138 discrete-columns
+--- Gerrymander.gms(157) 4 Mb
+--- Executing DICOPT (Solvelink=2): elapsed 0:00:00.023
+-------------------------------------------------------------------------------
+Dicopt 2         32.2.0 rc62c018 Released Aug 26, 2020 DEG x86 64bit/Mac OS X 
+-------------------------------------------------------------------------------
+by Aldo Vecchietti, Director del Instituto INGAR,
+   CONICET, UTN, Santa Fe, Argentina
+by Ignacio E. Grossmann, Chemical Engineering Faculty,
+   Carnegie Mellon University, Pittsburgh, PA, USA
+-------------------------------------------------------------------------------
+--- DICOPT: Starting major iteration 1
+--- DICOPT: Setting up first (relaxed) NLP.
+CONOPT 3         32.2.0 rc62c018 Released Aug 26, 2020 DEG x86 64bit/Mac OS X 
+ 
+ 
+    C O N O P T 3   version 3.17L
+    Copyright (C)   ARKI Consulting and Development A/S
+                    Bagsvaerdvej 246 A
+                    DK-2880 Bagsvaerd, Denmark
+ 
+ 
+   Iter Phase Ninf   Infeasibility   RGmax    NSB   Step InItr MX OK
+      0   0        2.4000000000E+01 (Input point)
+ 
+                   Pre-triangular equations:   0
+                   Post-triangular equations:  4
+ 
+      1   0        2.4000000000E+01 (After pre-processing)
+      2   0        2.1000000000E+01 (After scaling)
+      3   1    18  1.3500000000E+01 2.2E+03     3 1.0E+00    3 T  T
+      4   1    15  7.6601020408E+00 1.5E+01    39 1.0E+00    8 T  T
+ 
+ ** Feasible solution. Value of objective =    1.71372210331
+ 
+   Iter Phase Ninf     Objective     RGmax    NSB   Step InItr MX OK
+      5   3        5.9021657983E+01 5.2E+01    44 1.0E+00   12 T  T
+      6   3        9.4674829118E+01 5.5E+01    58 1.0E+00   17 T  T
+      7   3        9.8606823695E+01 3.7E+00    52 1.0E+00   27 T  T
+      8   3        1.0000000000E+02 1.8E+00    42 1.0E+00   22 T  T
+      9   3        1.0000000000E+02 0.0E+00     0
+ 
+ ** Optimal solution. There are no superbasic variables.
+ 
+--- DICOPT: Setting up first MIP
+IBM ILOG CPLEX   32.2.0 rc62c018 Released Aug 26, 2020 DEG x86 64bit/Mac OS X 
+--- GAMS/Cplex Link licensed for continuous and discrete problems.
+Cplex 12.10.0.0
+3: *** Value Error Value brought in range for option "itlim" saw "2147483638"
+3: *** Value Error    Value set to 2100000000
+Reading data...
+Starting Cplex...
+Unable to load names.
+Version identifier: 12.10.0.0 | 2019-11-26 | 843d4de
+CPXPARAM_Advance                                 0
+CPXPARAM_Threads                                 1
+CPXPARAM_Parallel                                1
+CPXPARAM_MIP_Display                             4
+CPXPARAM_TimeLimit                               9999999999.9759998
+CPXPARAM_Tune_TimeLimit                          1999999999.9951999
+CPXPARAM_MIP_Tolerances_AbsMIPGap                0
+CPXPARAM_MIP_Tolerances_MIPGap                   0
+CPXPARAM_WorkDir                                 "/Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO/225a/"
+Tried aggregator 1 time.
+MIP Presolve eliminated 95 rows and 7 columns.
+MIP Presolve modified 234 coefficients.
+Reduced MIP has 636 rows, 330 columns, and 4155 nonzeros.
+Reduced MIP has 138 binaries, 0 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.00 sec. (3.57 ticks)
+Found incumbent of value 100.000000 after 0.01 sec. (6.88 ticks)
+Probing time = 0.00 sec. (1.26 ticks)
+Tried aggregator 1 time.
+Detecting symmetries...
+Reduced MIP has 636 rows, 330 columns, and 4155 nonzeros.
+Reduced MIP has 138 binaries, 0 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.00 sec. (2.09 ticks)
+Probing time = 0.00 sec. (1.25 ticks)
+Clique table members: 423.
+MIP emphasis: balance optimality and feasibility.
+MIP search method: dynamic search.
+Parallel mode: none, using 1 thread.
+Tried aggregator 1 time.
+No LP presolve or aggregator reductions.
+Presolve time = 0.00 sec. (0.32 ticks)
+Initializing dual steep norms . . .
+Root relaxation solution time = 0.00 sec. (0.82 ticks)
+        Nodes                                         Cuts/
+   Node  Left     Objective  IInf  Best Integer    Best Bound    ItCnt     Gap
+*     0+    0                          100.0000      300.0000           200.00%
+Found incumbent of value 100.000000 after 0.03 sec. (14.26 ticks)
+      0     0        cutoff            100.0000                      1     --- 
+Root node processing (before b&c):
+  Real time             =    0.03 sec. (14.29 ticks)
+Sequential b&c:
+  Real time             =    0.00 sec. (0.00 ticks)
+                          ------------
+Total (root+branch&cut) =    0.03 sec. (14.29 ticks)
+MIP status(101): integer optimal solution
+Cplex Time: 0.03sec (det. 14.29 ticks)
+Fixing integer variables, and solving final LP...
+Version identifier: 12.10.0.0 | 2019-11-26 | 843d4de
+CPXPARAM_Advance                                 2
+CPXPARAM_Threads                                 1
+CPXPARAM_Parallel                                1
+CPXPARAM_MIP_Display                             4
+CPXPARAM_TimeLimit                               9999999999.9759998
+CPXPARAM_Tune_TimeLimit                          1999999999.9951999
+CPXPARAM_MIP_Tolerances_AbsMIPGap                0
+CPXPARAM_MIP_Tolerances_MIPGap                   0
+CPXPARAM_WorkDir                                 "/Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO/225a/"
+Tried aggregator 1 time.
+LP Presolve eliminated 727 rows and 333 columns.
+Aggregator did 4 substitutions.
+All rows and columns eliminated.
+Presolve time = 0.00 sec. (0.38 ticks)
+Fixed MIP status(1): optimal
+Cplex Time: 0.00sec (det. 0.67 ticks)
+Proven optimal solution.
+MIP Solution:          100.000000    (1 iterations, 0 nodes)
+Final Solve:           100.000000    (0 iterations)
+Best possible:         100.000000
+Absolute gap:            0.000000
+Relative gap:            0.000000
+--- DICOPT: Starting major iteration 2
+--- DICOPT: Setting up next NLP
+CONOPT 3         32.2.0 rc62c018 Released Aug 26, 2020 DEG x86 64bit/Mac OS X 
+ 
+ 
+    C O N O P T 3   version 3.17L
+    Copyright (C)   ARKI Consulting and Development A/S
+                    Bagsvaerdvej 246 A
+                    DK-2880 Bagsvaerd, Denmark
+ 
+ 
+   Iter Phase Ninf   Infeasibility   RGmax    NSB   Step InItr MX OK
+      0   0        1.4210854715E-14 (Input point)
+ 
+                   Pre-triangular equations:   166
+                   Post-triangular equations:  0
+ 
+      1   0        0.0000000000E+00 (After pre-processing)
+      2   0        0.0000000000E+00 (After scaling)
+ 
+ ** Feasible solution. Value of objective =    100.000000000
+ 
+   Iter Phase Ninf     Objective     RGmax    NSB   Step InItr MX OK
+      3   3        1.0000000000E+02 0.0E+00     0 0.0E+00    0 F  T
+      4   3        1.0000000000E+02 0.0E+00     0
+ 
+ ** Optimal solution. There are no superbasic variables.
+ 
+--- DICOPT: Checking convergence
+--- DICOPT: Setting up next MIP
+--- GMO Resort Time 0ms
+--- DICOPT: Log File:
+ Major Major     Objective    CPU time  Itera- Evaluation Solver
+ Step  Iter       Function     (Sec)    tions   Errors
+  NLP    1       100.00000      0.02        9      0      conopt
+  MIP    1       100.00000      0.04        1      0      cplex
+  NLP    2       100.00000<     0.00        4      0      conopt
+IBM ILOG CPLEX   32.2.0 rc62c018 Released Aug 26, 2020 DEG x86 64bit/Mac OS X 
+--- GAMS/Cplex Link licensed for continuous and discrete problems.
+Cplex 12.10.0.0
+3: *** Value Error Value brought in range for option "itlim" saw "2147483633"
+3: *** Value Error    Value set to 2100000000
+Reading data...
+Starting Cplex...
+Unable to load names.
+Version identifier: 12.10.0.0 | 2019-11-26 | 843d4de
+CPXPARAM_Advance                                 0
+CPXPARAM_Threads                                 1
+CPXPARAM_Parallel                                1
+CPXPARAM_MIP_Display                             4
+CPXPARAM_TimeLimit                               9999999999.9329987
+CPXPARAM_Tune_TimeLimit                          1999999999.9865997
+CPXPARAM_MIP_Tolerances_AbsMIPGap                0
+CPXPARAM_MIP_Tolerances_MIPGap                   0
+CPXPARAM_WorkDir                                 "/Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO/225a/"
+Tried aggregator 1 time.
+MIP Presolve eliminated 91 rows and 3 columns.
+MIP Presolve modified 303 coefficients.
+Reduced MIP has 642 rows, 336 columns, and 4300 nonzeros.
+Reduced MIP has 138 binaries, 0 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.01 sec. (3.96 ticks)
+Probing time = 0.00 sec. (1.39 ticks)
+Cover probing fixed 0 vars, tightened 3 bounds.
+Tried aggregator 1 time.
+Detecting symmetries...
+Reduced MIP has 642 rows, 336 columns, and 4300 nonzeros.
+Reduced MIP has 138 binaries, 3 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.00 sec. (2.13 ticks)
+Probing time = 0.00 sec. (1.38 ticks)
+Clique table members: 423.
+MIP emphasis: balance optimality and feasibility.
+MIP search method: dynamic search.
+Parallel mode: none, using 1 thread.
+Tried aggregator 1 time.
+LP Presolve eliminated 0 rows and 2 columns.
+Reduced LP has 642 rows, 334 columns, and 4298 nonzeros.
+Presolve time = 0.00 sec. (0.44 ticks)
+Initializing dual steep norms . . .
+Iteration log . . .
+Iteration:     1   Scaled dual infeas =            64.000000
+Iteration:     6   Dual objective     =           135.648681
+Initializing dual steep norms . . .
+Root relaxation solution time = 0.01 sec. (1.86 ticks)
+        Nodes                                         Cuts/
+   Node  Left     Objective  IInf  Best Integer    Best Bound    ItCnt     Gap
+      0     0      100.0000    39                    100.0000       39         
+*     0+    0                          100.0000      100.0000             0.00%
+Found incumbent of value 100.000000 after 0.12 sec. (38.82 ticks)
+      0     0        cutoff            100.0000      100.0000       39    0.00%
+Elapsed time = 0.12 sec. (38.82 ticks, tree = 0.01 MB, solutions = 1)
+Root node processing (before b&c):
+  Real time             =    0.12 sec. (38.85 ticks)
+Sequential b&c:
+  Real time             =    0.00 sec. (0.00 ticks)
+                          ------------
+Total (root+branch&cut) =    0.12 sec. (38.85 ticks)
+MIP status(101): integer optimal solution
+Cplex Time: 0.12sec (det. 38.85 ticks)
+Fixing integer variables, and solving final LP...
+Version identifier: 12.10.0.0 | 2019-11-26 | 843d4de
+CPXPARAM_Advance                                 2
+CPXPARAM_Threads                                 1
+CPXPARAM_Parallel                                1
+CPXPARAM_MIP_Display                             4
+CPXPARAM_TimeLimit                               9999999999.9329987
+CPXPARAM_Tune_TimeLimit                          1999999999.9865997
+CPXPARAM_MIP_Tolerances_AbsMIPGap                0
+CPXPARAM_MIP_Tolerances_MIPGap                   0
+CPXPARAM_WorkDir                                 "/Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO/225a/"
+Tried aggregator 1 time.
+LP Presolve eliminated 727 rows and 332 columns.
+Aggregator did 4 substitutions.
+Reduced LP has 2 rows, 3 columns, and 4 nonzeros.
+Presolve time = 0.00 sec. (0.40 ticks)
+Initializing dual steep norms . . .
+Fixed MIP status(1): optimal
+Cplex Time: 0.00sec (det. 0.69 ticks)
+Proven optimal solution.
+MIP Solution:          100.000000    (39 iterations, 0 nodes)
+Final Solve:           100.000000    (0 iterations)
+Best possible:         100.000000
+Absolute gap:            0.000000
+Relative gap:            0.000000
+--- DICOPT: Starting major iteration 3
+--- DICOPT: Setting up next NLP
+CONOPT 3         32.2.0 rc62c018 Released Aug 26, 2020 DEG x86 64bit/Mac OS X 
+ 
+ 
+    C O N O P T 3   version 3.17L
+    Copyright (C)   ARKI Consulting and Development A/S
+                    Bagsvaerdvej 246 A
+                    DK-2880 Bagsvaerd, Denmark
+ 
+ 
+   Iter Phase Ninf   Infeasibility   RGmax    NSB   Step InItr MX OK
+      0   0        1.4210854715E-14 (Input point)
+ 
+                   Pre-triangular equations:   166
+                   Post-triangular equations:  0
+ 
+      1   0        0.0000000000E+00 (After pre-processing)
+      2   0        0.0000000000E+00 (After scaling)
+ 
+ ** Feasible solution. Value of objective =    100.000000000
+ 
+   Iter Phase Ninf     Objective     RGmax    NSB   Step InItr MX OK
+      3   3        1.0000000000E+02 0.0E+00     0 0.0E+00    0 F  T
+      4   3        1.0000000000E+02 0.0E+00     0
+ 
+ ** Optimal solution. There are no superbasic variables.
+ 
+--- DICOPT: Checking convergence
+--- DICOPT: Search stopped on worsening of NLP subproblems
+--- DICOPT: Log File:
+ Major Major     Objective    CPU time  Itera- Evaluation Solver
+ Step  Iter       Function     (Sec)    tions   Errors
+  NLP    1       100.00000      0.02        9      0      conopt
+  MIP    1       100.00000      0.04        1      0      cplex
+  NLP    2       100.00000<     0.00        4      0      conopt
+  MIP    2       100.00000      0.14       39      0      cplex
+  NLP    3       100.00000      0.00        4      0      conopt
+--- DICOPT: Terminating...
+--- DICOPT: Stopped on NLP worsening
+      The search was stopped because the objective function
+      of the NLP subproblems started to deteriorate.
+--- DICOPT: Best integer solution found: 100.000000
+--- Reading solution for model spanning_tree
+--- Executing after solve: elapsed 0:00:00.314
+--- Gerrymander.gms(163) 4 Mb
+--- GDX File /Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO/data_Gerrymander/default.gdx
+*** Status: Normal completion
+--- Job Gerrymander.gms Stop 02/05/21 04:20:00 elapsed 0:00:00.315
+========================
+========================TRACE [2021-02-05 04:20:03] Logging facility initialised.
+[1] "Installing: devtools"
+probando la URL 'https://cloud.r-project.org/bin/macosx/contrib/4.0/devtools_2.3.2.tgz'
+Content type 'application/x-gzip' length 337605 bytes (329 KB)
+==
+==================================================
+downloaded 329 KB
+The downloaded binary packages are in
+	/var/folders/_v/4f8gt7jd161cxvnxqbm3bkgc0000gn/T//Rtmpck9EPp/downloaded_packages
+[1] "Installing: tidyverse"
+probando la URL 'https://cloud.r-project.org/bin/macosx/contrib/4.0/tidyverse_1.3.0.tgz'
+Content type 'application/x-gzip'
+Content type 'application/x-gzip' length 433049 bytes (422 KB)
+=
+====
+===========================
+==================================================
+downloaded 422 KB
+The downloaded binary packages are in
+	/var/folders/_v/4f8gt7jd161cxvnxqbm3bkgc0000gn/T//Rtmpck9EPp/downloaded_packages
+DEBUG [2021-02-05 04:20:07] Database connection established.
+DEBUG [2021-02-05 04:20:07] Access Control initialised.
+DEBUG [2021-02-05 04:20:08] Db: Data was imported from table: '_sys__data_hashes' (Db.importDataset).
+INFO [2021-02-05 04:20:08] Data: 'default.gdx' skipped because it has not changed since the last start.
+========================================================
+INFO [2021-02-05 04:20:11] Session started (model: 'gerrymander', user: 'walter', workdir: '/Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO').
+DEBUG [2021-02-05 04:20:11] Working directory was created: '/Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO'.
+DEBUG [2021-02-05 04:20:13] Sidebar menu item: 'inputData' selected.
+DEBUG [2021-02-05 04:20:14] walter: Import input data button clicked.
+DEBUG [2021-02-05 04:20:14] Db: Data was imported from table: '_sys_metadata_gerrymander' (Db.importDataset).
+DEBUG [2021-02-05 04:20:16] Confirm load scenario button clicked.
+DEBUG [2021-02-05 04:20:16] Loading and rendering scenarios: '1'.
+DEBUG [2021-02-05 04:20:16] Db: Data was imported from table: 'gerrymander_assign_result' (Db.importDataset).
+DEBUG [2021-02-05 04:20:16] Db: Data was imported from table: 'gerrymander_nodes' (Db.importDataset).
+DEBUG [2021-02-05 04:20:16] Db: Data was imported from table: 'gerrymander_foo' (Db.importDataset).
+DEBUG [2021-02-05 04:20:16] Db: Data was imported from table: 'gerrymander_num' (Db.importDataset).
+DEBUG [2021-02-05 04:20:16] Db: Data was imported from table: 'gerrymander__scalars' (Db.importDataset).
+DEBUG [2021-02-05 04:20:16] Db: A table named: '_sys_scripts_gerrymander' does not exist in the database (Db.importDataset).
+DEBUG [2021-02-05 04:20:16] Db: A table named: '_sys_views_gerrymander' does not exist in the database (Db.importDataset).
+DEBUG [2021-02-05 04:20:16] Scenario: 'New Scenario' closed.
+DEBUG [2021-02-05 04:20:16] Db: Data was imported from table: '_sys_metadata_gerrymander' (Db.importDataset).
+DEBUG [2021-02-05 04:20:16] Db: Data was imported from table: '_sys_scenlocks_gerrymander' (Db.importDataset).
+DEBUG [2021-02-05 04:20:16] Db: 1 rows in table: '_sys_scenlocks_gerrymander' were deleted. (Db.deleteRows)
+DEBUG [2021-02-05 04:20:16] Db: walter: Lock was added for scenario: '1' (Scenario.lock).
+DEBUG [2021-02-05 04:20:16] Dataset: nodes loaded successfully (mode: scen, overwrite: FALSE)
+DEBUG [2021-02-05 04:20:17] Dataset: foo loaded successfully (mode: scen, overwrite: FALSE)
+DEBUG [2021-02-05 04:20:17] Dataset: num loaded successfully (mode: scen, overwrite: FALSE)
+Warning in file(file, "rt") :
+ 
+  no fue posible abrir el archivo '/Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO/renderer_gerrymander /states.csv': No such file or directory
+ERROR [2021-02-05 04:20:17] Problems rendering output charts/tables of dataset: 'assign_result'. Error message: An error occured in the custom renderer function: 'gerry'. Error message: Error in file(file, "rt"): no se puede abrir la conexi'on
+..
+DEBUG [2021-02-05 04:20:17] Scenario: '1' was loaded into UI
+DEBUG [2021-02-05 04:20:17] Db: Data was imported from table: '_sys_scenlocks_gerrymander' (Db.importDataset).
+--- Job Gerrymander.gms Start 02/05/21 04:21:03 32.2.0 rc62c018 DEX-DEG x86 64bit/Mac OS X
+--- Applying:
+    /Library/Frameworks/GAMS.framework/Versions/32/Resources/gmsprmun.txt
+--- GAMS Parameters defined
+    Input /Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO/Gerrymander.gms
+    PageSize 0
+    ScrDir /Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO/225a/
+    SysDir /Library/Frameworks/GAMS.framework/Versions/32/Resources/
+    LogOption 3
+    ErrMsg 1
+    ErrorLog 99
+    IDE 1
+    LstTitleLeftAligned 1
+    IDCGenerateJSON conf_Gerrymander/Gerrymander_io.json
+    IDCGenerateGDX data_Gerrymander/default.gdx
+GAMS 32.2.0   Copyright (C) 1987-2020 GAMS Development. All rights reserved
+Licensee: Introduction to Optimization (CS/ISyE/ECE 524) S200826/0001AB-GEN
+          University of Wisconsin-Madison, Computer Sciences Dept.   DCE850
+          /Users/walter/Library/Application Support/GAMS/gamslice.txt
+          Evaluation license: Not for commercial or production use
+--- Starting compilation
+--- Gerrymander.gms(17) 3 Mb
+--- GDXin=/Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO/adjaceny_AZ.gdx
+--- Gerrymander.gms(26) 3 Mb
+--- GDXin=/Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO/county_vote_AZ.gdx
+--- Gerrymander.gms(164) 3 Mb
+--- Resetting table request for foo due to external input request for domain nodes.
+--- Starting execution: elapsed 0:00:00.051
+--- Gerrymander.gms(48) 4 Mb
+--- Generating MINLP model spanning_tree
+--- Gerrymander.gms(157) 6 Mb
+---   730 rows  334 columns  4,435 non-zeroes
+---   13 nl-code  6 nl-non-zeroes
+---   138 discrete-columns
+--- Gerrymander.gms(157) 4 Mb
+--- Executing DICOPT (Solvelink=2): elapsed 0:00:00.121
+-------------------------------------------------------------------------------
+Dicopt 2         32.2.0 rc62c018 Released Aug 26, 2020 DEG x86 64bit/Mac OS X 
+-------------------------------------------------------------------------------
+by Aldo Vecchietti, Director del Instituto INGAR,
+   CONICET, UTN, Santa Fe, Argentina
+by Ignacio E. Grossmann, Chemical Engineering Faculty,
+   Carnegie Mellon University, Pittsburgh, PA, USA
+-------------------------------------------------------------------------------
+--- DICOPT: Starting major iteration 1
+--- DICOPT: Setting up first (relaxed) NLP.
+CONOPT 3         32.2.0 rc62c018 Released Aug 26, 2020 DEG x86 64bit/Mac OS X 
+ 
+ 
+    C O N O P T 3   version 3.17L
+    Copyright (C)   ARKI Consulting and Development A/S
+                    Bagsvaerdvej 246 A
+                    DK-2880 Bagsvaerd, Denmark
+ 
+ 
+   Iter Phase Ninf   Infeasibility   RGmax    NSB   Step InItr MX OK
+      0   0        2.4000000000E+01 (Input point)
+ 
+                   Pre-triangular equations:   0
+                   Post-triangular equations:  4
+ 
+      1   0        2.4000000000E+01 (After pre-processing)
+      2   0        2.1000000000E+01 (After scaling)
+      3   1    18  1.3500000000E+01 2.2E+03     3 1.0E+00    3 T  T
+      4   1    15  7.6601020408E+00 1.5E+01    39 1.0E+00    8 T  T
+ 
+ ** Feasible solution. Value of objective =    1.71372210331
+ 
+   Iter Phase Ninf     Objective     RGmax    NSB   Step InItr MX OK
+      5   3        5.9021657983E+01 5.2E+01    44 1.0E+00   12 T  T
+      6   3        9.4674829118E+01 5.5E+01    58 1.0E+00   17 T  T
+      7   3        9.8606823695E+01 3.7E+00    52 1.0E+00   27 T  T
+      8   3        1.0000000000E+02 1.8E+00    42 1.0E+00   22 T  T
+      9   3        1.0000000000E+02 0.0E+00     0
+ 
+ ** Optimal solution. There are no superbasic variables.
+ 
+--- DICOPT: Setting up first MIP
+IBM ILOG CPLEX   32.2.0 rc62c018 Released Aug 26, 2020 DEG x86 64bit/Mac OS X 
+--- GAMS/Cplex Link licensed for continuous and discrete problems.
+Cplex 12.10.0.0
+3: *** Value Error Value brought in range for option "itlim" saw "2147483638"
+3: *** Value Error    Value set to 2100000000
+Reading data...
+Starting Cplex...
+Unable to load names.
+Version identifier: 12.10.0.0 | 2019-11-26 | 843d4de
+CPXPARAM_Advance                                 0
+CPXPARAM_Threads                                 1
+CPXPARAM_Parallel                                1
+CPXPARAM_MIP_Display                             4
+CPXPARAM_TimeLimit                               9999999999.9640007
+CPXPARAM_Tune_TimeLimit                          1999999999.9928002
+CPXPARAM_MIP_Tolerances_AbsMIPGap                0
+CPXPARAM_MIP_Tolerances_MIPGap                   0
+CPXPARAM_WorkDir                                 "/Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO/225a/"
+Tried aggregator 1 time.
+MIP Presolve eliminated 95 rows and 7 columns.
+MIP Presolve modified 234 coefficients.
+Reduced MIP has 636 rows, 330 columns, and 4155 nonzeros.
+Reduced MIP has 138 binaries, 0 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.01 sec. (3.57 ticks)
+Found incumbent of value 100.000000 after 0.02 sec. (6.88 ticks)
+Probing time = 0.00 sec. (1.26 ticks)
+Tried aggregator 1 time.
+Detecting symmetries...
+Reduced MIP has 636 rows, 330 columns, and 4155 nonzeros.
+Reduced MIP has 138 binaries, 0 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.00 sec. (2.09 ticks)
+Probing time = 0.00 sec. (1.25 ticks)
+Clique table members: 423.
+MIP emphasis: balance optimality and feasibility.
+MIP search method: dynamic search.
+Parallel mode: none, using 1 thread.
+Tried aggregator 1 time.
+No LP presolve or aggregator reductions.
+Presolve time = 0.00 sec. (0.32 ticks)
+Initializing dual steep norms . . .
+Root relaxation solution time = 0.00 sec. (0.82 ticks)
+        Nodes                                         Cuts/
+   Node  Left     Objective  IInf  Best Integer    Best Bound    ItCnt     Gap
+*     0+    0                          100.0000      300.0000           200.00%
+Found incumbent of value 100.000000 after 0.04 sec. (14.26 ticks)
+      0     0        cutoff            100.0000                      1     --- 
+Root node processing (before b&c):
+  Real time             =    0.04 sec. (14.29 ticks)
+Sequential b&c:
+  Real time             =    0.00 sec. (0.00 ticks)
+                          ------------
+Total (root+branch&cut) =    0.04 sec. (14.29 ticks)
+MIP status(101): integer optimal solution
+Cplex Time: 0.04sec (det. 14.29 ticks)
+Fixing integer variables, and solving final LP...
+Version identifier: 12.10.0.0 | 2019-11-26 | 843d4de
+CPXPARAM_Advance                                 2
+CPXPARAM_Threads                                 1
+CPXPARAM_Parallel                                1
+CPXPARAM_MIP_Display                             4
+CPXPARAM_TimeLimit                               9999999999.9640007
+CPXPARAM_Tune_TimeLimit                          1999999999.9928002
+CPXPARAM_MIP_Tolerances_AbsMIPGap                0
+CPXPARAM_MIP_Tolerances_MIPGap                   0
+CPXPARAM_WorkDir                                 "/Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO/225a/"
+Tried aggregator 1 time.
+LP Presolve eliminated 727 rows and 333 columns.
+Aggregator did 4 substitutions.
+All rows and columns eliminated.
+Presolve time = 0.00 sec. (0.38 ticks)
+Fixed MIP status(1): optimal
+Cplex Time: 0.00sec (det. 0.67 ticks)
+Proven optimal solution.
+MIP Solution:          100.000000    (1 iterations, 0 nodes)
+Final Solve:           100.000000    (0 iterations)
+Best possible:         100.000000
+Absolute gap:            0.000000
+Relative gap:            0.000000
+--- DICOPT: Starting major iteration 2
+--- DICOPT: Setting up next NLP
+CONOPT 3         32.2.0 rc62c018 Released Aug 26, 2020 DEG x86 64bit/Mac OS X 
+ 
+ 
+    C O N O P T 3   version 3.17L
+    Copyright (C)   ARKI Consulting and Development A/S
+                    Bagsvaerdvej 246 A
+                    DK-2880 Bagsvaerd, Denmark
+ 
+ 
+   Iter Phase Ninf   Infeasibility   RGmax    NSB   Step InItr MX OK
+      0   0        1.4210854715E-14 (Input point)
+ 
+                   Pre-triangular equations:   166
+                   Post-triangular equations:  0
+ 
+      1   0        0.0000000000E+00 (After pre-processing)
+      2   0        0.0000000000E+00 (After scaling)
+ 
+ ** Feasible solution. Value of objective =    100.000000000
+ 
+   Iter Phase Ninf     Objective     RGmax    NSB   Step InItr MX OK
+      3   3        1.0000000000E+02 0.0E+00     0 0.0E+00    0 F  T
+      4   3        1.0000000000E+02 0.0E+00     0
+ 
+ ** Optimal solution. There are no superbasic variables.
+ 
+--- DICOPT: Checking convergence
+--- DICOPT: Setting up next MIP
+--- GMO Resort Time 0ms
+--- DICOPT: Log File:
+ Major Major     Objective    CPU time  Itera- Evaluation Solver
+ Step  Iter       Function     (Sec)    tions   Errors
+  NLP    1       100.00000      0.04        9      0      conopt
+  MIP    1       100.00000      0.06        1      0      cplex
+  NLP    2       100.00000<     0.01        4      0      conopt
+IBM ILOG CPLEX   32.2.0 rc62c018 Released Aug 26, 2020 DEG x86 64bit/Mac OS X 
+--- GAMS/Cplex Link licensed for continuous and discrete problems.
+Cplex 12.10.0.0
+3: *** Value Error Value brought in range for option "itlim" saw "2147483633"
+3: *** Value Error    Value set to 2100000000
+Reading data...
+Starting Cplex...
+Unable to load names.
+Version identifier: 12.10.0.0 | 2019-11-26 | 843d4de
+CPXPARAM_Advance                                 0
+CPXPARAM_Threads                                 1
+CPXPARAM_Parallel                                1
+CPXPARAM_MIP_Display                             4
+CPXPARAM_TimeLimit                               9999999999.8980007
+CPXPARAM_Tune_TimeLimit                          1999999999.9796002
+CPXPARAM_MIP_Tolerances_AbsMIPGap                0
+CPXPARAM_MIP_Tolerances_MIPGap                   0
+CPXPARAM_WorkDir                                 "/Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO/225a/"
+Tried aggregator 1 time.
+MIP Presolve eliminated 91 rows and 3 columns.
+MIP Presolve modified 303 coefficients.
+Reduced MIP has 642 rows, 336 columns, and 4300 nonzeros.
+Reduced MIP has 138 binaries, 0 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.01 sec. (3.96 ticks)
+Probing time = 0.00 sec. (1.39 ticks)
+Cover probing fixed 0 vars, tightened 3 bounds.
+Tried aggregator 1 time.
+Detecting symmetries...
+Reduced MIP has 642 rows, 336 columns, and 4300 nonzeros.
+Reduced MIP has 138 binaries, 3 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.00 sec. (2.13 ticks)
+Probing time = 0.00 sec. (1.38 ticks)
+Clique table members: 423.
+MIP emphasis: balance optimality and feasibility.
+MIP search method: dynamic search.
+Parallel mode: none, using 1 thread.
+Tried aggregator 1 time.
+LP Presolve eliminated 0 rows and 2 columns.
+Reduced LP has 642 rows, 334 columns, and 4298 nonzeros.
+Presolve time = 0.00 sec. (0.44 ticks)
+Initializing dual steep norms . . .
+Iteration log . . .
+Iteration:     1   Scaled dual infeas =            64.000000
+Iteration:     6   Dual objective     =           135.648681
+Initializing dual steep norms . . .
+Root relaxation solution time = 0.00 sec. (1.86 ticks)
+        Nodes                                         Cuts/
+   Node  Left     Objective  IInf  Best Integer    Best Bound    ItCnt     Gap
+      0     0      100.0000    39                    100.0000       39         
+*     0+    0                          100.0000      100.0000             0.00%
+Found incumbent of value 100.000000 after 0.19 sec. (38.82 ticks)
+      0     0        cutoff            100.0000      100.0000       39    0.00%
+Elapsed time = 0.19 sec. (38.82 ticks, tree = 0.01 MB, solutions = 1)
+Root node processing (before b&c):
+  Real time             =    0.19 sec. (38.85 ticks)
+Sequential b&c:
+  Real time             =    0.00 sec. (0.00 ticks)
+                          ------------
+Total (root+branch&cut) =    0.19 sec. (38.85 ticks)
+MIP status(101): integer optimal solution
+Cplex Time: 0.19sec (det. 38.85 ticks)
+Fixing integer variables, and solving final LP...
+Version identifier: 12.10.0.0 | 2019-11-26 | 843d4de
+CPXPARAM_Advance                                 2
+CPXPARAM_Threads                                 1
+CPXPARAM_Parallel                                1
+CPXPARAM_MIP_Display                             4
+CPXPARAM_TimeLimit                               9999999999.8980007
+CPXPARAM_Tune_TimeLimit                          1999999999.9796002
+CPXPARAM_MIP_Tolerances_AbsMIPGap                0
+CPXPARAM_MIP_Tolerances_MIPGap                   0
+CPXPARAM_WorkDir                                 "/Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO/225a/"
+Tried aggregator 1 time.
+LP Presolve eliminated 727 rows and 332 columns.
+Aggregator did 4 substitutions.
+Reduced LP has 2 rows, 3 columns, and 4 nonzeros.
+Presolve time = 0.00 sec. (0.40 ticks)
+Initializing dual steep norms . . .
+Fixed MIP status(1): optimal
+Cplex Time: 0.00sec (det. 0.69 ticks)
+Proven optimal solution.
+MIP Solution:          100.000000    (39 iterations, 0 nodes)
+Final Solve:           100.000000    (0 iterations)
+Best possible:         100.000000
+Absolute gap:            0.000000
+Relative gap:            0.000000
+--- DICOPT: Starting major iteration 3
+--- DICOPT: Setting up next NLP
+CONOPT 3         32.2.0 rc62c018 Released Aug 26, 2020 DEG x86 64bit/Mac OS X 
+ 
+ 
+    C O N O P T 3   version 3.17L
+    Copyright (C)   ARKI Consulting and Development A/S
+                    Bagsvaerdvej 246 A
+                    DK-2880 Bagsvaerd, Denmark
+ 
+ 
+   Iter Phase Ninf   Infeasibility   RGmax    NSB   Step InItr MX OK
+      0   0        1.4210854715E-14 (Input point)
+ 
+                   Pre-triangular equations:   166
+                   Post-triangular equations:  0
+ 
+      1   0        0.0000000000E+00 (After pre-processing)
+      2   0        0.0000000000E+00 (After scaling)
+ 
+ ** Feasible solution. Value of objective =    100.000000000
+ 
+   Iter Phase Ninf     Objective     RGmax    NSB   Step InItr MX OK
+      3   3        1.0000000000E+02 0.0E+00     0 0.0E+00    0 F  T
+      4   3        1.0000000000E+02 0.0E+00     0
+ 
+ ** Optimal solution. There are no superbasic variables.
+ 
+--- DICOPT: Checking convergence
+--- DICOPT: Search stopped on worsening of NLP subproblems
+--- DICOPT: Log File:
+ Major Major     Objective    CPU time  Itera- Evaluation Solver
+ Step  Iter       Function     (Sec)    tions   Errors
+  NLP    1       100.00000      0.04        9      0      conopt
+  MIP    1       100.00000      0.06        1      0      cplex
+  NLP    2       100.00000<     0.01        4      0      conopt
+  MIP    2       100.00000      0.20       39      0      cplex
+  NLP    3       100.00000      0.00        4      0      conopt
+--- DICOPT: Terminating...
+--- DICOPT: Stopped on NLP worsening
+      The search was stopped because the objective function
+      of the NLP subproblems started to deteriorate.
+--- DICOPT: Best integer solution found: 100.000000
+--- Reading solution for model spanning_tree
+--- Executing after solve: elapsed 0:00:00.618
+--- Gerrymander.gms(163) 4 Mb
+--- GDX File /Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO/data_Gerrymander/default.gdx
+*** Status: Normal completion
+--- Job Gerrymander.gms Stop 02/05/21 04:21:03 elapsed 0:00:00.620
+========================
+========================TRACE [2021-02-05 04:21:08] Logging facility initialised.
+[1] "Installing: devtools"
+probando la URL 'https://cloud.r-project.org/bin/macosx/contrib/4.0/devtools_2.3.2.tgz'
+Content type 'application/x-gzip' length 337605 bytes (329 KB)
+==
+==================================================
+downloaded 329 KB
+The downloaded binary packages are in
+	/var/folders/_v/4f8gt7jd161cxvnxqbm3bkgc0000gn/T//RtmpQWEw3g/downloaded_packages
+[1] "Installing: tidyverse"
+probando la URL 'https://cloud.r-project.org/bin/macosx/contrib/4.0/tidyverse_1.3.0.tgz'
+Content type 'application/x-gzip'
+Content type 'application/x-gzip' length 433049 bytes (422 KB)
+=
+==
+===
+====
+=====
+=============================
+==============================
+===============================
+================================
+=================================
+==================================
+===================================
+====================================
+=====================================
+======================================
+=======================================
+========================================
+=========================================
+==========================================
+============================================
+=============================================
+==============================================
+===============================================
+================================================
+=================================================
+==================================================
+downloaded 422 KB
+The downloaded binary packages are in
+	/var/folders/_v/4f8gt7jd161cxvnxqbm3bkgc0000gn/T//RtmpQWEw3g/downloaded_packages
+DEBUG [2021-02-05 04:21:12] Database connection established.
+DEBUG [2021-02-05 04:21:12] Access Control initialised.
+DEBUG [2021-02-05 04:21:12] Db: Data was imported from table: '_sys__data_hashes' (Db.importDataset).
+INFO [2021-02-05 04:21:12] Data: 'default.gdx' skipped because it has not changed since the last start.
+========================================================
+INFO [2021-02-05 04:21:15] Session started (model: 'gerrymander', user: 'walter', workdir: '/Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO').
+DEBUG [2021-02-05 04:21:15] Working directory was created: '/Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO'.
+DEBUG [2021-02-05 04:21:17] Sidebar menu item: 'inputData' selected.
+DEBUG [2021-02-05 04:21:18] walter: Import input data button clicked.
+DEBUG [2021-02-05 04:21:18] Db: Data was imported from table: '_sys_metadata_gerrymander' (Db.importDataset).
+DEBUG [2021-02-05 04:21:20] Confirm load scenario button clicked.
+DEBUG [2021-02-05 04:21:20] Loading and rendering scenarios: '1'.
+DEBUG [2021-02-05 04:21:20] Db: Data was imported from table: 'gerrymander_assign_result' (Db.importDataset).
+DEBUG [2021-02-05 04:21:20] Db: Data was imported from table: 'gerrymander_nodes' (Db.importDataset).
+DEBUG [2021-02-05 04:21:20] Db: Data was imported from table: 'gerrymander_foo' (Db.importDataset).
+DEBUG [2021-02-05 04:21:20] Db: Data was imported from table: 'gerrymander_num' (Db.importDataset).
+DEBUG [2021-02-05 04:21:20] Db: Data was imported from table: 'gerrymander__scalars' (Db.importDataset).
+DEBUG [2021-02-05 04:21:20] Db: A table named: '_sys_scripts_gerrymander' does not exist in the database (Db.importDataset).
+DEBUG [2021-02-05 04:21:20] Db: A table named: '_sys_views_gerrymander' does not exist in the database (Db.importDataset).
+DEBUG [2021-02-05 04:21:20] Scenario: 'New Scenario' closed.
+DEBUG [2021-02-05 04:21:21] Db: Data was imported from table: '_sys_metadata_gerrymander' (Db.importDataset).
+DEBUG [2021-02-05 04:21:21] Db: Data was imported from table: '_sys_scenlocks_gerrymander' (Db.importDataset).
+DEBUG [2021-02-05 04:21:21] Db: 1 rows in table: '_sys_scenlocks_gerrymander' were deleted. (Db.deleteRows)
+DEBUG [2021-02-05 04:21:21] Db: walter: Lock was added for scenario: '1' (Scenario.lock).
+DEBUG [2021-02-05 04:21:21] Dataset: nodes loaded successfully (mode: scen, overwrite: FALSE)
+DEBUG [2021-02-05 04:21:21] Dataset: foo loaded successfully (mode: scen, overwrite: FALSE)
+DEBUG [2021-02-05 04:21:21] Dataset: num loaded successfully (mode: scen, overwrite: FALSE)
+DEBUG [2021-02-05 04:21:21] Scenario: '1' was loaded into UI
+DEBUG [2021-02-05 04:21:22] Db: Data was imported from table: '_sys_scenlocks_gerrymander' (Db.importDataset).
+DEBUG [2021-02-05 04:21:23] Solve button clicked (model: 'gerrymander').
+TRACE [2021-02-05 04:21:23] Dataset: Fips Code saved in dataTmp.
+TRACE [2021-02-05 04:21:24] Dataset: Adjacency Data saved in dataTmp.
+TRACE [2021-02-05 04:21:24] Dataset: Votes saved in dataTmp.
+TRACE [2021-02-05 04:21:24] Dataset: District Number saved in dataTmp.
+TRACE [2021-02-05 04:21:24] Dataset: Party to Win saved in dataTmp.
+DEBUG [2021-02-05 04:21:24] Db: A table named: '_sys_attach_gerrymander' does not exist in the database (Db.importDataset).
+DEBUG [2021-02-05 04:21:24] Sidebar menu item: 'gamsinter' selected.
+DEBUG [2021-02-05 04:21:27] Db: A table named: '_sys_attach_gerrymander' does not exist in the database (Db.importDataset).
+DEBUG [2021-02-05 04:21:27] Sidebar menu item: 'outputData' selected.
+DEBUG [2021-02-05 04:21:27] Db: Data was imported from table: '_sys_scenlocks_gerrymander' (Db.importDataset).
+--- Job Gerrymander.gms Start 02/05/21 04:23:08 32.2.0 rc62c018 DEX-DEG x86 64bit/Mac OS X
+--- Applying:
+    /Library/Frameworks/GAMS.framework/Versions/32/Resources/gmsprmun.txt
+--- GAMS Parameters defined
+    Input /Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO/Gerrymander.gms
+    PageSize 0
+    ScrDir /Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO/225a/
+    SysDir /Library/Frameworks/GAMS.framework/Versions/32/Resources/
+    LogOption 3
+    ErrMsg 1
+    ErrorLog 99
+    IDE 1
+    LstTitleLeftAligned 1
+    IDCGenerateJSON conf_Gerrymander/Gerrymander_io.json
+    IDCGenerateGDX data_Gerrymander/default.gdx
+GAMS 32.2.0   Copyright (C) 1987-2020 GAMS Development. All rights reserved
+Licensee: Introduction to Optimization (CS/ISyE/ECE 524) S200826/0001AB-GEN
+          University of Wisconsin-Madison, Computer Sciences Dept.   DCE850
+          /Users/walter/Library/Application Support/GAMS/gamslice.txt
+          Evaluation license: Not for commercial or production use
+--- Starting compilation
+--- Gerrymander.gms(17) 3 Mb
+--- GDXin=/Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO/adjaceny_AZ.gdx
+--- Gerrymander.gms(26) 3 Mb
+--- GDXin=/Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO/county_vote_AZ.gdx
+--- Gerrymander.gms(164) 3 Mb
+--- Resetting table request for foo due to external input request for domain nodes.
+--- Starting execution: elapsed 0:00:00.081
+--- Gerrymander.gms(48) 4 Mb
+--- Generating MINLP model spanning_tree
+--- Gerrymander.gms(157) 6 Mb
+---   730 rows  334 columns  4,435 non-zeroes
+---   13 nl-code  6 nl-non-zeroes
+---   138 discrete-columns
+--- Gerrymander.gms(157) 4 Mb
+--- Executing DICOPT (Solvelink=2): elapsed 0:00:00.121
+-------------------------------------------------------------------------------
+Dicopt 2         32.2.0 rc62c018 Released Aug 26, 2020 DEG x86 64bit/Mac OS X 
+-------------------------------------------------------------------------------
+by Aldo Vecchietti, Director del Instituto INGAR,
+   CONICET, UTN, Santa Fe, Argentina
+by Ignacio E. Grossmann, Chemical Engineering Faculty,
+   Carnegie Mellon University, Pittsburgh, PA, USA
+-------------------------------------------------------------------------------
+--- DICOPT: Starting major iteration 1
+--- DICOPT: Setting up first (relaxed) NLP.
+CONOPT 3         32.2.0 rc62c018 Released Aug 26, 2020 DEG x86 64bit/Mac OS X 
+ 
+ 
+    C O N O P T 3   version 3.17L
+    Copyright (C)   ARKI Consulting and Development A/S
+                    Bagsvaerdvej 246 A
+                    DK-2880 Bagsvaerd, Denmark
+ 
+ 
+   Iter Phase Ninf   Infeasibility   RGmax    NSB   Step InItr MX OK
+      0   0        2.4000000000E+01 (Input point)
+ 
+                   Pre-triangular equations:   0
+                   Post-triangular equations:  4
+ 
+      1   0        2.4000000000E+01 (After pre-processing)
+      2   0        2.1000000000E+01 (After scaling)
+      3   1    18  1.3500000000E+01 2.2E+03     3 1.0E+00    3 T  T
+      4   1    15  7.6601020408E+00 1.5E+01    39 1.0E+00    8 T  T
+ 
+ ** Feasible solution. Value of objective =    1.71372210331
+ 
+   Iter Phase Ninf     Objective     RGmax    NSB   Step InItr MX OK
+      5   3        5.9021657983E+01 5.2E+01    44 1.0E+00   12 T  T
+      6   3        9.4674829118E+01 5.5E+01    58 1.0E+00   17 T  T
+      7   3        9.8606823695E+01 3.7E+00    52 1.0E+00   27 T  T
+      8   3        1.0000000000E+02 1.8E+00    42 1.0E+00   22 T  T
+      9   3        1.0000000000E+02 0.0E+00     0
+ 
+ ** Optimal solution. There are no superbasic variables.
+ 
+--- DICOPT: Setting up first MIP
+IBM ILOG CPLEX   32.2.0 rc62c018 Released Aug 26, 2020 DEG x86 64bit/Mac OS X 
+--- GAMS/Cplex Link licensed for continuous and discrete problems.
+Cplex 12.10.0.0
+3: *** Value Error Value brought in range for option "itlim" saw "2147483638"
+3: *** Value Error    Value set to 2100000000
+Reading data...
+Starting Cplex...
+Unable to load names.
+Version identifier: 12.10.0.0 | 2019-11-26 | 843d4de
+CPXPARAM_Advance                                 0
+CPXPARAM_Threads                                 1
+CPXPARAM_Parallel                                1
+CPXPARAM_MIP_Display                             4
+CPXPARAM_TimeLimit                               9999999999.9610004
+CPXPARAM_Tune_TimeLimit                          1999999999.9922001
+CPXPARAM_MIP_Tolerances_AbsMIPGap                0
+CPXPARAM_MIP_Tolerances_MIPGap                   0
+CPXPARAM_WorkDir                                 "/Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO/225a/"
+Tried aggregator 1 time.
+MIP Presolve eliminated 95 rows and 7 columns.
+MIP Presolve modified 234 coefficients.
+Reduced MIP has 636 rows, 330 columns, and 4155 nonzeros.
+Reduced MIP has 138 binaries, 0 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.01 sec. (3.57 ticks)
+Found incumbent of value 100.000000 after 0.03 sec. (6.88 ticks)
+Probing time = 0.00 sec. (1.26 ticks)
+Tried aggregator 1 time.
+Detecting symmetries...
+Reduced MIP has 636 rows, 330 columns, and 4155 nonzeros.
+Reduced MIP has 138 binaries, 0 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.00 sec. (2.09 ticks)
+Probing time = 0.00 sec. (1.25 ticks)
+Clique table members: 423.
+MIP emphasis: balance optimality and feasibility.
+MIP search method: dynamic search.
+Parallel mode: none, using 1 thread.
+Tried aggregator 1 time.
+No LP presolve or aggregator reductions.
+Presolve time = 0.00 sec. (0.32 ticks)
+Initializing dual steep norms . . .
+Root relaxation solution time = 0.00 sec. (0.82 ticks)
+        Nodes                                         Cuts/
+   Node  Left     Objective  IInf  Best Integer    Best Bound    ItCnt     Gap
+*     0+    0                          100.0000      300.0000           200.00%
+Found incumbent of value 100.000000 after 0.05 sec. (14.26 ticks)
+      0     0        cutoff            100.0000                      1     --- 
+Root node processing (before b&c):
+  Real time             =    0.06 sec. (14.29 ticks)
+Sequential b&c:
+  Real time             =    0.00 sec. (0.00 ticks)
+                          ------------
+Total (root+branch&cut) =    0.06 sec. (14.29 ticks)
+MIP status(101): integer optimal solution
+Cplex Time: 0.06sec (det. 14.29 ticks)
+Fixing integer variables, and solving final LP...
+Version identifier: 12.10.0.0 | 2019-11-26 | 843d4de
+CPXPARAM_Advance                                 2
+CPXPARAM_Threads                                 1
+CPXPARAM_Parallel                                1
+CPXPARAM_MIP_Display                             4
+CPXPARAM_TimeLimit                               9999999999.9610004
+CPXPARAM_Tune_TimeLimit                          1999999999.9922001
+CPXPARAM_MIP_Tolerances_AbsMIPGap                0
+CPXPARAM_MIP_Tolerances_MIPGap                   0
+CPXPARAM_WorkDir                                 "/Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO/225a/"
+Tried aggregator 1 time.
+LP Presolve eliminated 727 rows and 333 columns.
+Aggregator did 4 substitutions.
+All rows and columns eliminated.
+Presolve time = 0.00 sec. (0.38 ticks)
+Fixed MIP status(1): optimal
+Cplex Time: 0.00sec (det. 0.67 ticks)
+Proven optimal solution.
+MIP Solution:          100.000000    (1 iterations, 0 nodes)
+Final Solve:           100.000000    (0 iterations)
+Best possible:         100.000000
+Absolute gap:            0.000000
+Relative gap:            0.000000
+--- DICOPT: Starting major iteration 2
+--- DICOPT: Setting up next NLP
+CONOPT 3         32.2.0 rc62c018 Released Aug 26, 2020 DEG x86 64bit/Mac OS X 
+ 
+ 
+    C O N O P T 3   version 3.17L
+    Copyright (C)   ARKI Consulting and Development A/S
+                    Bagsvaerdvej 246 A
+                    DK-2880 Bagsvaerd, Denmark
+ 
+ 
+   Iter Phase Ninf   Infeasibility   RGmax    NSB   Step InItr MX OK
+      0   0        1.4210854715E-14 (Input point)
+ 
+                   Pre-triangular equations:   166
+                   Post-triangular equations:  0
+ 
+      1   0        0.0000000000E+00 (After pre-processing)
+      2   0        0.0000000000E+00 (After scaling)
+ 
+ ** Feasible solution. Value of objective =    100.000000000
+ 
+   Iter Phase Ninf     Objective     RGmax    NSB   Step InItr MX OK
+      3   3        1.0000000000E+02 0.0E+00     0 0.0E+00    0 F  T
+      4   3        1.0000000000E+02 0.0E+00     0
+ 
+ ** Optimal solution. There are no superbasic variables.
+ 
+--- DICOPT: Checking convergence
+--- DICOPT: Setting up next MIP
+--- GMO Resort Time 0ms
+--- DICOPT: Log File:
+ Major Major     Objective    CPU time  Itera- Evaluation Solver
+ Step  Iter       Function     (Sec)    tions   Errors
+  NLP    1       100.00000      0.04        9      0      conopt
+  MIP    1       100.00000      0.09        1      0      cplex
+  NLP    2       100.00000<     0.00        4      0      conopt
+IBM ILOG CPLEX   32.2.0 rc62c018 Released Aug 26, 2020 DEG x86 64bit/Mac OS X 
+--- GAMS/Cplex Link licensed for continuous and discrete problems.
+Cplex 12.10.0.0
+3: *** Value Error Value brought in range for option "itlim" saw "2147483633"
+3: *** Value Error    Value set to 2100000000
+Reading data...
+Starting Cplex...
+Unable to load names.
+Version identifier: 12.10.0.0 | 2019-11-26 | 843d4de
+CPXPARAM_Advance                                 0
+CPXPARAM_Threads                                 1
+CPXPARAM_Parallel                                1
+CPXPARAM_MIP_Display                             4
+CPXPARAM_TimeLimit                               9999999999.8689995
+CPXPARAM_Tune_TimeLimit                          1999999999.9737999
+CPXPARAM_MIP_Tolerances_AbsMIPGap                0
+CPXPARAM_MIP_Tolerances_MIPGap                   0
+CPXPARAM_WorkDir                                 "/Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO/225a/"
+Tried aggregator 1 time.
+MIP Presolve eliminated 91 rows and 3 columns.
+MIP Presolve modified 303 coefficients.
+Reduced MIP has 642 rows, 336 columns, and 4300 nonzeros.
+Reduced MIP has 138 binaries, 0 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.01 sec. (3.96 ticks)
+Probing time = 0.00 sec. (1.39 ticks)
+Cover probing fixed 0 vars, tightened 3 bounds.
+Tried aggregator 1 time.
+Detecting symmetries...
+Reduced MIP has 642 rows, 336 columns, and 4300 nonzeros.
+Reduced MIP has 138 binaries, 3 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.00 sec. (2.13 ticks)
+Probing time = 0.00 sec. (1.38 ticks)
+Clique table members: 423.
+MIP emphasis: balance optimality and feasibility.
+MIP search method: dynamic search.
+Parallel mode: none, using 1 thread.
+Tried aggregator 1 time.
+LP Presolve eliminated 0 rows and 2 columns.
+Reduced LP has 642 rows, 334 columns, and 4298 nonzeros.
+Presolve time = 0.00 sec. (0.44 ticks)
+Initializing dual steep norms . . .
+Iteration log . . .
+Iteration:     1   Scaled dual infeas =            64.000000
+Iteration:     6   Dual objective     =           135.648681
+Initializing dual steep norms . . .
+Root relaxation solution time = 0.00 sec. (1.86 ticks)
+        Nodes                                         Cuts/
+   Node  Left     Objective  IInf  Best Integer    Best Bound    ItCnt     Gap
+      0     0      100.0000    39                    100.0000       39         
+*     0+    0                          100.0000      100.0000             0.00%
+Found incumbent of value 100.000000 after 0.08 sec. (38.82 ticks)
+      0     0        cutoff            100.0000      100.0000       39    0.00%
+Elapsed time = 0.08 sec. (38.82 ticks, tree = 0.01 MB, solutions = 1)
+Root node processing (before b&c):
+  Real time             =    0.08 sec. (38.85 ticks)
+Sequential b&c:
+  Real time             =    0.00 sec. (0.00 ticks)
+                          ------------
+Total (root+branch&cut) =    0.08 sec. (38.85 ticks)
+MIP status(101): integer optimal solution
+Cplex Time: 0.08sec (det. 38.85 ticks)
+Fixing integer variables, and solving final LP...
+Version identifier: 12.10.0.0 | 2019-11-26 | 843d4de
+CPXPARAM_Advance                                 2
+CPXPARAM_Threads                                 1
+CPXPARAM_Parallel                                1
+CPXPARAM_MIP_Display                             4
+CPXPARAM_TimeLimit                               9999999999.8689995
+CPXPARAM_Tune_TimeLimit                          1999999999.9737999
+CPXPARAM_MIP_Tolerances_AbsMIPGap                0
+CPXPARAM_MIP_Tolerances_MIPGap                   0
+CPXPARAM_WorkDir                                 "/Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO/225a/"
+Tried aggregator 1 time.
+LP Presolve eliminated 727 rows and 332 columns.
+Aggregator did 4 substitutions.
+Reduced LP has 2 rows, 3 columns, and 4 nonzeros.
+Presolve time = 0.00 sec. (0.40 ticks)
+Initializing dual steep norms . . .
+Fixed MIP status(1): optimal
+Cplex Time: 0.00sec (det. 0.69 ticks)
+Proven optimal solution.
+MIP Solution:          100.000000    (39 iterations, 0 nodes)
+Final Solve:           100.000000    (0 iterations)
+Best possible:         100.000000
+Absolute gap:            0.000000
+Relative gap:            0.000000
+--- DICOPT: Starting major iteration 3
+--- DICOPT: Setting up next NLP
+CONOPT 3         32.2.0 rc62c018 Released Aug 26, 2020 DEG x86 64bit/Mac OS X 
+ 
+ 
+    C O N O P T 3   version 3.17L
+    Copyright (C)   ARKI Consulting and Development A/S
+                    Bagsvaerdvej 246 A
+                    DK-2880 Bagsvaerd, Denmark
+ 
+ 
+   Iter Phase Ninf   Infeasibility   RGmax    NSB   Step InItr MX OK
+      0   0        1.4210854715E-14 (Input point)
+ 
+                   Pre-triangular equations:   166
+                   Post-triangular equations:  0
+ 
+      1   0        0.0000000000E+00 (After pre-processing)
+      2   0        0.0000000000E+00 (After scaling)
+ 
+ ** Feasible solution. Value of objective =    100.000000000
+ 
+   Iter Phase Ninf     Objective     RGmax    NSB   Step InItr MX OK
+      3   3        1.0000000000E+02 0.0E+00     0 0.0E+00    0 F  T
+      4   3        1.0000000000E+02 0.0E+00     0
+ 
+ ** Optimal solution. There are no superbasic variables.
+ 
+--- DICOPT: Checking convergence
+--- DICOPT: Search stopped on worsening of NLP subproblems
+--- DICOPT: Log File:
+ Major Major     Objective    CPU time  Itera- Evaluation Solver
+ Step  Iter       Function     (Sec)    tions   Errors
+  NLP    1       100.00000      0.04        9      0      conopt
+  MIP    1       100.00000      0.09        1      0      cplex
+  NLP    2       100.00000<     0.00        4      0      conopt
+  MIP    2       100.00000      0.10       39      0      cplex
+  NLP    3       100.00000      0.00        4      0      conopt
+--- DICOPT: Terminating...
+--- DICOPT: Stopped on NLP worsening
+      The search was stopped because the objective function
+      of the NLP subproblems started to deteriorate.
+--- DICOPT: Best integer solution found: 100.000000
+--- Reading solution for model spanning_tree
+--- Executing after solve: elapsed 0:00:00.558
+--- Gerrymander.gms(163) 4 Mb
+--- GDX File /Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO/data_Gerrymander/default.gdx
+*** Status: Normal completion
+--- Job Gerrymander.gms Stop 02/05/21 04:23:09 elapsed 0:00:00.560
+========================
+========================TRACE [2021-02-05 04:23:13] Logging facility initialised.
+[1] "Installing: devtools"
+probando la URL 'https://cloud.r-project.org/bin/macosx/contrib/4.0/devtools_2.3.2.tgz'
+Content type 'application/x-gzip' length 337605 bytes (329 KB)
+==
+==================================================
+downloaded 329 KB
+The downloaded binary packages are in
+	/var/folders/_v/4f8gt7jd161cxvnxqbm3bkgc0000gn/T//RtmpygYC4b/downloaded_packages
+[1]
+[1] "Installing: tidyverse"
+probando la URL 'https://cloud.r-project.org/bin/macosx/contrib/4.0/tidyverse_1.3.0.tgz'
+Content type 'application/x-gzip'
+Content type 'application/x-gzip' length 433049 bytes (422 KB)
+=
+==
+=============
+=============================
+==============================
+================================
+==================================================
+downloaded 422 KB
+The downloaded binary packages are in
+	/var/folders/_v/4f8gt7jd161cxvnxqbm3bkgc0000gn/T//RtmpygYC4b/downloaded_packages
+DEBUG [2021-02-05 04:23:22] Database connection established.
+DEBUG [2021-02-05 04:23:23] Access Control initialised.
+DEBUG [2021-02-05 04:23:23] Db: Data was imported from table: '_sys__data_hashes' (Db.importDataset).
+INFO [2021-02-05 04:23:23] Data: 'default.gdx' skipped because it has not changed since the last start.
+========================================================
+INFO [2021-02-05 04:23:25] Session started (model: 'gerrymander', user: 'walter', workdir: '/Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO').
+DEBUG [2021-02-05 04:23:25] Working directory was created: '/Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO'.
+DEBUG [2021-02-05 04:23:27] Sidebar menu item: 'inputData' selected.
+DEBUG [2021-02-05 04:23:30] walter: Import input data button clicked.
+DEBUG [2021-02-05 04:23:30] Db: Data was imported from table: '_sys_metadata_gerrymander' (Db.importDataset).
+DEBUG [2021-02-05 04:23:31] Confirm load scenario button clicked.
+DEBUG [2021-02-05 04:23:31] Loading and rendering scenarios: '1'.
+DEBUG [2021-02-05 04:23:31] Db: Data was imported from table: 'gerrymander_assign_result' (Db.importDataset).
+DEBUG [2021-02-05 04:23:31] Db: Data was imported from table: 'gerrymander_nodes' (Db.importDataset).
+DEBUG [2021-02-05 04:23:31] Db: Data was imported from table: 'gerrymander_foo' (Db.importDataset).
+DEBUG [2021-02-05 04:23:31] Db: Data was imported from table: 'gerrymander_num' (Db.importDataset).
+DEBUG [2021-02-05 04:23:31] Db: Data was imported from table: 'gerrymander__scalars' (Db.importDataset).
+DEBUG [2021-02-05 04:23:31] Db: A table named: '_sys_scripts_gerrymander' does not exist in the database (Db.importDataset).
+DEBUG [2021-02-05 04:23:31] Db: A table named: '_sys_views_gerrymander' does not exist in the database (Db.importDataset).
+DEBUG [2021-02-05 04:23:31] Scenario: 'New Scenario' closed.
+DEBUG [2021-02-05 04:23:32] Db: Data was imported from table: '_sys_metadata_gerrymander' (Db.importDataset).
+DEBUG [2021-02-05 04:23:32] Db: Data was imported from table: '_sys_scenlocks_gerrymander' (Db.importDataset).
+DEBUG [2021-02-05 04:23:32] Db: 1 rows in table: '_sys_scenlocks_gerrymander' were deleted. (Db.deleteRows)
+DEBUG [2021-02-05 04:23:32] Db: walter: Lock was added for scenario: '1' (Scenario.lock).
+DEBUG [2021-02-05 04:23:32] Dataset: nodes loaded successfully (mode: scen, overwrite: FALSE)
+DEBUG [2021-02-05 04:23:32] Dataset: foo loaded successfully (mode: scen, overwrite: FALSE)
+DEBUG [2021-02-05 04:23:32] Dataset: num loaded successfully (mode: scen, overwrite: FALSE)
+DEBUG [2021-02-05 04:23:33] Scenario: '1' was loaded into UI
+DEBUG [2021-02-05 04:23:33] Db: Data was imported from table: '_sys_scenlocks_gerrymander' (Db.importDataset).
+DEBUG [2021-02-05 04:23:34] Solve button clicked (model: 'gerrymander').
+TRACE [2021-02-05 04:23:35] Dataset: Fips Code saved in dataTmp.
+TRACE [2021-02-05 04:23:35] Dataset: Adjacency Data saved in dataTmp.
+TRACE [2021-02-05 04:23:35] Dataset: Votes saved in dataTmp.
+TRACE [2021-02-05 04:23:35] Dataset: District Number saved in dataTmp.
+TRACE [2021-02-05 04:23:35] Dataset: Party to Win saved in dataTmp.
+DEBUG [2021-02-05 04:23:35] Db: A table named: '_sys_attach_gerrymander' does not exist in the database (Db.importDataset).
+DEBUG [2021-02-05 04:23:36] Sidebar menu item: 'gamsinter' selected.
+DEBUG [2021-02-05 04:23:38] Db: A table named: '_sys_attach_gerrymander' does not exist in the database (Db.importDataset).
+DEBUG [2021-02-05 04:23:39] Sidebar menu item: 'outputData' selected.
+DEBUG [2021-02-05 04:23:39] Db: Data was imported from table: '_sys_scenlocks_gerrymander' (Db.importDataset).
+--- Job Gerrymander.gms Start 02/05/21 04:25:13 32.2.0 rc62c018 DEX-DEG x86 64bit/Mac OS X
+--- Applying:
+    /Library/Frameworks/GAMS.framework/Versions/32/Resources/gmsprmun.txt
+--- GAMS Parameters defined
+    Input /Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO/Gerrymander.gms
+    PageSize 0
+    ScrDir /Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO/225a/
+    SysDir /Library/Frameworks/GAMS.framework/Versions/32/Resources/
+    LogOption 3
+    ErrMsg 1
+    ErrorLog 99
+    IDE 1
+    LstTitleLeftAligned 1
+    IDCGenerateJSON conf_Gerrymander/Gerrymander_io.json
+    IDCGenerateGDX data_Gerrymander/default.gdx
+GAMS 32.2.0   Copyright (C) 1987-2020 GAMS Development. All rights reserved
+Licensee: Introduction to Optimization (CS/ISyE/ECE 524) S200826/0001AB-GEN
+          University of Wisconsin-Madison, Computer Sciences Dept.   DCE850
+          /Users/walter/Library/Application Support/GAMS/gamslice.txt
+          Evaluation license: Not for commercial or production use
+--- Starting compilation
+--- Gerrymander.gms(17) 3 Mb
+--- GDXin=/Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO/adjaceny_AZ.gdx
+--- Gerrymander.gms(26) 3 Mb
+--- GDXin=/Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO/county_vote_AZ.gdx
+--- Gerrymander.gms(164) 3 Mb
+--- Resetting table request for foo due to external input request for domain nodes.
+--- Starting execution: elapsed 0:00:00.056
+--- Gerrymander.gms(48) 4 Mb
+--- Generating MINLP model spanning_tree
+--- Gerrymander.gms(157) 6 Mb
+---   730 rows  334 columns  4,435 non-zeroes
+---   13 nl-code  6 nl-non-zeroes
+---   138 discrete-columns
+--- Gerrymander.gms(157) 4 Mb
+--- Executing DICOPT (Solvelink=2): elapsed 0:00:00.109
+-------------------------------------------------------------------------------
+Dicopt 2         32.2.0 rc62c018 Released Aug 26, 2020 DEG x86 64bit/Mac OS X 
+-------------------------------------------------------------------------------
+by Aldo Vecchietti, Director del Instituto INGAR,
+   CONICET, UTN, Santa Fe, Argentina
+by Ignacio E. Grossmann, Chemical Engineering Faculty,
+   Carnegie Mellon University, Pittsburgh, PA, USA
+-------------------------------------------------------------------------------
+--- DICOPT: Starting major iteration 1
+--- DICOPT: Setting up first (relaxed) NLP.
+CONOPT 3         32.2.0 rc62c018 Released Aug 26, 2020 DEG x86 64bit/Mac OS X 
+ 
+ 
+    C O N O P T 3   version 3.17L
+    Copyright (C)   ARKI Consulting and Development A/S
+                    Bagsvaerdvej 246 A
+                    DK-2880 Bagsvaerd, Denmark
+ 
+ 
+   Iter Phase Ninf   Infeasibility   RGmax    NSB   Step InItr MX OK
+      0   0        2.4000000000E+01 (Input point)
+ 
+                   Pre-triangular equations:   0
+                   Post-triangular equations:  4
+ 
+      1   0        2.4000000000E+01 (After pre-processing)
+      2   0        2.1000000000E+01 (After scaling)
+      3   1    18  1.3500000000E+01 2.2E+03     3 1.0E+00    3 T  T
+      4   1    15  7.6601020408E+00 1.5E+01    39 1.0E+00    8 T  T
+ 
+ ** Feasible solution. Value of objective =    1.71372210331
+ 
+   Iter Phase Ninf     Objective     RGmax    NSB   Step InItr MX OK
+      5   3        5.9021657983E+01 5.2E+01    44 1.0E+00   12 T  T
+      6   3        9.4674829118E+01 5.5E+01    58 1.0E+00   17 T  T
+      7   3        9.8606823695E+01 3.7E+00    52 1.0E+00   27 T  T
+      8   3        1.0000000000E+02 1.8E+00    42 1.0E+00   22 T  T
+      9   3        1.0000000000E+02 0.0E+00     0
+ 
+ ** Optimal solution. There are no superbasic variables.
+ 
+--- DICOPT: Setting up first MIP
+IBM ILOG CPLEX   32.2.0 rc62c018 Released Aug 26, 2020 DEG x86 64bit/Mac OS X 
+--- GAMS/Cplex Link licensed for continuous and discrete problems.
+Cplex 12.10.0.0
+3: *** Value Error Value brought in range for option "itlim" saw "2147483638"
+3: *** Value Error    Value set to 2100000000
+Reading data...
+Starting Cplex...
+Unable to load names.
+Version identifier: 12.10.0.0 | 2019-11-26 | 843d4de
+CPXPARAM_Advance                                 0
+CPXPARAM_Threads                                 1
+CPXPARAM_Parallel                                1
+CPXPARAM_MIP_Display                             4
+CPXPARAM_TimeLimit                               9999999999.9619999
+CPXPARAM_Tune_TimeLimit                          1999999999.9923999
+CPXPARAM_MIP_Tolerances_AbsMIPGap                0
+CPXPARAM_MIP_Tolerances_MIPGap                   0
+CPXPARAM_WorkDir                                 "/Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO/225a/"
+Tried aggregator 1 time.
+MIP Presolve eliminated 95 rows and 7 columns.
+MIP Presolve modified 234 coefficients.
+Reduced MIP has 636 rows, 330 columns, and 4155 nonzeros.
+Reduced MIP has 138 binaries, 0 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.01 sec. (3.57 ticks)
+Found incumbent of value 100.000000 after 0.02 sec. (6.88 ticks)
+Probing time = 0.00 sec. (1.26 ticks)
+Tried aggregator 1 time.
+Detecting symmetries...
+Reduced MIP has 636 rows, 330 columns, and 4155 nonzeros.
+Reduced MIP has 138 binaries, 0 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.00 sec. (2.09 ticks)
+Probing time = 0.00 sec. (1.25 ticks)
+Clique table members: 423.
+MIP emphasis: balance optimality and feasibility.
+MIP search method: dynamic search.
+Parallel mode: none, using 1 thread.
+Tried aggregator 1 time.
+No LP presolve or aggregator reductions.
+Presolve time = 0.00 sec. (0.32 ticks)
+Initializing dual steep norms . . .
+Root relaxation solution time = 0.00 sec. (0.82 ticks)
+        Nodes                                         Cuts/
+   Node  Left     Objective  IInf  Best Integer    Best Bound    ItCnt     Gap
+*     0+    0                          100.0000      300.0000           200.00%
+Found incumbent of value 100.000000 after 0.04 sec. (14.26 ticks)
+      0     0        cutoff            100.0000                      1     --- 
+Root node processing (before b&c):
+  Real time             =    0.04 sec. (14.29 ticks)
+Sequential b&c:
+  Real time             =    0.00 sec. (0.00 ticks)
+                          ------------
+Total (root+branch&cut) =    0.04 sec. (14.29 ticks)
+MIP status(101): integer optimal solution
+Cplex Time: 0.04sec (det. 14.29 ticks)
+Fixing integer variables, and solving final LP...
+Version identifier: 12.10.0.0 | 2019-11-26 | 843d4de
+CPXPARAM_Advance                                 2
+CPXPARAM_Threads                                 1
+CPXPARAM_Parallel                                1
+CPXPARAM_MIP_Display                             4
+CPXPARAM_TimeLimit                               9999999999.9619999
+CPXPARAM_Tune_TimeLimit                          1999999999.9923999
+CPXPARAM_MIP_Tolerances_AbsMIPGap                0
+CPXPARAM_MIP_Tolerances_MIPGap                   0
+CPXPARAM_WorkDir                                 "/Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO/225a/"
+Tried aggregator 1 time.
+LP Presolve eliminated 727 rows and 333 columns.
+Aggregator did 4 substitutions.
+All rows and columns eliminated.
+Presolve time = 0.00 sec. (0.38 ticks)
+Fixed MIP status(1): optimal
+Cplex Time: 0.00sec (det. 0.67 ticks)
+Proven optimal solution.
+MIP Solution:          100.000000    (1 iterations, 0 nodes)
+Final Solve:           100.000000    (0 iterations)
+Best possible:         100.000000
+Absolute gap:            0.000000
+Relative gap:            0.000000
+--- DICOPT: Starting major iteration 2
+--- DICOPT: Setting up next NLP
+CONOPT 3         32.2.0 rc62c018 Released Aug 26, 2020 DEG x86 64bit/Mac OS X 
+ 
+ 
+    C O N O P T 3   version 3.17L
+    Copyright (C)   ARKI Consulting and Development A/S
+                    Bagsvaerdvej 246 A
+                    DK-2880 Bagsvaerd, Denmark
+ 
+ 
+   Iter Phase Ninf   Infeasibility   RGmax    NSB   Step InItr MX OK
+      0   0        1.4210854715E-14 (Input point)
+ 
+                   Pre-triangular equations:   166
+                   Post-triangular equations:  0
+ 
+      1   0        0.0000000000E+00 (After pre-processing)
+      2   0        0.0000000000E+00 (After scaling)
+ 
+ ** Feasible solution. Value of objective =    100.000000000
+ 
+   Iter Phase Ninf     Objective     RGmax    NSB   Step InItr MX OK
+      3   3        1.0000000000E+02 0.0E+00     0 0.0E+00    0 F  T
+      4   3        1.0000000000E+02 0.0E+00     0
+ 
+ ** Optimal solution. There are no superbasic variables.
+ 
+--- DICOPT: Checking convergence
+--- DICOPT: Setting up next MIP
+--- GMO Resort Time 0ms
+--- DICOPT: Log File:
+ Major Major     Objective    CPU time  Itera- Evaluation Solver
+ Step  Iter       Function     (Sec)    tions   Errors
+  NLP    1       100.00000      0.04        9      0      conopt
+  MIP    1       100.00000      0.08        1      0      cplex
+  NLP    2       100.00000<     0.01        4      0      conopt
+IBM ILOG CPLEX   32.2.0 rc62c018 Released Aug 26, 2020 DEG x86 64bit/Mac OS X 
+--- GAMS/Cplex Link licensed for continuous and discrete problems.
+Cplex 12.10.0.0
+3: *** Value Error Value brought in range for option "itlim" saw "2147483633"
+3: *** Value Error    Value set to 2100000000
+Reading data...
+Starting Cplex...
+Unable to load names.
+Version identifier: 12.10.0.0 | 2019-11-26 | 843d4de
+CPXPARAM_Advance                                 0
+CPXPARAM_Threads                                 1
+CPXPARAM_Parallel                                1
+CPXPARAM_MIP_Display                             4
+CPXPARAM_TimeLimit                               9999999999.8780003
+CPXPARAM_Tune_TimeLimit                          1999999999.9756
+CPXPARAM_MIP_Tolerances_AbsMIPGap                0
+CPXPARAM_MIP_Tolerances_MIPGap                   0
+CPXPARAM_WorkDir                                 "/Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO/225a/"
+Tried aggregator 1 time.
+MIP Presolve eliminated 91 rows and 3 columns.
+MIP Presolve modified 303 coefficients.
+Reduced MIP has 642 rows, 336 columns, and 4300 nonzeros.
+Reduced MIP has 138 binaries, 0 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.01 sec. (3.96 ticks)
+Probing time = 0.00 sec. (1.39 ticks)
+Cover probing fixed 0 vars, tightened 3 bounds.
+Tried aggregator 1 time.
+Detecting symmetries...
+Reduced MIP has 642 rows, 336 columns, and 4300 nonzeros.
+Reduced MIP has 138 binaries, 3 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.00 sec. (2.13 ticks)
+Probing time = 0.00 sec. (1.38 ticks)
+Clique table members: 423.
+MIP emphasis: balance optimality and feasibility.
+MIP search method: dynamic search.
+Parallel mode: none, using 1 thread.
+Tried aggregator 1 time.
+LP Presolve eliminated 0 rows and 2 columns.
+Reduced LP has 642 rows, 334 columns, and 4298 nonzeros.
+Presolve time = 0.00 sec. (0.44 ticks)
+Initializing dual steep norms . . .
+Iteration log . . .
+Iteration:     1   Scaled dual infeas =            64.000000
+Iteration:     6   Dual objective     =           135.648681
+Initializing dual steep norms . . .
+Root relaxation solution time = 0.00 sec. (1.86 ticks)
+        Nodes                                         Cuts/
+   Node  Left     Objective  IInf  Best Integer    Best Bound    ItCnt     Gap
+      0     0      100.0000    39                    100.0000       39         
+*     0+    0                          100.0000      100.0000             0.00%
+Found incumbent of value 100.000000 after 0.07 sec. (38.82 ticks)
+      0     0        cutoff            100.0000      100.0000       39    0.00%
+Elapsed time = 0.07 sec. (38.82 ticks, tree = 0.01 MB, solutions = 1)
+Root node processing (before b&c):
+  Real time             =    0.07 sec. (38.85 ticks)
+Sequential b&c:
+  Real time             =    0.00 sec. (0.00 ticks)
+                          ------------
+Total (root+branch&cut) =    0.07 sec. (38.85 ticks)
+MIP status(101): integer optimal solution
+Cplex Time: 0.07sec (det. 38.85 ticks)
+Fixing integer variables, and solving final LP...
+Version identifier: 12.10.0.0 | 2019-11-26 | 843d4de
+CPXPARAM_Advance                                 2
+CPXPARAM_Threads                                 1
+CPXPARAM_Parallel                                1
+CPXPARAM_MIP_Display                             4
+CPXPARAM_TimeLimit                               9999999999.8780003
+CPXPARAM_Tune_TimeLimit                          1999999999.9756
+CPXPARAM_MIP_Tolerances_AbsMIPGap                0
+CPXPARAM_MIP_Tolerances_MIPGap                   0
+CPXPARAM_WorkDir                                 "/Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO/225a/"
+Tried aggregator 1 time.
+LP Presolve eliminated 727 rows and 332 columns.
+Aggregator did 4 substitutions.
+Reduced LP has 2 rows, 3 columns, and 4 nonzeros.
+Presolve time = 0.00 sec. (0.40 ticks)
+Initializing dual steep norms . . .
+Fixed MIP status(1): optimal
+Cplex Time: 0.00sec (det. 0.69 ticks)
+Proven optimal solution.
+MIP Solution:          100.000000    (39 iterations, 0 nodes)
+Final Solve:           100.000000    (0 iterations)
+Best possible:         100.000000
+Absolute gap:            0.000000
+Relative gap:            0.000000
+--- DICOPT: Starting major iteration 3
+--- DICOPT: Setting up next NLP
+CONOPT 3         32.2.0 rc62c018 Released Aug 26, 2020 DEG x86 64bit/Mac OS X 
+ 
+ 
+    C O N O P T 3   version 3.17L
+    Copyright (C)   ARKI Consulting and Development A/S
+                    Bagsvaerdvej 246 A
+                    DK-2880 Bagsvaerd, Denmark
+ 
+ 
+   Iter Phase Ninf   Infeasibility   RGmax    NSB   Step InItr MX OK
+      0   0        1.4210854715E-14 (Input point)
+ 
+                   Pre-triangular equations:   166
+                   Post-triangular equations:  0
+ 
+      1   0        0.0000000000E+00 (After pre-processing)
+      2   0        0.0000000000E+00 (After scaling)
+ 
+ ** Feasible solution. Value of objective =    100.000000000
+ 
+   Iter Phase Ninf     Objective     RGmax    NSB   Step InItr MX OK
+      3   3        1.0000000000E+02 0.0E+00     0 0.0E+00    0 F  T
+      4   3        1.0000000000E+02 0.0E+00     0
+ 
+ ** Optimal solution. There are no superbasic variables.
+ 
+--- DICOPT: Checking convergence
+--- DICOPT: Search stopped on worsening of NLP subproblems
+--- DICOPT: Log File:
+ Major Major     Objective    CPU time  Itera- Evaluation Solver
+ Step  Iter       Function     (Sec)    tions   Errors
+  NLP    1       100.00000      0.04        9      0      conopt
+  MIP    1       100.00000      0.08        1      0      cplex
+  NLP    2       100.00000<     0.01        4      0      conopt
+  MIP    2       100.00000      0.08       39      0      cplex
+  NLP    3       100.00000      0.00        4      0      conopt
+--- DICOPT: Terminating...
+--- DICOPT: Stopped on NLP worsening
+      The search was stopped because the objective function
+      of the NLP subproblems started to deteriorate.
+--- DICOPT: Best integer solution found: 100.000000
+--- Reading solution for model spanning_tree
+--- Executing after solve: elapsed 0:00:00.475
+--- Gerrymander.gms(163) 4 Mb
+--- GDX File /Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO/data_Gerrymander/default.gdx
+*** Status: Normal completion
+--- Job Gerrymander.gms Stop 02/05/21 04:25:14 elapsed 0:00:00.478
+========================
+========================TRACE [2021-02-05 04:25:18] Logging facility initialised.
+[1] "Installing: devtools"
+probando la URL 'https://cloud.r-project.org/bin/macosx/contrib/4.0/devtools_2.3.2.tgz'
+Content type 'application/x-gzip'
+Content type 'application/x-gzip' length 337605 bytes (329 KB)
+==
+==================================================
+downloaded 329 KB
+The downloaded binary packages are in
+	/var/folders/_v/4f8gt7jd161cxvnxqbm3bkgc0000gn/T//RtmpNDsvEg/downloaded_packages
+[1] "Installing: tidyverse"
+probando la URL 'https://cloud.r-project.org/bin/macosx/contrib/4.0/tidyverse_1.3.0.tgz'
+Content type 'application/x-gzip'
+Content type 'application/x-gzip' length 433049 bytes (422 KB)
+=
+==================================================
+downloaded 422 KB
+The downloaded binary packages are in
+	/var/folders/_v/4f8gt7jd161cxvnxqbm3bkgc0000gn/T//RtmpNDsvEg/downloaded_packages
+DEBUG [2021-02-05 04:25:22] Database connection established.
+DEBUG [2021-02-05 04:25:22] Access Control initialised.
+DEBUG [2021-02-05 04:25:22] Db: Data was imported from table: '_sys__data_hashes' (Db.importDataset).
+INFO [2021-02-05 04:25:22] Data: 'default.gdx' skipped because it has not changed since the last start.
+========================================================
+INFO [2021-02-05 04:25:26] Session started (model: 'gerrymander', user: 'walter', workdir: '/Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO').
+DEBUG [2021-02-05 04:25:26] Working directory was created: '/Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO'.
+DEBUG [2021-02-05 04:25:27] Sidebar menu item: 'inputData' selected.
+DEBUG [2021-02-05 04:25:29] walter: Import input data button clicked.
+DEBUG [2021-02-05 04:25:29] Db: Data was imported from table: '_sys_metadata_gerrymander' (Db.importDataset).
+DEBUG [2021-02-05 04:25:31] Confirm load scenario button clicked.
+DEBUG [2021-02-05 04:25:31] Loading and rendering scenarios: '1'.
+DEBUG [2021-02-05 04:25:31] Db: Data was imported from table: 'gerrymander_assign_result' (Db.importDataset).
+DEBUG [2021-02-05 04:25:31] Db: Data was imported from table: 'gerrymander_nodes' (Db.importDataset).
+DEBUG [2021-02-05 04:25:31] Db: Data was imported from table: 'gerrymander_foo' (Db.importDataset).
+DEBUG [2021-02-05 04:25:31] Db: Data was imported from table: 'gerrymander_num' (Db.importDataset).
+DEBUG [2021-02-05 04:25:31] Db: Data was imported from table: 'gerrymander__scalars' (Db.importDataset).
+DEBUG [2021-02-05 04:25:31] Db: A table named: '_sys_scripts_gerrymander' does not exist in the database (Db.importDataset).
+DEBUG [2021-02-05 04:25:31] Db: A table named: '_sys_views_gerrymander' does not exist in the database (Db.importDataset).
+DEBUG [2021-02-05 04:25:31] Scenario: 'New Scenario' closed.
+DEBUG [2021-02-05 04:25:31] Db: Data was imported from table: '_sys_metadata_gerrymander' (Db.importDataset).
+DEBUG [2021-02-05 04:25:31] Db: Data was imported from table: '_sys_scenlocks_gerrymander' (Db.importDataset).
+DEBUG [2021-02-05 04:25:31] Db: 1 rows in table: '_sys_scenlocks_gerrymander' were deleted. (Db.deleteRows)
+DEBUG [2021-02-05 04:25:31] Db: walter: Lock was added for scenario: '1' (Scenario.lock).
+DEBUG [2021-02-05 04:25:31] Dataset: nodes loaded successfully (mode: scen, overwrite: FALSE)
+DEBUG [2021-02-05 04:25:32] Dataset: foo loaded successfully (mode: scen, overwrite: FALSE)
+DEBUG [2021-02-05 04:25:32] Dataset: num loaded successfully (mode: scen, overwrite: FALSE)
+DEBUG [2021-02-05 04:25:32] Scenario: '1' was loaded into UI
+DEBUG [2021-02-05 04:25:33] Db: Data was imported from table: '_sys_scenlocks_gerrymander' (Db.importDataset).
+DEBUG [2021-02-05 04:25:34] Solve button clicked (model: 'gerrymander').
+TRACE [2021-02-05 04:25:34] Dataset: Fips Code saved in dataTmp.
+TRACE [2021-02-05 04:25:35] Dataset: Adjacency Data saved in dataTmp.
+TRACE [2021-02-05 04:25:35] Dataset: Votes saved in dataTmp.
+TRACE [2021-02-05 04:25:35] Dataset: District Number saved in dataTmp.
+TRACE [2021-02-05 04:25:35] Dataset: Party to Win saved in dataTmp.
+DEBUG [2021-02-05 04:25:35] Db: A table named: '_sys_attach_gerrymander' does not exist in the database (Db.importDataset).
+DEBUG [2021-02-05 04:25:35] Sidebar menu item: 'gamsinter' selected.
+DEBUG [2021-02-05 04:25:38] Db: A table named: '_sys_attach_gerrymander' does not exist in the database (Db.importDataset).
+DEBUG [2021-02-05 04:25:38] Sidebar menu item: 'outputData' selected.
+DEBUG [2021-02-05 04:25:38] Db: Data was imported from table: '_sys_scenlocks_gerrymander' (Db.importDataset).
+--- Job Gerrymander.gms Start 02/05/21 04:27:51 32.2.0 rc62c018 DEX-DEG x86 64bit/Mac OS X
+--- Applying:
+    /Library/Frameworks/GAMS.framework/Versions/32/Resources/gmsprmun.txt
+--- GAMS Parameters defined
+    Input /Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO/Gerrymander.gms
+    PageSize 0
+    ScrDir /Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO/225a/
+    SysDir /Library/Frameworks/GAMS.framework/Versions/32/Resources/
+    LogOption 3
+    ErrMsg 1
+    ErrorLog 99
+    IDE 1
+    LstTitleLeftAligned 1
+    IDCGenerateJSON conf_Gerrymander/Gerrymander_io.json
+    IDCGenerateGDX data_Gerrymander/default.gdx
+GAMS 32.2.0   Copyright (C) 1987-2020 GAMS Development. All rights reserved
+Licensee: Introduction to Optimization (CS/ISyE/ECE 524) S200826/0001AB-GEN
+          University of Wisconsin-Madison, Computer Sciences Dept.   DCE850
+          /Users/walter/Library/Application Support/GAMS/gamslice.txt
+          Evaluation license: Not for commercial or production use
+--- Starting compilation
+--- Gerrymander.gms(17) 3 Mb
+--- GDXin=/Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO/adjaceny_AZ.gdx
+--- Gerrymander.gms(26) 3 Mb
+--- GDXin=/Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO/county_vote_AZ.gdx
+--- Gerrymander.gms(164) 3 Mb
+--- Resetting table request for foo due to external input request for domain nodes.
+--- Starting execution: elapsed 0:00:00.052
+--- Gerrymander.gms(48) 4 Mb
+--- Generating MINLP model spanning_tree
+--- Gerrymander.gms(157) 6 Mb
+---   730 rows  334 columns  4,435 non-zeroes
+---   13 nl-code  6 nl-non-zeroes
+---   138 discrete-columns
+--- Gerrymander.gms(157) 4 Mb
+--- Executing DICOPT (Solvelink=2): elapsed 0:00:00.083
+-------------------------------------------------------------------------------
+Dicopt 2         32.2.0 rc62c018 Released Aug 26, 2020 DEG x86 64bit/Mac OS X 
+-------------------------------------------------------------------------------
+by Aldo Vecchietti, Director del Instituto INGAR,
+   CONICET, UTN, Santa Fe, Argentina
+by Ignacio E. Grossmann, Chemical Engineering Faculty,
+   Carnegie Mellon University, Pittsburgh, PA, USA
+-------------------------------------------------------------------------------
+--- DICOPT: Starting major iteration 1
+--- DICOPT: Setting up first (relaxed) NLP.
+CONOPT 3         32.2.0 rc62c018 Released Aug 26, 2020 DEG x86 64bit/Mac OS X 
+ 
+ 
+    C O N O P T 3   version 3.17L
+    Copyright (C)   ARKI Consulting and Development A/S
+                    Bagsvaerdvej 246 A
+                    DK-2880 Bagsvaerd, Denmark
+ 
+ 
+   Iter Phase Ninf   Infeasibility   RGmax    NSB   Step InItr MX OK
+      0   0        2.4000000000E+01 (Input point)
+ 
+                   Pre-triangular equations:   0
+                   Post-triangular equations:  4
+ 
+      1   0        2.4000000000E+01 (After pre-processing)
+      2   0        2.1000000000E+01 (After scaling)
+      3   1    18  1.3500000000E+01 2.2E+03     3 1.0E+00    3 T  T
+      4   1    15  7.6601020408E+00 1.5E+01    39 1.0E+00    8 T  T
+ 
+ ** Feasible solution. Value of objective =    1.71372210331
+ 
+   Iter Phase Ninf     Objective     RGmax    NSB   Step InItr MX OK
+      5   3        5.9021657983E+01 5.2E+01    44 1.0E+00   12 T  T
+      6   3        9.4674829118E+01 5.5E+01    58 1.0E+00   17 T  T
+      7   3        9.8606823695E+01 3.7E+00    52 1.0E+00   27 T  T
+      8   3        1.0000000000E+02 1.8E+00    42 1.0E+00   22 T  T
+      9   3        1.0000000000E+02 0.0E+00     0
+ 
+ ** Optimal solution. There are no superbasic variables.
+ 
+--- DICOPT: Setting up first MIP
+IBM ILOG CPLEX   32.2.0 rc62c018 Released Aug 26, 2020 DEG x86 64bit/Mac OS X 
+--- GAMS/Cplex Link licensed for continuous and discrete problems.
+Cplex 12.10.0.0
+3: *** Value Error Value brought in range for option "itlim" saw "2147483638"
+3: *** Value Error    Value set to 2100000000
+Reading data...
+Starting Cplex...
+Unable to load names.
+Version identifier: 12.10.0.0 | 2019-11-26 | 843d4de
+CPXPARAM_Advance                                 0
+CPXPARAM_Threads                                 1
+CPXPARAM_Parallel                                1
+CPXPARAM_MIP_Display                             4
+CPXPARAM_TimeLimit                               9999999999.9540005
+CPXPARAM_Tune_TimeLimit                          1999999999.9908001
+CPXPARAM_MIP_Tolerances_AbsMIPGap                0
+CPXPARAM_MIP_Tolerances_MIPGap                   0
+CPXPARAM_WorkDir                                 "/Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO/225a/"
+Tried aggregator 1 time.
+MIP Presolve eliminated 95 rows and 7 columns.
+MIP Presolve modified 234 coefficients.
+Reduced MIP has 636 rows, 330 columns, and 4155 nonzeros.
+Reduced MIP has 138 binaries, 0 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.01 sec. (3.57 ticks)
+Found incumbent of value 100.000000 after 0.02 sec. (6.88 ticks)
+Probing time = 0.00 sec. (1.26 ticks)
+Tried aggregator 1 time.
+Detecting symmetries...
+Reduced MIP has 636 rows, 330 columns, and 4155 nonzeros.
+Reduced MIP has 138 binaries, 0 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.01 sec. (2.09 ticks)
+Probing time = 0.00 sec. (1.25 ticks)
+Clique table members: 423.
+MIP emphasis: balance optimality and feasibility.
+MIP search method: dynamic search.
+Parallel mode: none, using 1 thread.
+Tried aggregator 1 time.
+No LP presolve or aggregator reductions.
+Presolve time = 0.00 sec. (0.32 ticks)
+Initializing dual steep norms . . .
+Root relaxation solution time = 0.00 sec. (0.82 ticks)
+        Nodes                                         Cuts/
+   Node  Left     Objective  IInf  Best Integer    Best Bound    ItCnt     Gap
+*     0+    0                          100.0000      300.0000           200.00%
+Found incumbent of value 100.000000 after 0.04 sec. (14.26 ticks)
+      0     0        cutoff            100.0000                      1     --- 
+Root node processing (before b&c):
+  Real time             =    0.04 sec. (14.29 ticks)
+Sequential b&c:
+  Real time             =    0.00 sec. (0.00 ticks)
+                          ------------
+Total (root+branch&cut) =    0.04 sec. (14.29 ticks)
+MIP status(101): integer optimal solution
+Cplex Time: 0.04sec (det. 14.29 ticks)
+Fixing integer variables, and solving final LP...
+Version identifier: 12.10.0.0 | 2019-11-26 | 843d4de
+CPXPARAM_Advance                                 2
+CPXPARAM_Threads                                 1
+CPXPARAM_Parallel                                1
+CPXPARAM_MIP_Display                             4
+CPXPARAM_TimeLimit                               9999999999.9540005
+CPXPARAM_Tune_TimeLimit                          1999999999.9908001
+CPXPARAM_MIP_Tolerances_AbsMIPGap                0
+CPXPARAM_MIP_Tolerances_MIPGap                   0
+CPXPARAM_WorkDir                                 "/Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO/225a/"
+Tried aggregator 1 time.
+LP Presolve eliminated 727 rows and 333 columns.
+Aggregator did 4 substitutions.
+All rows and columns eliminated.
+Presolve time = 0.00 sec. (0.38 ticks)
+Fixed MIP status(1): optimal
+Cplex Time: 0.00sec (det. 0.67 ticks)
+Proven optimal solution.
+MIP Solution:          100.000000    (1 iterations, 0 nodes)
+Final Solve:           100.000000    (0 iterations)
+Best possible:         100.000000
+Absolute gap:            0.000000
+Relative gap:            0.000000
+--- DICOPT: Starting major iteration 2
+--- DICOPT: Setting up next NLP
+CONOPT 3         32.2.0 rc62c018 Released Aug 26, 2020 DEG x86 64bit/Mac OS X 
+ 
+ 
+    C O N O P T 3   version 3.17L
+    Copyright (C)   ARKI Consulting and Development A/S
+                    Bagsvaerdvej 246 A
+                    DK-2880 Bagsvaerd, Denmark
+ 
+ 
+   Iter Phase Ninf   Infeasibility   RGmax    NSB   Step InItr MX OK
+      0   0        1.4210854715E-14 (Input point)
+ 
+                   Pre-triangular equations:   166
+                   Post-triangular equations:  0
+ 
+      1   0        0.0000000000E+00 (After pre-processing)
+      2   0        0.0000000000E+00 (After scaling)
+ 
+ ** Feasible solution. Value of objective =    100.000000000
+ 
+   Iter Phase Ninf     Objective     RGmax    NSB   Step InItr MX OK
+      3   3        1.0000000000E+02 0.0E+00     0 0.0E+00    0 F  T
+      4   3        1.0000000000E+02 0.0E+00     0
+ 
+ ** Optimal solution. There are no superbasic variables.
+ 
+--- DICOPT: Checking convergence
+--- DICOPT: Setting up next MIP
+--- GMO Resort Time 0ms
+--- DICOPT: Log File:
+ Major Major     Objective    CPU time  Itera- Evaluation Solver
+ Step  Iter       Function     (Sec)    tions   Errors
+  NLP    1       100.00000      0.05        9      0      conopt
+  MIP    1       100.00000      0.06        1      0      cplex
+  NLP    2       100.00000<     0.00        4      0      conopt
+IBM ILOG CPLEX   32.2.0 rc62c018 Released Aug 26, 2020 DEG x86 64bit/Mac OS X 
+--- GAMS/Cplex Link licensed for continuous and discrete problems.
+Cplex 12.10.0.0
+3: *** Value Error Value brought in range for option "itlim" saw "2147483633"
+3: *** Value Error    Value set to 2100000000
+Reading data...
+Starting Cplex...
+Unable to load names.
+Version identifier: 12.10.0.0 | 2019-11-26 | 843d4de
+CPXPARAM_Advance                                 0
+CPXPARAM_Threads                                 1
+CPXPARAM_Parallel                                1
+CPXPARAM_MIP_Display                             4
+CPXPARAM_TimeLimit                               9999999999.8910007
+CPXPARAM_Tune_TimeLimit                          1999999999.9782002
+CPXPARAM_MIP_Tolerances_AbsMIPGap                0
+CPXPARAM_MIP_Tolerances_MIPGap                   0
+CPXPARAM_WorkDir                                 "/Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO/225a/"
+Tried aggregator 1 time.
+MIP Presolve eliminated 91 rows and 3 columns.
+MIP Presolve modified 303 coefficients.
+Reduced MIP has 642 rows, 336 columns, and 4300 nonzeros.
+Reduced MIP has 138 binaries, 0 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.01 sec. (3.96 ticks)
+Probing time = 0.00 sec. (1.39 ticks)
+Cover probing fixed 0 vars, tightened 3 bounds.
+Tried aggregator 1 time.
+Detecting symmetries...
+Reduced MIP has 642 rows, 336 columns, and 4300 nonzeros.
+Reduced MIP has 138 binaries, 3 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.01 sec. (2.13 ticks)
+Probing time = 0.00 sec. (1.38 ticks)
+Clique table members: 423.
+MIP emphasis: balance optimality and feasibility.
+MIP search method: dynamic search.
+Parallel mode: none, using 1 thread.
+Tried aggregator 1 time.
+LP Presolve eliminated 0 rows and 2 columns.
+Reduced LP has 642 rows, 334 columns, and 4298 nonzeros.
+Presolve time = 0.00 sec. (0.44 ticks)
+Initializing dual steep norms . . .
+Iteration log . . .
+Iteration:     1   Scaled dual infeas =            64.000000
+Iteration:     6   Dual objective     =           135.648681
+Initializing dual steep norms . . .
+Root relaxation solution time = 0.00 sec. (1.86 ticks)
+        Nodes                                         Cuts/
+   Node  Left     Objective  IInf  Best Integer    Best Bound    ItCnt     Gap
+      0     0      100.0000    39                    100.0000       39         
+*     0+    0                          100.0000      100.0000             0.00%
+Found incumbent of value 100.000000 after 0.08 sec. (38.82 ticks)
+      0     0        cutoff            100.0000      100.0000       39    0.00%
+Elapsed time = 0.08 sec. (38.82 ticks, tree = 0.01 MB, solutions = 1)
+Root node processing (before b&c):
+  Real time             =    0.08 sec. (38.85 ticks)
+Sequential b&c:
+  Real time             =    0.00 sec. (0.00 ticks)
+                          ------------
+Total (root+branch&cut) =    0.08 sec. (38.85 ticks)
+MIP status(101): integer optimal solution
+Cplex Time: 0.08sec (det. 38.85 ticks)
+Fixing integer variables, and solving final LP...
+Version identifier: 12.10.0.0 | 2019-11-26 | 843d4de
+CPXPARAM_Advance                                 2
+CPXPARAM_Threads                                 1
+CPXPARAM_Parallel                                1
+CPXPARAM_MIP_Display                             4
+CPXPARAM_TimeLimit                               9999999999.8910007
+CPXPARAM_Tune_TimeLimit                          1999999999.9782002
+CPXPARAM_MIP_Tolerances_AbsMIPGap                0
+CPXPARAM_MIP_Tolerances_MIPGap                   0
+CPXPARAM_WorkDir                                 "/Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO/225a/"
+Tried aggregator 1 time.
+LP Presolve eliminated 727 rows and 332 columns.
+Aggregator did 4 substitutions.
+Reduced LP has 2 rows, 3 columns, and 4 nonzeros.
+Presolve time = 0.00 sec. (0.40 ticks)
+Initializing dual steep norms . . .
+Fixed MIP status(1): optimal
+Cplex Time: 0.00sec (det. 0.69 ticks)
+Proven optimal solution.
+MIP Solution:          100.000000    (39 iterations, 0 nodes)
+Final Solve:           100.000000    (0 iterations)
+Best possible:         100.000000
+Absolute gap:            0.000000
+Relative gap:            0.000000
+--- DICOPT: Starting major iteration 3
+--- DICOPT: Setting up next NLP
+CONOPT 3         32.2.0 rc62c018 Released Aug 26, 2020 DEG x86 64bit/Mac OS X 
+ 
+ 
+    C O N O P T 3   version 3.17L
+    Copyright (C)   ARKI Consulting and Development A/S
+                    Bagsvaerdvej 246 A
+                    DK-2880 Bagsvaerd, Denmark
+ 
+ 
+   Iter Phase Ninf   Infeasibility   RGmax    NSB   Step InItr MX OK
+      0   0        1.4210854715E-14 (Input point)
+ 
+                   Pre-triangular equations:   166
+                   Post-triangular equations:  0
+ 
+      1   0        0.0000000000E+00 (After pre-processing)
+      2   0        0.0000000000E+00 (After scaling)
+ 
+ ** Feasible solution. Value of objective =    100.000000000
+ 
+   Iter Phase Ninf     Objective     RGmax    NSB   Step InItr MX OK
+      3   3        1.0000000000E+02 0.0E+00     0 0.0E+00    0 F  T
+      4   3        1.0000000000E+02 0.0E+00     0
+ 
+ ** Optimal solution. There are no superbasic variables.
+ 
+--- DICOPT: Checking convergence
+--- DICOPT: Search stopped on worsening of NLP subproblems
+--- DICOPT: Log File:
+ Major Major     Objective    CPU time  Itera- Evaluation Solver
+ Step  Iter       Function     (Sec)    tions   Errors
+  NLP    1       100.00000      0.05        9      0      conopt
+  MIP    1       100.00000      0.06        1      0      cplex
+  NLP    2       100.00000<     0.00        4      0      conopt
+  MIP    2       100.00000      0.10       39      0      cplex
+  NLP    3       100.00000      0.01        4      0      conopt
+--- DICOPT: Terminating...
+--- DICOPT: Stopped on NLP worsening
+      The search was stopped because the objective function
+      of the NLP subproblems started to deteriorate.
+--- DICOPT: Best integer solution found: 100.000000
+--- Reading solution for model spanning_tree
+--- Executing after solve: elapsed 0:00:00.516
+--- Gerrymander.gms(163) 4 Mb
+--- GDX File /Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO/data_Gerrymander/default.gdx
+*** Status: Normal completion
+--- Job Gerrymander.gms Stop 02/05/21 04:27:51 elapsed 0:00:00.518
+========================
+========================TRACE [2021-02-05 04:27:56] Logging facility initialised.
+[1] "Installing: devtools"
+probando la URL 'https://cloud.r-project.org/bin/macosx/contrib/4.0/devtools_2.3.2.tgz'
+Content type 'application/x-gzip' length 337605 bytes (329 KB)
+====================
+=====================
+=============================
+==================================================
+downloaded 329 KB
+The downloaded binary packages are in
+	/var/folders/_v/4f8gt7jd161cxvnxqbm3bkgc0000gn/T//RtmpFtMjUE/downloaded_packages
+[1] "Installing: tidyverse"
+probando la URL 'https://cloud.r-project.org/bin/macosx/contrib/4.0/tidyverse_1.3.0.tgz'
+Content type 'application/x-gzip'
+Content type 'application/x-gzip' length 433049 bytes (422 KB)
+==================
+===================
+====================
+=====================
+======================
+=======================
+========================
+=========================
+==========================
+=========================================
+==================================================
+downloaded 422 KB
+The downloaded binary packages are in
+	/var/folders/_v/4f8gt7jd161cxvnxqbm3bkgc0000gn/T//RtmpFtMjUE/downloaded_packages
+DEBUG [2021-02-05 04:28:02] Database connection established.
+DEBUG [2021-02-05 04:28:02] Access Control initialised.
+DEBUG [2021-02-05 04:28:02] Db: Data was imported from table: '_sys__data_hashes' (Db.importDataset).
+INFO [2021-02-05 04:28:02] Data: 'default.gdx' skipped because it has not changed since the last start.
+========================================================
+INFO [2021-02-05 04:28:04] Session started (model: 'gerrymander', user: 'walter', workdir: '/Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO').
+DEBUG [2021-02-05 04:28:04] Working directory was created: '/Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO'.
+DEBUG [2021-02-05 04:28:06] Sidebar menu item: 'inputData' selected.
+DEBUG [2021-02-05 04:28:07] walter: Import input data button clicked.
+DEBUG [2021-02-05 04:28:07] Db: Data was imported from table: '_sys_metadata_gerrymander' (Db.importDataset).
+DEBUG [2021-02-05 04:28:09] Confirm load scenario button clicked.
+DEBUG [2021-02-05 04:28:09] Loading and rendering scenarios: '1'.
+DEBUG [2021-02-05 04:28:09] Db: Data was imported from table: 'gerrymander_assign_result' (Db.importDataset).
+DEBUG [2021-02-05 04:28:09] Db: Data was imported from table: 'gerrymander_nodes' (Db.importDataset).
+DEBUG [2021-02-05 04:28:09] Db: Data was imported from table: 'gerrymander_foo' (Db.importDataset).
+DEBUG [2021-02-05 04:28:09] Db: Data was imported from table: 'gerrymander_num' (Db.importDataset).
+DEBUG [2021-02-05 04:28:09] Db: Data was imported from table: 'gerrymander__scalars' (Db.importDataset).
+DEBUG [2021-02-05 04:28:09] Db: A table named: '_sys_scripts_gerrymander' does not exist in the database (Db.importDataset).
+DEBUG [2021-02-05 04:28:09] Db: A table named: '_sys_views_gerrymander' does not exist in the database (Db.importDataset).
+DEBUG [2021-02-05 04:28:09] Scenario: 'New Scenario' closed.
+DEBUG [2021-02-05 04:28:10] Db: Data was imported from table: '_sys_metadata_gerrymander' (Db.importDataset).
+DEBUG [2021-02-05 04:28:10] Db: Data was imported from table: '_sys_scenlocks_gerrymander' (Db.importDataset).
+DEBUG [2021-02-05 04:28:10] Db: 1 rows in table: '_sys_scenlocks_gerrymander' were deleted. (Db.deleteRows)
+DEBUG [2021-02-05 04:28:10] Db: walter: Lock was added for scenario: '1' (Scenario.lock).
+DEBUG [2021-02-05 04:28:10] Dataset: nodes loaded successfully (mode: scen, overwrite: FALSE)
+DEBUG [2021-02-05 04:28:10] Dataset: foo loaded successfully (mode: scen, overwrite: FALSE)
+DEBUG [2021-02-05 04:28:10] Dataset: num loaded successfully (mode: scen, overwrite: FALSE)
+ERROR [2021-02-05 04:28:11] Problems rendering output charts/tables of dataset: 'assign_result'. Error message: An error occured in the custom renderer function: 'gerry'. Error message: Error in str_split(maps::county.fips[maps::county.fips$fips %in% fips_coverted, : no se pudo encontrar la funci'on "str_split"
+..
+DEBUG [2021-02-05 04:28:11] Scenario: '1' was loaded into UI
+DEBUG [2021-02-05 04:28:12] Db: Data was imported from table: '_sys_scenlocks_gerrymander' (Db.importDataset).
+--- Job Gerrymander.gms Start 02/05/21 04:30:36 32.2.0 rc62c018 DEX-DEG x86 64bit/Mac OS X
+--- Applying:
+    /Library/Frameworks/GAMS.framework/Versions/32/Resources/gmsprmun.txt
+--- GAMS Parameters defined
+    Input /Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO/Gerrymander.gms
+    PageSize 0
+    ScrDir /Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO/225a/
+    SysDir /Library/Frameworks/GAMS.framework/Versions/32/Resources/
+    LogOption 3
+    ErrMsg 1
+    ErrorLog 99
+    IDE 1
+    LstTitleLeftAligned 1
+    IDCGenerateJSON conf_Gerrymander/Gerrymander_io.json
+    IDCGenerateGDX data_Gerrymander/default.gdx
+GAMS 32.2.0   Copyright (C) 1987-2020 GAMS Development. All rights reserved
+Licensee: Introduction to Optimization (CS/ISyE/ECE 524) S200826/0001AB-GEN
+          University of Wisconsin-Madison, Computer Sciences Dept.   DCE850
+          /Users/walter/Library/Application Support/GAMS/gamslice.txt
+          Evaluation license: Not for commercial or production use
+--- Starting compilation
+--- Gerrymander.gms(17) 3 Mb
+--- GDXin=/Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO/adjaceny_AZ.gdx
+--- Gerrymander.gms(26) 3 Mb
+--- GDXin=/Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO/county_vote_AZ.gdx
+--- Gerrymander.gms(164) 3 Mb
+--- Resetting table request for foo due to external input request for domain nodes.
+--- Starting execution: elapsed 0:00:00.027
+--- Gerrymander.gms(48) 4 Mb
+--- Generating MINLP model spanning_tree
+--- Gerrymander.gms(157) 6 Mb
+---   730 rows  334 columns  4,435 non-zeroes
+---   13 nl-code  6 nl-non-zeroes
+---   138 discrete-columns
+--- Gerrymander.gms(157) 4 Mb
+--- Executing DICOPT (Solvelink=2): elapsed 0:00:00.072
+-------------------------------------------------------------------------------
+Dicopt 2         32.2.0 rc62c018 Released Aug 26, 2020 DEG x86 64bit/Mac OS X 
+-------------------------------------------------------------------------------
+by Aldo Vecchietti, Director del Instituto INGAR,
+   CONICET, UTN, Santa Fe, Argentina
+by Ignacio E. Grossmann, Chemical Engineering Faculty,
+   Carnegie Mellon University, Pittsburgh, PA, USA
+-------------------------------------------------------------------------------
+--- DICOPT: Starting major iteration 1
+--- DICOPT: Setting up first (relaxed) NLP.
+CONOPT 3         32.2.0 rc62c018 Released Aug 26, 2020 DEG x86 64bit/Mac OS X 
+ 
+ 
+    C O N O P T 3   version 3.17L
+    Copyright (C)   ARKI Consulting and Development A/S
+                    Bagsvaerdvej 246 A
+                    DK-2880 Bagsvaerd, Denmark
+ 
+ 
+   Iter Phase Ninf   Infeasibility   RGmax    NSB   Step InItr MX OK
+      0   0        2.4000000000E+01 (Input point)
+ 
+                   Pre-triangular equations:   0
+                   Post-triangular equations:  4
+ 
+      1   0        2.4000000000E+01 (After pre-processing)
+      2   0        2.1000000000E+01 (After scaling)
+      3   1    18  1.3500000000E+01 2.2E+03     3 1.0E+00    3 T  T
+      4   1    15  7.6601020408E+00 1.5E+01    39 1.0E+00    8 T  T
+ 
+ ** Feasible solution. Value of objective =    1.71372210331
+ 
+   Iter Phase Ninf     Objective     RGmax    NSB   Step InItr MX OK
+      5   3        5.9021657983E+01 5.2E+01    44 1.0E+00   12 T  T
+      6   3        9.4674829118E+01 5.5E+01    58 1.0E+00   17 T  T
+      7   3        9.8606823695E+01 3.7E+00    52 1.0E+00   27 T  T
+      8   3        1.0000000000E+02 1.8E+00    42 1.0E+00   22 T  T
+      9   3        1.0000000000E+02 0.0E+00     0
+ 
+ ** Optimal solution. There are no superbasic variables.
+ 
+--- DICOPT: Setting up first MIP
+IBM ILOG CPLEX   32.2.0 rc62c018 Released Aug 26, 2020 DEG x86 64bit/Mac OS X 
+--- GAMS/Cplex Link licensed for continuous and discrete problems.
+Cplex 12.10.0.0
+3: *** Value Error Value brought in range for option "itlim" saw "2147483638"
+3: *** Value Error    Value set to 2100000000
+Reading data...
+Starting Cplex...
+Unable to load names.
+Version identifier: 12.10.0.0 | 2019-11-26 | 843d4de
+CPXPARAM_Advance                                 0
+CPXPARAM_Threads                                 1
+CPXPARAM_Parallel                                1
+CPXPARAM_MIP_Display                             4
+CPXPARAM_TimeLimit                               9999999999.9769993
+CPXPARAM_Tune_TimeLimit                          1999999999.9954
+CPXPARAM_MIP_Tolerances_AbsMIPGap                0
+CPXPARAM_MIP_Tolerances_MIPGap                   0
+CPXPARAM_WorkDir                                 "/Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO/225a/"
+Tried aggregator 1 time.
+MIP Presolve eliminated 95 rows and 7 columns.
+MIP Presolve modified 234 coefficients.
+Reduced MIP has 636 rows, 330 columns, and 4155 nonzeros.
+Reduced MIP has 138 binaries, 0 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.01 sec. (3.57 ticks)
+Found incumbent of value 100.000000 after 0.01 sec. (6.88 ticks)
+Probing time = 0.00 sec. (1.26 ticks)
+Tried aggregator 1 time.
+Detecting symmetries...
+Reduced MIP has 636 rows, 330 columns, and 4155 nonzeros.
+Reduced MIP has 138 binaries, 0 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.00 sec. (2.09 ticks)
+Probing time = 0.00 sec. (1.25 ticks)
+Clique table members: 423.
+MIP emphasis: balance optimality and feasibility.
+MIP search method: dynamic search.
+Parallel mode: none, using 1 thread.
+Tried aggregator 1 time.
+No LP presolve or aggregator reductions.
+Presolve time = 0.00 sec. (0.32 ticks)
+Initializing dual steep norms . . .
+Root relaxation solution time = 0.00 sec. (0.82 ticks)
+        Nodes                                         Cuts/
+   Node  Left     Objective  IInf  Best Integer    Best Bound    ItCnt     Gap
+*     0+    0                          100.0000      300.0000           200.00%
+Found incumbent of value 100.000000 after 0.03 sec. (14.26 ticks)
+      0     0        cutoff            100.0000                      1     --- 
+Root node processing (before b&c):
+  Real time             =    0.03 sec. (14.29 ticks)
+Sequential b&c:
+  Real time             =    0.00 sec. (0.00 ticks)
+                          ------------
+Total (root+branch&cut) =    0.03 sec. (14.29 ticks)
+MIP status(101): integer optimal solution
+Cplex Time: 0.03sec (det. 14.29 ticks)
+Fixing integer variables, and solving final LP...
+Version identifier: 12.10.0.0 | 2019-11-26 | 843d4de
+CPXPARAM_Advance                                 2
+CPXPARAM_Threads                                 1
+CPXPARAM_Parallel                                1
+CPXPARAM_MIP_Display                             4
+CPXPARAM_TimeLimit                               9999999999.9769993
+CPXPARAM_Tune_TimeLimit                          1999999999.9954
+CPXPARAM_MIP_Tolerances_AbsMIPGap                0
+CPXPARAM_MIP_Tolerances_MIPGap                   0
+CPXPARAM_WorkDir                                 "/Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO/225a/"
+Tried aggregator 1 time.
+LP Presolve eliminated 727 rows and 333 columns.
+Aggregator did 4 substitutions.
+All rows and columns eliminated.
+Presolve time = 0.00 sec. (0.38 ticks)
+Fixed MIP status(1): optimal
+Cplex Time: 0.00sec (det. 0.67 ticks)
+Proven optimal solution.
+MIP Solution:          100.000000    (1 iterations, 0 nodes)
+Final Solve:           100.000000    (0 iterations)
+Best possible:         100.000000
+Absolute gap:            0.000000
+Relative gap:            0.000000
+--- DICOPT: Starting major iteration 2
+--- DICOPT: Setting up next NLP
+CONOPT 3         32.2.0 rc62c018 Released Aug 26, 2020 DEG x86 64bit/Mac OS X 
+ 
+ 
+    C O N O P T 3   version 3.17L
+    Copyright (C)   ARKI Consulting and Development A/S
+                    Bagsvaerdvej 246 A
+                    DK-2880 Bagsvaerd, Denmark
+ 
+ 
+   Iter Phase Ninf   Infeasibility   RGmax    NSB   Step InItr MX OK
+      0   0        1.4210854715E-14 (Input point)
+ 
+                   Pre-triangular equations:   166
+                   Post-triangular equations:  0
+ 
+      1   0        0.0000000000E+00 (After pre-processing)
+      2   0        0.0000000000E+00 (After scaling)
+ 
+ ** Feasible solution. Value of objective =    100.000000000
+ 
+   Iter Phase Ninf     Objective     RGmax    NSB   Step InItr MX OK
+      3   3        1.0000000000E+02 0.0E+00     0 0.0E+00    0 F  T
+      4   3        1.0000000000E+02 0.0E+00     0
+ 
+ ** Optimal solution. There are no superbasic variables.
+ 
+--- DICOPT: Checking convergence
+--- DICOPT: Setting up next MIP
+--- GMO Resort Time 0ms
+--- DICOPT: Log File:
+ Major Major     Objective    CPU time  Itera- Evaluation Solver
+ Step  Iter       Function     (Sec)    tions   Errors
+  NLP    1       100.00000      0.02        9      0      conopt
+  MIP    1       100.00000      0.05        1      0      cplex
+  NLP    2       100.00000<     0.00        4      0      conopt
+IBM ILOG CPLEX   32.2.0 rc62c018 Released Aug 26, 2020 DEG x86 64bit/Mac OS X 
+--- GAMS/Cplex Link licensed for continuous and discrete problems.
+Cplex 12.10.0.0
+3: *** Value Error Value brought in range for option "itlim" saw "2147483633"
+3: *** Value Error    Value set to 2100000000
+Reading data...
+Starting Cplex...
+Unable to load names.
+Version identifier: 12.10.0.0 | 2019-11-26 | 843d4de
+CPXPARAM_Advance                                 0
+CPXPARAM_Threads                                 1
+CPXPARAM_Parallel                                1
+CPXPARAM_MIP_Display                             4
+CPXPARAM_TimeLimit                               9999999999.9269981
+CPXPARAM_Tune_TimeLimit                          1999999999.9853997
+CPXPARAM_MIP_Tolerances_AbsMIPGap                0
+CPXPARAM_MIP_Tolerances_MIPGap                   0
+CPXPARAM_WorkDir                                 "/Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO/225a/"
+Tried aggregator 1 time.
+MIP Presolve eliminated 91 rows and 3 columns.
+MIP Presolve modified 303 coefficients.
+Reduced MIP has 642 rows, 336 columns, and 4300 nonzeros.
+Reduced MIP has 138 binaries, 0 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.01 sec. (3.96 ticks)
+Probing time = 0.00 sec. (1.39 ticks)
+Cover probing fixed 0 vars, tightened 3 bounds.
+Tried aggregator 1 time.
+Detecting symmetries...
+Reduced MIP has 642 rows, 336 columns, and 4300 nonzeros.
+Reduced MIP has 138 binaries, 3 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.00 sec. (2.13 ticks)
+Probing time = 0.00 sec. (1.38 ticks)
+Clique table members: 423.
+MIP emphasis: balance optimality and feasibility.
+MIP search method: dynamic search.
+Parallel mode: none, using 1 thread.
+Tried aggregator 1 time.
+LP Presolve eliminated 0 rows and 2 columns.
+Reduced LP has 642 rows, 334 columns, and 4298 nonzeros.
+Presolve time = 0.00 sec. (0.44 ticks)
+Initializing dual steep norms . . .
+Iteration log . . .
+Iteration:     1   Scaled dual infeas =            64.000000
+Iteration:     6   Dual objective     =           135.648681
+Initializing dual steep norms . . .
+Root relaxation solution time = 0.00 sec. (1.86 ticks)
+        Nodes                                         Cuts/
+   Node  Left     Objective  IInf  Best Integer    Best Bound    ItCnt     Gap
+      0     0      100.0000    39                    100.0000       39         
+*     0+    0                          100.0000      100.0000             0.00%
+Found incumbent of value 100.000000 after 0.07 sec. (38.82 ticks)
+      0     0        cutoff            100.0000      100.0000       39    0.00%
+Elapsed time = 0.07 sec. (38.82 ticks, tree = 0.01 MB, solutions = 1)
+Root node processing (before b&c):
+  Real time             =    0.07 sec. (38.85 ticks)
+Sequential b&c:
+  Real time             =    0.00 sec. (0.00 ticks)
+                          ------------
+Total (root+branch&cut) =    0.07 sec. (38.85 ticks)
+MIP status(101): integer optimal solution
+Cplex Time: 0.07sec (det. 38.85 ticks)
+Fixing integer variables, and solving final LP...
+Version identifier: 12.10.0.0 | 2019-11-26 | 843d4de
+CPXPARAM_Advance                                 2
+CPXPARAM_Threads                                 1
+CPXPARAM_Parallel                                1
+CPXPARAM_MIP_Display                             4
+CPXPARAM_TimeLimit                               9999999999.9269981
+CPXPARAM_Tune_TimeLimit                          1999999999.9853997
+CPXPARAM_MIP_Tolerances_AbsMIPGap                0
+CPXPARAM_MIP_Tolerances_MIPGap                   0
+CPXPARAM_WorkDir                                 "/Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO/225a/"
+Tried aggregator 1 time.
+LP Presolve eliminated 727 rows and 332 columns.
+Aggregator did 4 substitutions.
+Reduced LP has 2 rows, 3 columns, and 4 nonzeros.
+Presolve time = 0.00 sec. (0.40 ticks)
+Initializing dual steep norms . . .
+Fixed MIP status(1): optimal
+Cplex Time: 0.00sec (det. 0.69 ticks)
+Proven optimal solution.
+MIP Solution:          100.000000    (39 iterations, 0 nodes)
+Final Solve:           100.000000    (0 iterations)
+Best possible:         100.000000
+Absolute gap:            0.000000
+Relative gap:            0.000000
+--- DICOPT: Starting major iteration 3
+--- DICOPT: Setting up next NLP
+CONOPT 3         32.2.0 rc62c018 Released Aug 26, 2020 DEG x86 64bit/Mac OS X 
+ 
+ 
+    C O N O P T 3   version 3.17L
+    Copyright (C)   ARKI Consulting and Development A/S
+                    Bagsvaerdvej 246 A
+                    DK-2880 Bagsvaerd, Denmark
+ 
+ 
+   Iter Phase Ninf   Infeasibility   RGmax    NSB   Step InItr MX OK
+      0   0        1.4210854715E-14 (Input point)
+ 
+                   Pre-triangular equations:   166
+                   Post-triangular equations:  0
+ 
+      1   0        0.0000000000E+00 (After pre-processing)
+      2   0        0.0000000000E+00 (After scaling)
+ 
+ ** Feasible solution. Value of objective =    100.000000000
+ 
+   Iter Phase Ninf     Objective     RGmax    NSB   Step InItr MX OK
+      3   3        1.0000000000E+02 0.0E+00     0 0.0E+00    0 F  T
+      4   3        1.0000000000E+02 0.0E+00     0
+ 
+ ** Optimal solution. There are no superbasic variables.
+ 
+--- DICOPT: Checking convergence
+--- DICOPT: Search stopped on worsening of NLP subproblems
+--- DICOPT: Log File:
+ Major Major     Objective    CPU time  Itera- Evaluation Solver
+ Step  Iter       Function     (Sec)    tions   Errors
+  NLP    1       100.00000      0.02        9      0      conopt
+  MIP    1       100.00000      0.05        1      0      cplex
+  NLP    2       100.00000<     0.00        4      0      conopt
+  MIP    2       100.00000      0.08       39      0      cplex
+  NLP    3       100.00000      0.00        4      0      conopt
+--- DICOPT: Terminating...
+--- DICOPT: Stopped on NLP worsening
+      The search was stopped because the objective function
+      of the NLP subproblems started to deteriorate.
+--- DICOPT: Best integer solution found: 100.000000
+--- Reading solution for model spanning_tree
+--- Executing after solve: elapsed 0:00:00.402
+--- Gerrymander.gms(163) 4 Mb
+--- GDX File /Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO/data_Gerrymander/default.gdx
+*** Status: Normal completion
+--- Job Gerrymander.gms Stop 02/05/21 04:30:37 elapsed 0:00:00.403
+========================
+========================TRACE [2021-02-05 04:30:41] Logging facility initialised.
+[1] "Installing: devtools"
+probando la URL 'https://cloud.r-project.org/bin/macosx/contrib/4.0/devtools_2.3.2.tgz'
+Content type 'application/x-gzip'
+Content type 'application/x-gzip' length 337605 bytes (329 KB)
+====
+=====
+======
+=======
+========
+=========
+==========
+===========
+============
+=============
+==============
+===============
+================
+=================
+==================
+===================
+====================
+=====================
+======================
+=======================
+========================
+=========================
+==========================
+===========================
+============================
+=============================
+==============================
+===============================
+================================
+=================================
+==================================
+===================================
+====================================
+=====================================
+======================================
+=======================================
+========================================
+=========================================
+==========================================
+===========================================
+============================================
+==================================================
+downloaded 329 KB
+The downloaded binary packages are in
+	/var/folders/_v/4f8gt7jd161cxvnxqbm3bkgc0000gn/T//Rtmpf3vCiy/downloaded_packages
+[1] "Installing: tidyverse"
+probando la URL 'https://cloud.r-project.org/bin/macosx/contrib/4.0/tidyverse_1.3.0.tgz'
+Content type 'application/x-gzip'
+Content type 'application/x-gzip' length 433049 bytes (422 KB)
+=
+====
+==================================================
+downloaded 422 KB
+The downloaded binary packages are in
+	/var/folders/_v/4f8gt7jd161cxvnxqbm3bkgc0000gn/T//Rtmpf3vCiy/downloaded_packages
+DEBUG [2021-02-05 04:30:48] Database connection established.
+DEBUG [2021-02-05 04:30:48] Access Control initialised.
+DEBUG [2021-02-05 04:30:48] Db: Data was imported from table: '_sys__data_hashes' (Db.importDataset).
+INFO [2021-02-05 04:30:48] Data: 'default.gdx' skipped because it has not changed since the last start.
+========================================================
+INFO [2021-02-05 04:30:51] Session started (model: 'gerrymander', user: 'walter', workdir: '/Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO').
+DEBUG [2021-02-05 04:30:51] Working directory was created: '/Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO'.
+DEBUG [2021-02-05 04:30:52] Sidebar menu item: 'inputData' selected.
+DEBUG [2021-02-05 04:30:54] walter: Import input data button clicked.
+DEBUG [2021-02-05 04:30:54] Db: Data was imported from table: '_sys_metadata_gerrymander' (Db.importDataset).
+DEBUG [2021-02-05 04:30:55] Confirm load scenario button clicked.
+DEBUG [2021-02-05 04:30:55] Loading and rendering scenarios: '1'.
+DEBUG [2021-02-05 04:30:55] Db: Data was imported from table: 'gerrymander_assign_result' (Db.importDataset).
+DEBUG [2021-02-05 04:30:55] Db: Data was imported from table: 'gerrymander_nodes' (Db.importDataset).
+DEBUG [2021-02-05 04:30:55] Db: Data was imported from table: 'gerrymander_foo' (Db.importDataset).
+DEBUG [2021-02-05 04:30:55] Db: Data was imported from table: 'gerrymander_num' (Db.importDataset).
+DEBUG [2021-02-05 04:30:55] Db: Data was imported from table: 'gerrymander__scalars' (Db.importDataset).
+DEBUG [2021-02-05 04:30:55] Db: A table named: '_sys_scripts_gerrymander' does not exist in the database (Db.importDataset).
+DEBUG [2021-02-05 04:30:56] Db: A table named: '_sys_views_gerrymander' does not exist in the database (Db.importDataset).
+DEBUG [2021-02-05 04:30:56] Scenario: 'New Scenario' closed.
+DEBUG [2021-02-05 04:30:56] Db: Data was imported from table: '_sys_metadata_gerrymander' (Db.importDataset).
+DEBUG [2021-02-05 04:30:56] Db: Data was imported from table: '_sys_scenlocks_gerrymander' (Db.importDataset).
+DEBUG [2021-02-05 04:30:56] Db: 1 rows in table: '_sys_scenlocks_gerrymander' were deleted. (Db.deleteRows)
+DEBUG [2021-02-05 04:30:56] Db: walter: Lock was added for scenario: '1' (Scenario.lock).
+DEBUG [2021-02-05 04:30:56] Dataset: nodes loaded successfully (mode: scen, overwrite: FALSE)
+DEBUG [2021-02-05 04:30:56] Dataset: foo loaded successfully (mode: scen, overwrite: FALSE)
+DEBUG [2021-02-05 04:30:56] Dataset: num loaded successfully (mode: scen, overwrite: FALSE)
+ERROR [2021-02-05 04:30:57] Problems rendering output charts/tables of dataset: 'assign_result'. Error message: An error occured in the custom renderer function: 'gerry'. Error message: Error in str_split(county_fips[county_fips$fips %in% fips_coverted, ]$polyname, : no se pudo encontrar la funci'on "str_split"
+..
+DEBUG [2021-02-05 04:30:57] Scenario: '1' was loaded into UI
+DEBUG [2021-02-05 04:30:58] Db: Data was imported from table: '_sys_scenlocks_gerrymander' (Db.importDataset).
+--- Job Gerrymander.gms Start 02/05/21 04:32:14 32.2.0 rc62c018 DEX-DEG x86 64bit/Mac OS X
+--- Applying:
+    /Library/Frameworks/GAMS.framework/Versions/32/Resources/gmsprmun.txt
+--- GAMS Parameters defined
+    Input /Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO/Gerrymander.gms
+    PageSize 0
+    ScrDir /Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO/225a/
+    SysDir /Library/Frameworks/GAMS.framework/Versions/32/Resources/
+    LogOption 3
+    ErrMsg 1
+    ErrorLog 99
+    IDE 1
+    LstTitleLeftAligned 1
+    IDCGenerateJSON conf_Gerrymander/Gerrymander_io.json
+    IDCGenerateGDX data_Gerrymander/default.gdx
+GAMS 32.2.0   Copyright (C) 1987-2020 GAMS Development. All rights reserved
+Licensee: Introduction to Optimization (CS/ISyE/ECE 524) S200826/0001AB-GEN
+          University of Wisconsin-Madison, Computer Sciences Dept.   DCE850
+          /Users/walter/Library/Application Support/GAMS/gamslice.txt
+          Evaluation license: Not for commercial or production use
+--- Starting compilation
+--- Gerrymander.gms(17) 3 Mb
+--- GDXin=/Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO/adjaceny_AZ.gdx
+--- Gerrymander.gms(26) 3 Mb
+--- GDXin=/Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO/county_vote_AZ.gdx
+--- Gerrymander.gms(164) 3 Mb
+--- Resetting table request for foo due to external input request for domain nodes.
+--- Starting execution: elapsed 0:00:00.027
+--- Gerrymander.gms(48) 4 Mb
+--- Generating MINLP model spanning_tree
+--- Gerrymander.gms(157) 6 Mb
+---   730 rows  334 columns  4,435 non-zeroes
+---   13 nl-code  6 nl-non-zeroes
+---   138 discrete-columns
+--- Gerrymander.gms(157) 4 Mb
+--- Executing DICOPT (Solvelink=2): elapsed 0:00:00.055
+-------------------------------------------------------------------------------
+Dicopt 2         32.2.0 rc62c018 Released Aug 26, 2020 DEG x86 64bit/Mac OS X 
+-------------------------------------------------------------------------------
+by Aldo Vecchietti, Director del Instituto INGAR,
+   CONICET, UTN, Santa Fe, Argentina
+by Ignacio E. Grossmann, Chemical Engineering Faculty,
+   Carnegie Mellon University, Pittsburgh, PA, USA
+-------------------------------------------------------------------------------
+--- DICOPT: Starting major iteration 1
+--- DICOPT: Setting up first (relaxed) NLP.
+CONOPT 3         32.2.0 rc62c018 Released Aug 26, 2020 DEG x86 64bit/Mac OS X 
+ 
+ 
+    C O N O P T 3   version 3.17L
+    Copyright (C)   ARKI Consulting and Development A/S
+                    Bagsvaerdvej 246 A
+                    DK-2880 Bagsvaerd, Denmark
+ 
+ 
+   Iter Phase Ninf   Infeasibility   RGmax    NSB   Step InItr MX OK
+      0   0        2.4000000000E+01 (Input point)
+ 
+                   Pre-triangular equations:   0
+                   Post-triangular equations:  4
+ 
+      1   0        2.4000000000E+01 (After pre-processing)
+      2   0        2.1000000000E+01 (After scaling)
+      3   1    18  1.3500000000E+01 2.2E+03     3 1.0E+00    3 T  T
+      4   1    15  7.6601020408E+00 1.5E+01    39 1.0E+00    8 T  T
+ 
+ ** Feasible solution. Value of objective =    1.71372210331
+ 
+   Iter Phase Ninf     Objective     RGmax    NSB   Step InItr MX OK
+      5   3        5.9021657983E+01 5.2E+01    44 1.0E+00   12 T  T
+      6   3        9.4674829118E+01 5.5E+01    58 1.0E+00   17 T  T
+      7   3        9.8606823695E+01 3.7E+00    52 1.0E+00   27 T  T
+      8   3        1.0000000000E+02 1.8E+00    42 1.0E+00   22 T  T
+      9   3        1.0000000000E+02 0.0E+00     0
+ 
+ ** Optimal solution. There are no superbasic variables.
+ 
+--- DICOPT: Setting up first MIP
+IBM ILOG CPLEX   32.2.0 rc62c018 Released Aug 26, 2020 DEG x86 64bit/Mac OS X 
+--- GAMS/Cplex Link licensed for continuous and discrete problems.
+Cplex 12.10.0.0
+3: *** Value Error Value brought in range for option "itlim" saw "2147483638"
+3: *** Value Error    Value set to 2100000000
+Reading data...
+Starting Cplex...
+Unable to load names.
+Version identifier: 12.10.0.0 | 2019-11-26 | 843d4de
+CPXPARAM_Advance                                 0
+CPXPARAM_Threads                                 1
+CPXPARAM_Parallel                                1
+CPXPARAM_MIP_Display                             4
+CPXPARAM_TimeLimit                               9999999999.9619999
+CPXPARAM_Tune_TimeLimit                          1999999999.9923999
+CPXPARAM_MIP_Tolerances_AbsMIPGap                0
+CPXPARAM_MIP_Tolerances_MIPGap                   0
+CPXPARAM_WorkDir                                 "/Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO/225a/"
+Tried aggregator 1 time.
+MIP Presolve eliminated 95 rows and 7 columns.
+MIP Presolve modified 234 coefficients.
+Reduced MIP has 636 rows, 330 columns, and 4155 nonzeros.
+Reduced MIP has 138 binaries, 0 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.01 sec. (3.57 ticks)
+Found incumbent of value 100.000000 after 0.02 sec. (6.88 ticks)
+Probing time = 0.00 sec. (1.26 ticks)
+Tried aggregator 1 time.
+Detecting symmetries...
+Reduced MIP has 636 rows, 330 columns, and 4155 nonzeros.
+Reduced MIP has 138 binaries, 0 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.01 sec. (2.09 ticks)
+Probing time = 0.00 sec. (1.25 ticks)
+Clique table members: 423.
+MIP emphasis: balance optimality and feasibility.
+MIP search method: dynamic search.
+Parallel mode: none, using 1 thread.
+Tried aggregator 1 time.
+No LP presolve or aggregator reductions.
+Presolve time = 0.00 sec. (0.32 ticks)
+Initializing dual steep norms . . .
+Root relaxation solution time = 0.00 sec. (0.82 ticks)
+        Nodes                                         Cuts/
+   Node  Left     Objective  IInf  Best Integer    Best Bound    ItCnt     Gap
+*     0+    0                          100.0000      300.0000           200.00%
+Found incumbent of value 100.000000 after 0.04 sec. (14.26 ticks)
+      0     0        cutoff            100.0000                      1     --- 
+Root node processing (before b&c):
+  Real time             =    0.04 sec. (14.29 ticks)
+Sequential b&c:
+  Real time             =    0.00 sec. (0.00 ticks)
+                          ------------
+Total (root+branch&cut) =    0.04 sec. (14.29 ticks)
+MIP status(101): integer optimal solution
+Cplex Time: 0.04sec (det. 14.29 ticks)
+Fixing integer variables, and solving final LP...
+Version identifier: 12.10.0.0 | 2019-11-26 | 843d4de
+CPXPARAM_Advance                                 2
+CPXPARAM_Threads                                 1
+CPXPARAM_Parallel                                1
+CPXPARAM_MIP_Display                             4
+CPXPARAM_TimeLimit                               9999999999.9619999
+CPXPARAM_Tune_TimeLimit                          1999999999.9923999
+CPXPARAM_MIP_Tolerances_AbsMIPGap                0
+CPXPARAM_MIP_Tolerances_MIPGap                   0
+CPXPARAM_WorkDir                                 "/Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO/225a/"
+Tried aggregator 1 time.
+LP Presolve eliminated 727 rows and 333 columns.
+Aggregator did 4 substitutions.
+All rows and columns eliminated.
+Presolve time = 0.00 sec. (0.38 ticks)
+Fixed MIP status(1): optimal
+Cplex Time: 0.00sec (det. 0.67 ticks)
+Proven optimal solution.
+MIP Solution:          100.000000    (1 iterations, 0 nodes)
+Final Solve:           100.000000    (0 iterations)
+Best possible:         100.000000
+Absolute gap:            0.000000
+Relative gap:            0.000000
+--- DICOPT: Starting major iteration 2
+--- DICOPT: Setting up next NLP
+CONOPT 3         32.2.0 rc62c018 Released Aug 26, 2020 DEG x86 64bit/Mac OS X 
+ 
+ 
+    C O N O P T 3   version 3.17L
+    Copyright (C)   ARKI Consulting and Development A/S
+                    Bagsvaerdvej 246 A
+                    DK-2880 Bagsvaerd, Denmark
+ 
+ 
+   Iter Phase Ninf   Infeasibility   RGmax    NSB   Step InItr MX OK
+      0   0        1.4210854715E-14 (Input point)
+ 
+                   Pre-triangular equations:   166
+                   Post-triangular equations:  0
+ 
+      1   0        0.0000000000E+00 (After pre-processing)
+      2   0        0.0000000000E+00 (After scaling)
+ 
+ ** Feasible solution. Value of objective =    100.000000000
+ 
+   Iter Phase Ninf     Objective     RGmax    NSB   Step InItr MX OK
+      3   3        1.0000000000E+02 0.0E+00     0 0.0E+00    0 F  T
+      4   3        1.0000000000E+02 0.0E+00     0
+ 
+ ** Optimal solution. There are no superbasic variables.
+ 
+--- DICOPT: Checking convergence
+--- DICOPT: Setting up next MIP
+--- GMO Resort Time 0ms
+--- DICOPT: Log File:
+ Major Major     Objective    CPU time  Itera- Evaluation Solver
+ Step  Iter       Function     (Sec)    tions   Errors
+  NLP    1       100.00000      0.04        9      0      conopt
+  MIP    1       100.00000      0.07        1      0      cplex
+  NLP    2       100.00000<     0.00        4      0      conopt
+IBM ILOG CPLEX   32.2.0 rc62c018 Released Aug 26, 2020 DEG x86 64bit/Mac OS X 
+--- GAMS/Cplex Link licensed for continuous and discrete problems.
+Cplex 12.10.0.0
+3: *** Value Error Value brought in range for option "itlim" saw "2147483633"
+3: *** Value Error    Value set to 2100000000
+Reading data...
+Starting Cplex...
+Unable to load names.
+Version identifier: 12.10.0.0 | 2019-11-26 | 843d4de
+CPXPARAM_Advance                                 0
+CPXPARAM_Threads                                 1
+CPXPARAM_Parallel                                1
+CPXPARAM_MIP_Display                             4
+CPXPARAM_TimeLimit                               9999999999.8920002
+CPXPARAM_Tune_TimeLimit                          1999999999.9784
+CPXPARAM_MIP_Tolerances_AbsMIPGap                0
+CPXPARAM_MIP_Tolerances_MIPGap                   0
+CPXPARAM_WorkDir                                 "/Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO/225a/"
+Tried aggregator 1 time.
+MIP Presolve eliminated 91 rows and 3 columns.
+MIP Presolve modified 303 coefficients.
+Reduced MIP has 642 rows, 336 columns, and 4300 nonzeros.
+Reduced MIP has 138 binaries, 0 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.01 sec. (3.96 ticks)
+Probing time = 0.00 sec. (1.39 ticks)
+Cover probing fixed 0 vars, tightened 3 bounds.
+Tried aggregator 1 time.
+Detecting symmetries...
+Reduced MIP has 642 rows, 336 columns, and 4300 nonzeros.
+Reduced MIP has 138 binaries, 3 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.00 sec. (2.13 ticks)
+Probing time = 0.00 sec. (1.38 ticks)
+Clique table members: 423.
+MIP emphasis: balance optimality and feasibility.
+MIP search method: dynamic search.
+Parallel mode: none, using 1 thread.
+Tried aggregator 1 time.
+LP Presolve eliminated 0 rows and 2 columns.
+Reduced LP has 642 rows, 334 columns, and 4298 nonzeros.
+Presolve time = 0.00 sec. (0.44 ticks)
+Initializing dual steep norms . . .
+Iteration log . . .
+Iteration:     1   Scaled dual infeas =            64.000000
+Iteration:     6   Dual objective     =           135.648681
+Initializing dual steep norms . . .
+Root relaxation solution time = 0.00 sec. (1.86 ticks)
+        Nodes                                         Cuts/
+   Node  Left     Objective  IInf  Best Integer    Best Bound    ItCnt     Gap
+      0     0      100.0000    39                    100.0000       39         
+*     0+    0                          100.0000      100.0000             0.00%
+Found incumbent of value 100.000000 after 0.10 sec. (38.82 ticks)
+      0     0        cutoff            100.0000      100.0000       39    0.00%
+Elapsed time = 0.10 sec. (38.82 ticks, tree = 0.01 MB, solutions = 1)
+Root node processing (before b&c):
+  Real time             =    0.10 sec. (38.85 ticks)
+Sequential b&c:
+  Real time             =    0.00 sec. (0.00 ticks)
+                          ------------
+Total (root+branch&cut) =    0.10 sec. (38.85 ticks)
+MIP status(101): integer optimal solution
+Cplex Time: 0.10sec (det. 38.85 ticks)
+Fixing integer variables, and solving final LP...
+Version identifier: 12.10.0.0 | 2019-11-26 | 843d4de
+CPXPARAM_Advance                                 2
+CPXPARAM_Threads                                 1
+CPXPARAM_Parallel                                1
+CPXPARAM_MIP_Display                             4
+CPXPARAM_TimeLimit                               9999999999.8920002
+CPXPARAM_Tune_TimeLimit                          1999999999.9784
+CPXPARAM_MIP_Tolerances_AbsMIPGap                0
+CPXPARAM_MIP_Tolerances_MIPGap                   0
+CPXPARAM_WorkDir                                 "/Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO/225a/"
+Tried aggregator 1 time.
+LP Presolve eliminated 727 rows and 332 columns.
+Aggregator did 4 substitutions.
+Reduced LP has 2 rows, 3 columns, and 4 nonzeros.
+Presolve time = 0.00 sec. (0.40 ticks)
+Initializing dual steep norms . . .
+Fixed MIP status(1): optimal
+Cplex Time: 0.00sec (det. 0.69 ticks)
+Proven optimal solution.
+MIP Solution:          100.000000    (39 iterations, 0 nodes)
+Final Solve:           100.000000    (0 iterations)
+Best possible:         100.000000
+Absolute gap:            0.000000
+Relative gap:            0.000000
+--- DICOPT: Starting major iteration 3
+--- DICOPT: Setting up next NLP
+CONOPT 3         32.2.0 rc62c018 Released Aug 26, 2020 DEG x86 64bit/Mac OS X 
+ 
+ 
+    C O N O P T 3   version 3.17L
+    Copyright (C)   ARKI Consulting and Development A/S
+                    Bagsvaerdvej 246 A
+                    DK-2880 Bagsvaerd, Denmark
+ 
+ 
+   Iter Phase Ninf   Infeasibility   RGmax    NSB   Step InItr MX OK
+      0   0        1.4210854715E-14 (Input point)
+ 
+                   Pre-triangular equations:   166
+                   Post-triangular equations:  0
+ 
+      1   0        0.0000000000E+00 (After pre-processing)
+      2   0        0.0000000000E+00 (After scaling)
+ 
+ ** Feasible solution. Value of objective =    100.000000000
+ 
+   Iter Phase Ninf     Objective     RGmax    NSB   Step InItr MX OK
+      3   3        1.0000000000E+02 0.0E+00     0 0.0E+00    0 F  T
+      4   3        1.0000000000E+02 0.0E+00     0
+ 
+ ** Optimal solution. There are no superbasic variables.
+ 
+--- DICOPT: Checking convergence
+--- DICOPT: Search stopped on worsening of NLP subproblems
+--- DICOPT: Log File:
+ Major Major     Objective    CPU time  Itera- Evaluation Solver
+ Step  Iter       Function     (Sec)    tions   Errors
+  NLP    1       100.00000      0.04        9      0      conopt
+  MIP    1       100.00000      0.07        1      0      cplex
+  NLP    2       100.00000<     0.00        4      0      conopt
+  MIP    2       100.00000      0.11       39      0      cplex
+  NLP    3       100.00000      0.00        4      0      conopt
+--- DICOPT: Terminating...
+--- DICOPT: Stopped on NLP worsening
+      The search was stopped because the objective function
+      of the NLP subproblems started to deteriorate.
+--- DICOPT: Best integer solution found: 100.000000
+--- Reading solution for model spanning_tree
+--- Executing after solve: elapsed 0:00:00.437
+--- Gerrymander.gms(163) 4 Mb
+--- GDX File /Users/walter/Desktop/grad_research/miro_app/gerry_mandering_MIRO/data_Gerrymander/default.gdx
+*** Status: Normal completion
+--- Job Gerrymander.gms Stop 02/05/21 04:32:14 elapsed 0:00:00.439
+========================
+========================TRACE [2021-02-05 04:32:19] Logging facility initialised.
+DEBUG [2021-02-05 04:32:19] Database connection established.
+DEBUG [2021-02-05 04:32:19] Access Control initialised.
+DEBUG [2021-02-05 04:32:20] Db: Data was imported from table: '_sys__data_hashes' (Db.importDataset).
+INFO [2021-02-05 04:32:20] Data: 'default.gdx' skipped because it has not changed since the last start.
+========================================================
+DEBUG [2021-02-05 04:32:24] Db: Data was imported from table: '_sys_metadata_gerrymander' (Db.importDataset).
+DEBUG [2021-02-05 04:32:33] Db: Data was imported from table: 'gerrymander_assign_result' (Db.importDataset).
+DEBUG [2021-02-05 04:32:33] Db: Data was imported from table: 'gerrymander_nodes' (Db.importDataset).
+DEBUG [2021-02-05 04:32:33] Db: Data was imported from table: 'gerrymander_foo' (Db.importDataset).
+DEBUG [2021-02-05 04:32:33] Db: Data was imported from table: 'gerrymander_num' (Db.importDataset).
+DEBUG [2021-02-05 04:32:33] Db: Data was imported from table: 'gerrymander__scalars' (Db.importDataset).
+DEBUG [2021-02-05 04:32:33] Dataset: nodes loaded successfully (mode: scen, overwrite: TRUE)
+DEBUG [2021-02-05 04:32:33] Dataset: foo loaded successfully (mode: scen, overwrite: TRUE)
+DEBUG [2021-02-05 04:32:33] Dataset: num loaded successfully (mode: scen, overwrite: TRUE)
+2021-02-05 04:32:42.196 GAMS MIRO[1661:34906] dataFromCheckingString timed out
+2021-02-05 04:32:42.705 GAMS MIRO[1661:34906] dataFromCheckingString timed out
